@@ -34,7 +34,10 @@ export default function Sidebar() {
       }}
     >
       {/* Logo */}
-      <div className="px-5 py-5 border-b" style={{ borderColor: "#252825" }}>
+      <div
+        className="px-5 py-5 border-b"
+        style={{ borderColor: "#252825" }}
+      >
         <div className="flex items-center gap-2">
           <Shield size={16} style={{ color: "#b8f53a" }} />
           <span
@@ -49,7 +52,7 @@ export default function Sidebar() {
         </p>
       </div>
 
-      {/* Nav */}
+      {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         {NAV.map(({ href, icon: Icon, label }) => {
           const active = path === href;
@@ -76,7 +79,10 @@ export default function Sidebar() {
               <Icon size={14} />
               {label}
               {active && (
-                <span className="ml-auto w-1 h-1 rounded-full" style={{ background: "#b8f53a" }} />
+                <span
+                  className="ml-auto w-1 h-1 rounded-full"
+                  style={{ background: "#b8f53a" }}
+                />
               )}
             </Link>
           );
@@ -84,10 +90,21 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom system info */}
-      <div className="px-5 py-4 border-t space-y-1" style={{ borderColor: "#252825" }}>
+      <div
+        className="px-5 py-4 border-t space-y-1"
+        style={{ borderColor: "#252825" }}
+      >
         <div className="flex items-center gap-1.5">
-          <span className="status-dot" style={{ background: "#4ade80", boxShadow: "0 0 4px #4ade80" }} />
-          <span className="text-xs" style={{ color: "#4a5450" }}>system online</span>
+          <span
+            className="status-dot"
+            style={{
+              background: "#4ade80",
+              boxShadow: "0 0 4px #4ade80",
+            }}
+          />
+          <span className="text-xs" style={{ color: "#4a5450" }}>
+            system online
+          </span>
         </div>
         <p className="text-xs" style={{ color: "#4a5450" }}>
           {new Date().toLocaleDateString("en-GB")}

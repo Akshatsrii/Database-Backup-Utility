@@ -26,17 +26,26 @@ export default function TopBar() {
         backdropFilter: "blur(8px)",
       }}
     >
-      {/* Path breadcrumb */}
-      <div className="flex items-center gap-2 text-xs" style={{ color: "#8a9690" }}>
+      {/* Breadcrumb */}
+      <div
+        className="flex items-center gap-2 text-xs"
+        style={{ color: "#8a9690" }}
+      >
         <Terminal size={12} style={{ color: "#b8f53a" }} />
         <span style={{ color: "#4a5450" }}>~/</span>
         <span style={{ color: "#b8f53a" }}>{title}</span>
       </div>
 
-      {/* Right — timestamp + bell */}
+      {/* Right side */}
       <div className="flex items-center gap-4">
-        <span className="text-xs tabular-nums" style={{ color: "#4a5450" }}>
-          {new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}
+        <span
+          className="text-xs tabular-nums"
+          style={{ color: "#4a5450" }}
+        >
+          {new Date().toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </span>
         <button
           className="relative p-1 rounded hover:bg-bg-tertiary transition-colors"
