@@ -7,14 +7,15 @@ export function useBackups() {
 
   const query = useQuery<Backup[]>({
     queryKey: ["backups"],
-    queryFn:  async () => {
+    queryFn: async () => {
       const res = await backupsApi.list();
       return res.data.data ?? [];
     },
     refetchInterval: 15_000,
   });
 
-  const refresh = () => qc.invalidateQueries({ queryKey: ["backups"] });
+  const refresh = () =>
+    qc.invalidateQueries({ queryKey: ["backups"] });
 
   return { ...query, refresh };
 }
