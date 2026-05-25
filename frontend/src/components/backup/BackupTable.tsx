@@ -25,17 +25,17 @@ export default function BackupTable({
 }: Props) {
   const handleDelete = async (id: string) => {
     if (!confirm("delete this backup?")) return;
+
     try {
       await backupsApi.remove(id);
       onRefresh();
-    } catch { /**/ }
+    } catch {}
   };
 
   if (!backups.length) {
     return (
       <div
-        className="terminal-card flex flex-col items-center
-                   justify-center py-16 gap-3"
+        className="terminal-card flex flex-col items-center justify-center py-16 gap-3"
         style={{ color: "#4a5450" }}
       >
         <p className="text-xs tracking-widest">no backups found</p>
@@ -64,8 +64,7 @@ export default function BackupTable({
             ].map((h) => (
               <th
                 key={h}
-                className="text-left px-4 py-3 tracking-widest
-                           uppercase whitespace-nowrap"
+                className="text-left px-4 py-3 tracking-widest uppercase whitespace-nowrap"
                 style={{ color: "#4a5450" }}
               >
                 {h}
@@ -73,20 +72,20 @@ export default function BackupTable({
             ))}
           </tr>
         </thead>
+
         <tbody>
           {backups.map((b) => (
             <tr
               key={b.id}
               className="group transition-colors"
               style={{ borderBottom: "1px solid #141614" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "#141614")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "transparent")
-              }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#141614";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
             >
-              {/* Filename */}
               <td
                 className="px-4 py-3 font-medium"
                 style={{ color: "#e8edea", maxWidth: 180 }}
@@ -94,6 +93,7 @@ export default function BackupTable({
                 <span className="block truncate" title={b.filename}>
                   {b.filename}
                 </span>
+
                 {b.encrypted && (
                   <span
                     className="text-xs"
@@ -104,12 +104,13 @@ export default function BackupTable({
                 )}
               </td>
 
-              {/* DB Type */}
-              <td className="px-4 py-3" style={{ color: "#8a9690" }}>
+              <td
+                className="px-4 py-3"
+                style={{ color: "#8a9690" }}
+              >
                 {dbLabels[b.dbType]}
               </td>
 
-              {/* Backup Type */}
               <td className="px-4 py-3">
                 <TextBadge
                   color={
@@ -124,35 +125,45 @@ export default function BackupTable({
                 </TextBadge>
               </td>
 
-              {/* Size */}
               <td
                 className="px-4 py-3 tabular-nums"
                 style={{ color: "#8a9690" }}
               >
-                {b.sizeBefore ? formatBytes(b.sizeBefore) : "—"}
-                <span style={{ color: "#4a5450" }}> → </span>
-                {b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}
+                {b.sizeBefore
+                  ? formatBytes(b.sizeBefore)
+                  : "—"}
+
+                <span style={{ color: "#4a5450" }}>
+                  {" "}
+                  →{" "}
+                </span>
+
+                {b.sizeAfter
+                  ? formatBytes(b.sizeAfter)
+                  : "—"}
               </td>
 
-              {/* Compression Saved */}
               <td
                 className="px-4 py-3 tabular-nums"
                 style={{ color: "#4ade80" }}
               >
                 {b.sizeBefore && b.sizeAfter
-                  ? compressionSaved(b.sizeBefore, b.sizeAfter)
+                  ? compressionSaved(
+                      b.sizeBefore,
+                      b.sizeAfter
+                    )
                   : "—"}
               </td>
 
-              {/* Duration */}
               <td
                 className="px-4 py-3 tabular-nums"
                 style={{ color: "#4a5450" }}
               >
-                {b.durationMs ? formatDuration(b.durationMs) : "—"}
+                {b.durationMs
+                  ? formatDuration(b.durationMs)
+                  : "—"}
               </td>
 
-              {/* Date */}
               <td
                 className="px-4 py-3 tabular-nums whitespace-nowrap"
                 style={{ color: "#4a5450" }}
@@ -160,20 +171,15 @@ export default function BackupTable({
                 {fmtDate(b.startedAt)}
               </td>
 
-              {/* Status */}
               <td className="px-4 py-3">
                 <StatusBadge status={b.status} />
               </td>
 
-              {/* Actions */}
               <td className="px-4 py-3">
-                <div
-                  className="flex items-center gap-2 opacity-0
-                             group-hover:opacity-100 transition-opacity"
-                >
+                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   {b.status === "completed" && (
                     <>
-                      
+                      <a
                         href={backupsApi.download(b.id)}
                         className="p-1.5 rounded transition-colors"
                         style={{ color: "#38bdf8" }}
@@ -181,6 +187,7 @@ export default function BackupTable({
                       >
                         <Download size={13} />
                       </a>
+
                       <button
                         onClick={() => onRestore(b)}
                         className="p-1.5 rounded transition-colors"
@@ -191,6 +198,7 @@ export default function BackupTable({
                       </button>
                     </>
                   )}
+
                   <button
                     onClick={() => handleDelete(b.id)}
                     className="p-1.5 rounded transition-colors"
