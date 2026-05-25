@@ -20,7 +20,10 @@ export function Card({ children, className, style }: CardProps) {
 export function CardHeader({ children, className }: CardProps) {
   return (
     <div
-      className={cn("flex items-center justify-between mb-4 pb-3 border-b", className)}
+      className={cn(
+        "flex items-center justify-between mb-4 pb-3 border-b",
+        className
+      )}
       style={{ borderColor: "#252825" }}
     >
       {children}
@@ -30,7 +33,10 @@ export function CardHeader({ children, className }: CardProps) {
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs tracking-widest uppercase" style={{ color: "#4a5450" }}>
+    <p
+      className="text-xs tracking-widest uppercase"
+      style={{ color: "#4a5450" }}
+    >
       {children}
     </p>
   );

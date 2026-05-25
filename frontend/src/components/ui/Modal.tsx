@@ -11,10 +11,18 @@ interface ModalProps {
   width?: string;
 }
 
-export function Modal({ open, onClose, title, children, width = "max-w-lg" }: ModalProps) {
-  // Close on Escape
+export function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  width = "max-w-lg",
+}: ModalProps) {
+  // Close on Escape key
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
@@ -24,12 +32,21 @@ export function Modal({ open, onClose, title, children, width = "max-w-lg" }: Mo
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        background: "rgba(0,0,0,0.7)",
+        backdropFilter: "blur(4px)",
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <div
         className={`terminal-card w-full ${width} animate-fade-in`}
-        style={{ maxHeight: "85vh", display: "flex", flexDirection: "column" }}
+        style={{
+          maxHeight: "85vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         {/* Header */}
         <div
@@ -38,13 +55,16 @@ export function Modal({ open, onClose, title, children, width = "max-w-lg" }: Mo
         >
           <div className="flex items-center gap-2">
             <span style={{ color: "#b8f53a" }}>$</span>
-            <h2 className="text-sm font-semibold" style={{ color: "#e8edea" }}>
+            <h2
+              className="text-sm font-semibold"
+              style={{ color: "#e8edea" }}
+            >
               {title}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded transition-colors"
+            className="p-1 rounded transition-colors hover:bg-bg-tertiary"
             style={{ color: "#4a5450" }}
           >
             <X size={14} />
@@ -52,7 +72,9 @@ export function Modal({ open, onClose, title, children, width = "max-w-lg" }: Mo
         </div>
 
         {/* Body */}
-        <div className="px-5 py-4 overflow-y-auto flex-1">{children}</div>
+        <div className="px-5 py-4 overflow-y-auto flex-1">
+          {children}
+        </div>
       </div>
     </div>
   );

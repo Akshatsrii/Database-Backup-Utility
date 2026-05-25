@@ -1,6 +1,7 @@
 import { cn, statusColors } from "@/lib/utils";
 import type { BackupStatus } from "@/types";
 
+// ─── Status Badge ─────────────────────────────────────────────────────────
 interface BadgeProps {
   status: BackupStatus;
   className?: string;
@@ -27,6 +28,7 @@ export function StatusBadge({ status, className }: BadgeProps) {
   );
 }
 
+// ─── Text Badge ───────────────────────────────────────────────────────────
 interface TextBadgeProps {
   children: React.ReactNode;
   color?: "acid" | "blue" | "yellow" | "red" | "green" | "muted";
@@ -34,7 +36,7 @@ interface TextBadgeProps {
 }
 
 const textColorMap = {
-  acid:   "text-acid   bg-acid/10   border-acid/20",
+  acid:   "text-acid        bg-acid/10        border-acid/20",
   blue:   "text-terminal-blue   bg-terminal-blue/10   border-terminal-blue/20",
   yellow: "text-terminal-yellow bg-terminal-yellow/10 border-terminal-yellow/20",
   red:    "text-terminal-red    bg-terminal-red/10    border-terminal-red/20",
@@ -42,7 +44,11 @@ const textColorMap = {
   muted:  "text-text-secondary  bg-bg-tertiary        border-bg-border",
 };
 
-export function TextBadge({ children, color = "muted", className }: TextBadgeProps) {
+export function TextBadge({
+  children,
+  color = "muted",
+  className,
+}: TextBadgeProps) {
   return (
     <span
       className={cn(
