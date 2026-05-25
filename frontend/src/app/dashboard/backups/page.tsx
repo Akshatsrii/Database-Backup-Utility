@@ -26,14 +26,15 @@ export default function BackupsPage() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const filtered = backups.filter((b) => {
-    const srchOk = !search || b.filename.toLowerCase().includes(search.toLowerCase()) || b.connectionName?.toLowerCase().includes(search.toLowerCase());
-    const stOk   = statusFilter === "all" || b.status === statusFilter;
+    const srchOk = !search ||
+      b.filename.toLowerCase().includes(search.toLowerCase()) ||
+      b.connectionName?.toLowerCase().includes(search.toLowerCase());
+    const stOk = statusFilter === "all" || b.status === statusFilter;
     return srchOk && stOk;
   });
 
   return (
     <div className="space-y-5 animate-fade-in">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold" style={{ color: "#e8edea" }}>
@@ -43,7 +44,10 @@ export default function BackupsPage() {
             {backups.length} total backups
           </p>
         </div>
-        <button onClick={() => setShowCreate(true)} className="btn-acid flex items-center gap-2">
+        <button
+          onClick={() => setShowCreate(true)}
+          className="btn-acid flex items-center gap-2"
+        >
           <Plus size={14} /> new backup
         </button>
       </div>
@@ -51,7 +55,8 @@ export default function BackupsPage() {
       {/* Filters */}
       <div className="flex gap-3">
         <div className="relative flex-1 max-w-xs">
-          <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#4a5450" }} />
+          <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2"
+            style={{ color: "#4a5450" }} />
           <input
             type="text"
             placeholder="search backups..."
@@ -74,7 +79,6 @@ export default function BackupsPage() {
         </select>
       </div>
 
-      {/* Table */}
       {isLoading ? (
         <div className="terminal-card h-48 animate-pulse" />
       ) : (
