@@ -1,6 +1,13 @@
 "use client";
 
-import { Database, CheckCircle, XCircle, HardDrive, Wifi, Clock } from "lucide-react";
+import {
+  Database,
+  CheckCircle,
+  XCircle,
+  HardDrive,
+  Wifi,
+  Clock,
+} from "lucide-react";
 import { formatBytes } from "@/lib/utils";
 import type { DashboardStats } from "@/types";
 
@@ -12,23 +19,39 @@ interface StatsCardProps {
   accent?: string;
 }
 
-function StatCard({ label, value, icon, sub, accent = "#b8f53a" }: StatsCardProps) {
+function StatCard({
+  label,
+  value,
+  icon,
+  sub,
+  accent = "#b8f53a",
+}: StatsCardProps) {
   return (
     <div
       className="terminal-card p-4 flex flex-col gap-3"
       style={{ borderColor: "#252825" }}
     >
       <div className="flex items-center justify-between">
-        <span className="text-xs tracking-widest uppercase" style={{ color: "#4a5450" }}>
+        <span
+          className="text-xs tracking-widest uppercase"
+          style={{ color: "#4a5450" }}
+        >
           {label}
         </span>
         <span style={{ color: accent, opacity: 0.7 }}>{icon}</span>
       </div>
       <div>
-        <p className="text-2xl font-bold tabular-nums" style={{ color: accent }}>
+        <p
+          className="text-2xl font-bold tabular-nums"
+          style={{ color: accent }}
+        >
           {value}
         </p>
-        {sub && <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>{sub}</p>}
+        {sub && (
+          <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>
+            {sub}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -47,7 +70,9 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
         label="successful"
         value={stats.successfulBackups}
         icon={<CheckCircle size={15} />}
-        sub={`${Math.round((stats.successfulBackups / (stats.totalBackups || 1)) * 100)}% success rate`}
+        sub={`${Math.round(
+          (stats.successfulBackups / (stats.totalBackups || 1)) * 100
+        )}% success rate`}
         accent="#4ade80"
       />
       <StatCard

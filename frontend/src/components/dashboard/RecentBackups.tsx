@@ -7,7 +7,10 @@ import type { Backup } from "@/types";
 export default function RecentBackups({ backups }: { backups: Backup[] }) {
   if (!backups.length) {
     return (
-      <div className="flex items-center justify-center h-24 text-xs" style={{ color: "#4a5450" }}>
+      <div
+        className="flex items-center justify-center h-24 text-xs"
+        style={{ color: "#4a5450" }}
+      >
         no backups yet · run your first backup →
       </div>
     );
@@ -33,24 +36,40 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
           {backups.slice(0, 8).map((b) => (
             <tr
               key={b.id}
-              className="transition-colors"
               style={{ borderBottom: "1px solid #1a1d1a" }}
             >
-              <td className="py-2.5 pr-4 font-medium" style={{ color: "#e8edea", maxWidth: 160 }}>
+              <td
+                className="py-2.5 pr-4 font-medium"
+                style={{ color: "#e8edea", maxWidth: 160 }}
+              >
                 <span className="block truncate">{b.filename}</span>
               </td>
               <td className="py-2.5 pr-4">
-                <TextBadge color={b.backupType === "full" ? "acid" : b.backupType === "incremental" ? "blue" : "yellow"}>
+                <TextBadge
+                  color={
+                    b.backupType === "full"
+                      ? "acid"
+                      : b.backupType === "incremental"
+                      ? "blue"
+                      : "yellow"
+                  }
+                >
                   {b.backupType}
                 </TextBadge>
               </td>
               <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>
                 {dbLabels[b.dbType]}
               </td>
-              <td className="py-2.5 pr-4 tabular-nums" style={{ color: "#8a9690" }}>
+              <td
+                className="py-2.5 pr-4 tabular-nums"
+                style={{ color: "#8a9690" }}
+              >
                 {b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}
               </td>
-              <td className="py-2.5 pr-4 tabular-nums" style={{ color: "#4a5450" }}>
+              <td
+                className="py-2.5 pr-4 tabular-nums"
+                style={{ color: "#4a5450" }}
+              >
                 {timeAgo(b.startedAt)}
               </td>
               <td className="py-2.5">
