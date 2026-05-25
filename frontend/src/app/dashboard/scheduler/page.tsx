@@ -21,6 +21,7 @@ export default function SchedulerPage() {
     },
     refetchInterval: 15_000,
   });
+
   const { data: connections = [] } = useQuery<DbConnection[]>({
     queryKey: ["connections"],
     queryFn: async () => {
@@ -54,7 +55,10 @@ export default function SchedulerPage() {
             automated backup schedules
           </p>
         </div>
-        <button onClick={() => setShowForm(true)} className="btn-acid flex items-center gap-2">
+        <button
+          onClick={() => setShowForm(true)}
+          className="btn-acid flex items-center gap-2"
+        >
           <Plus size={14} /> new schedule
         </button>
       </div>
@@ -70,7 +74,8 @@ export default function SchedulerPage() {
         {isLoading ? (
           <div className="space-y-2">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-14 rounded animate-pulse" style={{ background: "#1a1d1a" }} />
+              <div key={i} className="h-14 rounded animate-pulse"
+                style={{ background: "#1a1d1a" }} />
             ))}
           </div>
         ) : schedules.length === 0 ? (
@@ -105,7 +110,12 @@ export default function SchedulerPage() {
                       {s.nextRun && <span> · next: {fmtDate(s.nextRun)}</span>}
                     </p>
                   </div>
-                  <TextBadge color={s.backupType === "full" ? "acid" : s.backupType === "incremental" ? "blue" : "yellow"}>
+                  <TextBadge
+                    color={
+                      s.backupType === "full" ? "acid" :
+                      s.backupType === "incremental" ? "blue" : "yellow"
+                    }
+                  >
                     {s.backupType}
                   </TextBadge>
                   <TextBadge color="muted">{s.frequency}</TextBadge>
@@ -116,7 +126,8 @@ export default function SchedulerPage() {
                     onClick={() => toggleSchedule(s.id, s.enabled)}
                     className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border transition-all"
                     style={{
-                      borderColor: s.enabled ? "rgba(255,68,68,0.3)" : "rgba(74,222,128,0.3)",
+                      borderColor: s.enabled
+                        ? "rgba(255,68,68,0.3)" : "rgba(74,222,128,0.3)",
                       color: s.enabled ? "#ff4444" : "#4ade80",
                     }}
                   >
