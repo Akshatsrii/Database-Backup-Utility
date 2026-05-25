@@ -47,11 +47,12 @@ export default function RestorePage() {
         </p>
       </div>
 
-      {/* Backup picker */}
       <Card>
         <CardHeader>
           <SectionLabel>select_backup_to_restore</SectionLabel>
-          <span className="text-xs" style={{ color: "#4a5450" }}>{completedBackups.length} available</span>
+          <span className="text-xs" style={{ color: "#4a5450" }}>
+            {completedBackups.length} available
+          </span>
         </CardHeader>
 
         {completedBackups.length === 0 ? (
@@ -63,17 +64,26 @@ export default function RestorePage() {
             {completedBackups.map((b) => (
               <div
                 key={b.id}
-                className="flex items-center justify-between px-4 py-3 rounded border transition-all cursor-pointer"
+                className="flex items-center justify-between px-4 py-3 rounded border
+                           transition-all cursor-pointer"
                 style={{
                   borderColor: selected?.id === b.id ? "#b8f53a" : "#252825",
-                  background: selected?.id === b.id ? "rgba(184,245,58,0.05)" : "#1a1d1a",
+                  background: selected?.id === b.id
+                    ? "rgba(184,245,58,0.05)" : "#1a1d1a",
                 }}
                 onClick={() => setSelected(b)}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: selected?.id === b.id ? "#b8f53a" : "#252825" }} />
+                  <span
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{
+                      background: selected?.id === b.id ? "#b8f53a" : "#252825"
+                    }}
+                  />
                   <div>
-                    <p className="text-xs font-medium" style={{ color: "#e8edea" }}>{b.filename}</p>
+                    <p className="text-xs font-medium" style={{ color: "#e8edea" }}>
+                      {b.filename}
+                    </p>
                     <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>
                       {b.connectionName} · {fmtDate(b.startedAt)}
                     </p>
@@ -91,34 +101,55 @@ export default function RestorePage() {
         )}
       </Card>
 
-      {/* Job history */}
+      {/* Restore history */}
       <Card>
         <CardHeader>
           <SectionLabel>restore_history</SectionLabel>
         </CardHeader>
         {jobs.length === 0 ? (
-          <p className="text-xs text-center py-6" style={{ color: "#4a5450" }}>no restore jobs yet</p>
+          <p className="text-xs text-center py-6" style={{ color: "#4a5450" }}>
+            no restore jobs yet
+          </p>
         ) : (
           <table className="w-full text-xs">
             <thead>
               <tr style={{ borderBottom: "1px solid #252825" }}>
                 {["backup", "target", "tables", "started", "duration", "status"].map((h) => (
-                  <th key={h} className="text-left pb-2 pr-4 tracking-widest uppercase" style={{ color: "#4a5450" }}>{h}</th>
+                  <th key={h}
+                    className="text-left pb-2 pr-4 tracking-widest uppercase"
+                    style={{ color: "#4a5450" }}>
+                    {h}
+                  </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {jobs.map((j) => (
                 <tr key={j.id} style={{ borderBottom: "1px solid #141614" }}>
-                  <td className="py-2.5 pr-4" style={{ color: "#e8edea" }}>{j.backupId.slice(0, 8)}…</td>
-                  <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>{j.connectionId.slice(0, 8)}…</td>
-                  <td className="py-2.5 pr-4" style={{ color: "#4a5450" }}>{j.tables?.join(", ") || "full"}</td>
-                  <td className="py-2.5 pr-4 tabular-nums" style={{ color: "#4a5450" }}>{fmtDate(j.startedAt)}</td>
+                  <td className="py-2.5 pr-4" style={{ color: "#e8edea" }}>
+                    {j.backupId.slice(0, 8)}…
+                  </td>
+                  <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>
+                    {j.connectionId.slice(0, 8)}…
+                  </td>
+                  <td className="py-2.5 pr-4" style={{ color: "#4a5450" }}>
+                    {j.tables?.join(", ") || "full"}
+                  </td>
                   <td className="py-2.5 pr-4 tabular-nums" style={{ color: "#4a5450" }}>
-                    {j.completedAt ? formatDuration(new Date(j.completedAt).getTime() - new Date(j.startedAt).getTime()) : "—"}
+                    {fmtDate(j.startedAt)}
+                  </td>
+                  <td className="py-2.5 pr-4 tabular-nums" style={{ color: "#4a5450" }}>
+                    {j.completedAt
+                      ? formatDuration(
+                          new Date(j.completedAt).getTime() -
+                          new Date(j.startedAt).getTime()
+                        )
+                      : "—"}
                   </td>
                   <td className="py-2.5">
-                    <StatusBadge status={j.status as "completed" | "running" | "failed" | "pending"} />
+                    <StatusBadge
+                      status={j.status as "completed" | "running" | "failed" | "pending"}
+                    />
                   </td>
                 </tr>
               ))}
