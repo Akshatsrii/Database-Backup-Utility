@@ -1,62 +1,42 @@
-import fs       from "fs";
-import path     from "path";
-import zlib     from "zlib";
-import { pipeline } from "stream/promises";
-import { logger }   from "../config/logger";
-import { getFileSize, deleteFile } from "../utils/fileHelper";
+import fs   from "fs";
+import path from "path";
+import { CompressionService } from "../../src/services/compression.service";
 
-export class CompressionService {
+const svc     = new CompressionService();
+const testDir = path.join(__dirname, "tmp");
+const testFile = path.join(testDir, "test.sql");
 
-  // Compress file → file.gz
-  async compress(inputPath: string): Promise<string> {
-    const outputPath = `${inputPath}.gz`;
+beforeAll(() => {
+  fs.mkdirSync(testDir, { recursive: true });
+  fs.writeFileSync(testFile, "SELECT * FROM users;\n".repeat(1000));
+});
 
-    logger.info(`Compressing: ${path.basename(inputPath)}`);
+afterAll(() => {
+  fs.rmSync(testDir, { recursive: true, force: true });
+});
 
-    const source = fs.createReadStream(inputPath);
-    const dest   = fs.createWriteStream(outputPath);
-    const gzip   = zlib.createGzip({ level: 9 });
+describe("CompressionService", () => {
+  it("should compress a file and return .gz path", async () => {
+    const compressed = await svc.compress(testFile);
+    expect(compressed).toMatch(/\.gz$/);
+    expect(fs.existsSync(compressed)).toBe(true);
+  });
 
-    await pipeline(source, gzip, dest);
+  it("compressed file should be smaller", async () => {
+    const gzFile  = `${testFile}.gz`;
+    const before  = 1000 * "SELECT * FROM users;\n".length;
+    const after   = fs.statSync(gzFile).size;
+    expect(after).toBeLessThan(before);
+  });
 
-    const before = getFileSize(inputPath);
-    const after  = getFileSize(outputPath);
-    const ratio  = ((before - after) / before * 100).toFixed(1);
+  it("should decompress back", async () => {
+    const gzFile     = `${testFile}.gz`;
+    const decompressed = await svc.decompress(gzFile);
+    expect(fs.existsSync(decompressed)).toBe(true);
+  });
 
-    logger.info(`Compressed: ${before} → ${after} bytes (${ratio}% saved)`);
-
-    // Delete original
-    deleteFile(inputPath);
-
-    return outputPath;
-  }
-
-  // Decompress file.gz → file
-  async decompress(inputPath: string): Promise<string> {
-    if (!inputPath.endsWith(".gz")) {
-      return inputPath; // already decompressed
-    }
-
-    const outputPath = inputPath.replace(/\.gz$/, "");
-
-    logger.info(`Decompressing: ${path.basename(inputPath)}`);
-
-    const source = fs.createReadStream(inputPath);
-    const dest   = fs.createWriteStream(outputPath);
-    const gunzip = zlib.createGunzip();
-
-    await pipeline(source, gunzip, dest);
-
-    logger.info(`Decompressed to: ${outputPath}`);
-
-    return outputPath;
-  }
-
-  // Get compression ratio
-  getCompressionRatio(sizeBefore: number, sizeAfter: number): number {
-    if (!sizeBefore) return 0;
-    return parseFloat(((sizeBefore - sizeAfter) / sizeBefore * 100).toFixed(2));
-  }
-}
-
-export const compressionService = new CompressionService();
+  it("getCompressionRatio should return correct %", () => {
+    const ratio = svc.getCompressionRatio(1000, 400);
+    expect(ratio).toBe(60);
+  });
+});
