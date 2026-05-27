@@ -68,4 +68,10 @@ server.listen(ENV.PORT, () => {
   `);
 });
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "BackupOS Backend Running"
+  });
+});
 export { app, server };

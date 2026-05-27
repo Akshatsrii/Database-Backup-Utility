@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // Required for Docker standalone build
+  output: "standalone",
+
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000",
+    NEXT_PUBLIC_WS_URL:  process.env.NEXT_PUBLIC_WS_URL  || "http://localhost:4000",
+  },
+};
 
 module.exports = nextConfig;
