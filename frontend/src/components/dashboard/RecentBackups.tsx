@@ -1,10 +1,50 @@
 "use client";
 
+import { useState } from "react";
 import { StatusBadge, TextBadge } from "@/components/ui/Badge";
 import { formatBytes, timeAgo, dbLabels } from "@/lib/utils";
 import type { Backup } from "@/types";
 
+/* ── inline keyframes injected once ─────────────────────── */
+const SHIMMER_CSS = `
+@keyframes rb-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+@keyframes rb-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+`;
+
+function StyleOnce() {
+  return <style dangerouslySetInnerHTML={{ __html: SHIMMER_CSS }} />;
+}
+
+/* ── shimmer row for "running" status ───────────────────── */
+function ShimmerRow() {
+  return (
+    <tr>
+      <td colSpan={6} style={{ padding: "2px 0" }}>
+        <div
+          style={{
+            height: 1,
+            background:
+              "linear-gradient(90deg, transparent 0%, #b8f53a22 40%, #b8f53a55 50%, #b8f53a22 60%, transparent 100%)",
+            backgroundSize: "400px 100%",
+            animation: "rb-shimmer 1.6s linear infinite",
+          }}
+        />
+      </td>
+    </tr>
+  );
+}
+
+/* ── main component ──────────────────────────────────────── */
+
 export default function RecentBackups({ backups }: { backups: Backup[] }) {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
   if (!backups.length) {
     return (
       <div
@@ -16,69 +56,142 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
     );
   }
 
+  const visible = backups.slice(0, 8);
+  const remaining = backups.length - visible.length;
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-xs">
-        <thead>
-          <tr style={{ borderBottom: "1px solid #252825" }}>
-            {["name", "type", "db", "size", "time", "status"].map((h) => (
-              <th
-                key={h}
-                className="text-left pb-2 pr-4 tracking-widest uppercase"
-                style={{ color: "#4a5450" }}
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {backups.slice(0, 8).map((b) => (
-            <tr
-              key={b.id}
-              style={{ borderBottom: "1px solid #1a1d1a" }}
-            >
-              <td
-                className="py-2.5 pr-4 font-medium"
-                style={{ color: "#e8edea", maxWidth: 160 }}
-              >
-                <span className="block truncate">{b.filename}</span>
-              </td>
-              <td className="py-2.5 pr-4">
-                <TextBadge
-                  color={
-                    b.backupType === "full"
-                      ? "acid"
-                      : b.backupType === "incremental"
-                      ? "blue"
-                      : "yellow"
-                  }
+    <>
+      <StyleOnce />
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs" style={{ borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ borderBottom: "1px solid #252825" }}>
+              {["name", "type", "db", "size", "time", "status"].map((h) => (
+                <th
+                  key={h}
+                  className="text-left pb-2 pr-4 tracking-widest uppercase"
+                  style={{ color: "#4a5450" }}
                 >
-                  {b.backupType}
-                </TextBadge>
-              </td>
-              <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>
-                {dbLabels[b.dbType]}
-              </td>
-              <td
-                className="py-2.5 pr-4 tabular-nums"
-                style={{ color: "#8a9690" }}
-              >
-                {b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}
-              </td>
-              <td
-                className="py-2.5 pr-4 tabular-nums"
-                style={{ color: "#4a5450" }}
-              >
-                {timeAgo(b.startedAt)}
-              </td>
-              <td className="py-2.5">
-                <StatusBadge status={b.status} />
-              </td>
+                  {h}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+
+          <tbody>
+            {visible.map((b) => {
+              const isHovered  = hoveredId === b.id;
+              const isRunning  = b.status === "running";
+              const isFailed   = b.status === "failed";
+
+              return (
+                <>
+                  <tr
+                    key={b.id}
+                    style={{
+                      borderBottom: "1px solid #1a1d1a",
+                      background: isHovered ? "#141614" : "transparent",
+                      transition: "background 0.1s ease",
+                    }}
+                    onMouseEnter={() => setHoveredId(b.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                  >
+                    {/* name */}
+                    <td
+                      className="py-2.5 pr-4 font-medium"
+                      style={{
+                        color: isFailed ? "#ff4444" : "#e8edea",
+                        maxWidth: 160,
+                      }}
+                    >
+                      <span
+                        className="block truncate"
+                        title={b.filename}
+                        style={{ cursor: "default" }}
+                      >
+                        {b.filename}
+                      </span>
+                      {b.encrypted && (
+                        <span style={{ color: "#ffd700", fontSize: 10 }}>
+                          🔒 encrypted
+                        </span>
+                      )}
+                    </td>
+
+                    {/* type */}
+                    <td className="py-2.5 pr-4">
+                      <TextBadge
+                        color={
+                          b.backupType === "full"
+                            ? "acid"
+                            : b.backupType === "incremental"
+                            ? "blue"
+                            : "yellow"
+                        }
+                      >
+                        {b.backupType}
+                      </TextBadge>
+                    </td>
+
+                    {/* db */}
+                    <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>
+                      {dbLabels[b.dbType]}
+                    </td>
+
+                    {/* size */}
+                    <td
+                      className="py-2.5 pr-4 tabular-nums"
+                      style={{ color: "#8a9690" }}
+                    >
+                      {b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}
+                    </td>
+
+                    {/* time */}
+                    <td
+                      className="py-2.5 pr-4 tabular-nums"
+                      style={{
+                        color: isRunning ? "#b8f53a" : "#4a5450",
+                        animation: isRunning
+                          ? "rb-pulse 1.4s ease-in-out infinite"
+                          : undefined,
+                      }}
+                    >
+                      {isRunning ? "running…" : timeAgo(b.startedAt)}
+                    </td>
+
+                    {/* status */}
+                    <td className="py-2.5">
+                      <StatusBadge status={b.status} />
+                    </td>
+                  </tr>
+
+                  {/* shimmer divider under running rows */}
+                  {isRunning && <ShimmerRow key={`shimmer-${b.id}`} />}
+                </>
+              );
+            })}
+          </tbody>
+        </table>
+
+        {/* footer */}
+        {(remaining > 0 || backups.length > 0) && (
+          <div
+            className="pt-2 text-xs tabular-nums"
+            style={{
+              color: "#4a5450",
+              borderTop: "1px solid #1a1d1a",
+              marginTop: 4,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span>{backups.length} total</span>
+            {remaining > 0 && (
+              <span style={{ color: "#4a5450" }}>+{remaining} more</span>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
