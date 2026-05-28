@@ -3,15 +3,19 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Install build tools for native modules
+RUN apk add --no-cache python3 make g++
+
 # Install dependencies
 COPY package*.json ./
-RUN npm ci --only=production=false
+RUN npm install
 
 # Copy source
 COPY . .
 
 # Build TypeScript
 RUN npm run build
+
 
 # ── Stage 2: Production ────────────────────────────────────────
 FROM node:20-alpine AS production
@@ -28,7 +32,7 @@ RUN apk add --no-cache \
     bash
 
 # Copy built files
-COPY --from=builder /app/dist       ./dist
+COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
 

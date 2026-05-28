@@ -16,12 +16,20 @@ interface Props {
   backups: Backup[];
   onRefresh: () => void;
   onRestore: (b: Backup) => void;
+  selectedIds: string[];
+  onToggleSelect: (id: string) => void;
+  onToggleAll: () => void;
+  allSelected: boolean;
 }
 
 export default function BackupTable({
   backups,
   onRefresh,
   onRestore,
+  selectedIds,
+  onToggleSelect,
+  onToggleAll,
+  allSelected,
 }: Props) {
   const handleDelete = async (id: string) => {
     if (!confirm("delete this backup?")) return;
@@ -51,6 +59,14 @@ export default function BackupTable({
       <table className="w-full text-xs">
         <thead>
           <tr style={{ borderBottom: "1px solid #252825" }}>
+            <th className="px-4 py-3">
+              <input
+                type="checkbox"
+                checked={allSelected}
+                onChange={onToggleAll}
+              />
+            </th>
+
             {[
               "filename",
               "db",
@@ -86,6 +102,14 @@ export default function BackupTable({
                 e.currentTarget.style.background = "transparent";
               }}
             >
+              <td className="px-4 py-3">
+                <input
+                  type="checkbox"
+                  checked={selectedIds.includes(b.id)}
+                  onChange={() => onToggleSelect(b.id)}
+                />
+              </td>
+
               <td
                 className="px-4 py-3 font-medium"
                 style={{ color: "#e8edea", maxWidth: 180 }}
