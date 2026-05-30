@@ -6,8 +6,7 @@
 <br/>
 
 <h1>
-  <img src="https://img.icons8.com/fluency/48/data-backup.png" alt="icon" height="36"/>
-  &nbsp; BackupOS
+   BackupOS
 </h1>
 
 <h3>🛡️ Production-Grade · Multi-Database · Cloud-Ready Backup Management Platform</h3>
