@@ -1,87 +1,173 @@
-"use client";
+"use client";  // ← YEH HONA CHAHIYE SABSE UPAR
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Plus, RefreshCw } from "lucide-react";
+import StatsCards      from "@/components/dashboard/StatsCard";
+import BackupChart     from "@/components/dashboard/BackupChart";
+import RecentBackups   from "@/components/dashboard/RecentBackups";
+import BackupModal     from "@/components/backup/BackupModal";
+import { useStats }    from "@/hooks/useStats";      // ← IMPORT
+import { useBackups }  from "@/hooks/useBackups";    // ← IMPORT
+import { useQuery }    from "@tanstack/react-query";
+import { connectionsApi } from "@/lib/api";
+import type { DbConnection } from "@/types";
+import { Card, CardHeader, SectionLabel } from "@/components/ui/Card";
 
-export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const router = useRouter();
+export default function DashboardPage() {
+  const {
+    data:      stats,
+    computed,
+    isLoading: statsLoading,
+    isFetching,
+    isUsingMock,
+    lastUpdated,
+    autoRefresh,
+    setAutoRefresh,
+    refresh:   refetchStats,
+  } = useStats();    // ← CORRECT USAGE
 
-  const handleConnect = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!username.trim()) return;
-    localStorage.setItem("bu_user", username);
-    router.push("/dashboard");
-  };
+  const {
+    data:    backups,
+    refresh: refreshBackups,
+  } = useBackups();
+
+  const { data: connections = [] } = useQuery<DbConnection[]>({
+    queryKey: ["connections"],
+    queryFn: async () => {
+      try { return (await connectionsApi.list()).data.data ?? []; }
+      catch { return []; }
+    },
+  });
+
+  const [showBackupModal, setShowBackupModal] = useState(false);
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <div
-        className="terminal-card w-full max-w-sm p-8"
-        style={{ boxShadow: "0 0 0 1px #252825, 0 24px 64px rgba(0,0,0,0.6)" }}
-      >
-        {/* Top status line */}
-        <div className="flex items-center gap-2 mb-6">
-          <span
-            className="status-dot"
-            style={{ background: "#b8f53a", boxShadow: "0 0 6px #b8f53a" }}
-          />
-          <span className="text-text-muted text-xs tracking-widest">
-            backup-os.onrender.com
-          </span>
+    <div className="space-y-6 animate-fade-in">
+
+      {/* ── Header ─────────────────────────────────────────────── */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-lg font-bold" style={{ color: "#e8edea" }}>
+            <span style={{ color: "#b8f53a" }}>$</span> dashboard
+          </h1>
+          <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>
+            backup management overview
+          </p>
         </div>
-
-        {/* Brand */}
-        <h1
-          className="text-3xl font-bold mb-1 tracking-tight"
-          style={{ color: "#b8f53a", fontFamily: "JetBrains Mono, monospace" }}
-        >
-          [BackupOS]
-        </h1>
-        <p className="text-text-secondary text-xs tracking-widest mb-8">
-          database backup management platform
-        </p>
-
-        {/* Form */}
-        <form onSubmit={handleConnect} className="space-y-4">
-          <div className="relative">
+        <div className="flex items-center gap-2">
+          {/* Live / Paused toggle */}
+          <button
+            onClick={() => setAutoRefresh(!autoRefresh)}
+            className="flex items-center gap-1.5 text-xs px-3 py-2
+                       rounded border transition-all"
+            style={{
+              borderColor: autoRefresh ? "rgba(74,222,128,0.3)" : "#252825",
+              color:       autoRefresh ? "#4ade80" : "#4a5450",
+            }}
+          >
             <span
-              className="absolute left-4 top-1/2 -translate-y-1/2 font-bold"
-              style={{ color: "#b8f53a" }}
-            >
-              $
-            </span>
-            <input
-              className="terminal-input pl-9"
-              type="text"
-              placeholder="enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoFocus
+              className="w-1.5 h-1.5 rounded-full"
+              style={{
+                background: autoRefresh ? "#4ade80" : "#4a5450",
+                boxShadow:  autoRefresh ? "0 0 4px #4ade80" : "none",
+              }}
             />
-          </div>
+            {autoRefresh ? "live" : "paused"}
+          </button>
 
           <button
-            type="submit"
-            className="btn-acid w-full flex items-center justify-center gap-2"
+            onClick={() => { refetchStats(); refreshBackups(); }}
+            className="btn-ghost flex items-center gap-2 text-xs"
           >
-            connect
-            <span className="text-base">→</span>
+            <RefreshCw size={12} /> refresh
           </button>
-        </form>
 
-        {/* Hint */}
-        <p className="mt-5 text-center text-xs text-text-muted">
-          <kbd
-            className="px-1.5 py-0.5 rounded text-xs border"
-            style={{ borderColor: "#252825", color: "#8a9690" }}
+          <button
+            onClick={() => setShowBackupModal(true)}
+            className="btn-acid flex items-center gap-2"
           >
-            enter
-          </kbd>{" "}
-          to join · room:{" "}
-          <span className="text-text-secondary">backup-room</span>
-        </p>
+            <Plus size={14} /> new backup
+          </button>
+        </div>
       </div>
-    </main>
+
+      {/* ── Mock data warning ───────────────────────────────────── */}
+      {isUsingMock && (
+        <div
+          className="flex items-center gap-2 px-3 py-2 rounded text-xs"
+          style={{
+            background: "rgba(255,215,0,0.06)",
+            border:     "1px solid rgba(255,215,0,0.2)",
+            color:      "#ffd700",
+          }}
+        >
+          ⚠ showing demo data — backend not connected
+        </div>
+      )}
+
+      {/* ── Health warning ──────────────────────────────────────── */}
+      {computed && !computed.isHealthy && (
+        <div
+          className="flex items-center gap-2 px-3 py-2 rounded text-xs"
+          style={{
+            background: "rgba(255,68,68,0.06)",
+            border:     "1px solid rgba(255,68,68,0.2)",
+            color:      "#ff4444",
+          }}
+        >
+          ⚠ success rate is {computed.successRate}% — check failed backups
+        </div>
+      )}
+
+      {/* ── Stats ───────────────────────────────────────────────── */}
+      {statsLoading ? (
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="terminal-card h-24 animate-pulse"
+            />
+          ))}
+        </div>
+      ) : stats ? (
+        <StatsCards stats={stats} />
+      ) : null}
+
+      {/* ── Charts ──────────────────────────────────────────────── */}
+      {stats && <BackupChart stats={stats} />}
+
+      {/* ── Recent backups ──────────────────────────────────────── */}
+      <Card>
+        <CardHeader>
+          <SectionLabel>recent_backups</SectionLabel>
+          <div className="flex items-center gap-3">
+            {lastUpdated && (
+              <span className="text-xs" style={{ color: "#4a5450" }}>
+                updated {lastUpdated.toLocaleTimeString("en-GB")}
+              </span>
+            )}
+            
+              href="/dashboard/backups"
+              className="text-xs"
+              style={{ color: "#b8f53a" }}
+            >
+              view all →
+            </a>
+          </div>
+        </CardHeader>
+        <RecentBackups backups={backups} />
+      </Card>
+
+      {/* ── Backup modal ────────────────────────────────────────── */}
+      <BackupModal
+        open={showBackupModal}
+        onClose={() => setShowBackupModal(false)}
+        connections={connections}
+        onSuccess={() => {
+          refreshBackups();
+          refetchStats();
+        }}
+      />
+    </div>
   );
 }
