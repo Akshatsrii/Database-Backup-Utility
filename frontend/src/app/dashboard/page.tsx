@@ -148,7 +148,7 @@ export default function DashboardPage() {
                 updated {lastUpdated.toLocaleTimeString("en-GB")}
               </span>
             )}
-            
+            <a
               href="/dashboard/backups"
               className="text-xs"
               style={{ color: "#b8f53a" }}
