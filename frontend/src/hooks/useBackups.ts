@@ -5,12 +5,10 @@ import {
 import { useState, useCallback, useEffect } from "react";
 import { backupsApi } from "@/lib/api";
 import type { Backup } from "@/types";
-
 // ─── Constants ─────────────────────────────────────────────────────────────
 const QUERY_KEY        = ["backups"];
 const REFETCH_INTERVAL = 15_000;   // 15s normal
 const FAST_INTERVAL    = 3_000;    // 3s when backup is running
-
 // ─── Types ──────────────────────────────────────────────────────────────────
 interface UseBackupsReturn {
   data:              Backup[];
@@ -43,59 +41,52 @@ interface UseBackupsReturn {
   clearFilters:      () => void;
   hasActiveFilters:  boolean;
 }
-
 // ═══════════════════════════════════════════════════════════════════════════
 export function useBackups(): UseBackupsReturn {
   const qc = useQueryClient();
-
   const [searchTerm,    setSearchTerm]    = useState("");
   const [statusFilter,  setStatusFilter]  = useState("all");
   const [typeFilter,    setTypeFilter]    = useState("all");
   const [lastUpdated,   setLastUpdated]   = useState<Date | null>(null);
   const [isDeleting,    setIsDeleting]    = useState(false);
-
   // ── Main query ────────────────────────────────────────────────────────────
   const query = useQuery<Backup[], Error>({
     queryKey: QUERY_KEY,
     queryFn:  async () => {
       const res  = await backupsApi.list();
-      const data = res.data.data ?? [];
+      const data = (res.data ?? []) as Backup[];
       setLastUpdated(new Date());
       return data;
     },
-    // ✅ Fixed: TanStack Query v5 passes a Query object, not data directly
-    refetchInterval: (query) => {
-      const backups = query.state.data;
+    refetchInterval: (queryData) => {
+      const backups = queryData.state.data as Backup[] | undefined;
       const hasRunning = Array.isArray(backups) && backups.some(
-        (b) => b.status === "running" || b.status === "pending"
+        (b: Backup) => b.status === "running" || b.status === "pending"
       );
       return hasRunning ? FAST_INTERVAL : REFETCH_INTERVAL;
     },
     retry:     2,
     staleTime: 5_000,
   });
-
-  const backups = query.data ?? [];
-
+  const backups = (query.data ?? []) as Backup[];
   // ── Stats ─────────────────────────────────────────────────────────────────
   const stats = {
     total:       backups.length,
-    completed:   backups.filter((b) => b.status === "completed").length,
-    failed:      backups.filter((b) => b.status === "failed").length,
-    running:     backups.filter((b) => b.status === "running").length,
-    pending:     backups.filter((b) => b.status === "pending").length,
-    totalBytes:  backups.reduce((s, b) => s + (b.sizeAfter ?? 0), 0),
+    completed:   backups.filter((b: Backup) => b.status === "completed").length,
+    failed:      backups.filter((b: Backup) => b.status === "failed").length,
+    running:     backups.filter((b: Backup) => b.status === "running").length,
+    pending:     backups.filter((b: Backup) => b.status === "pending").length,
+    totalBytes:  backups.reduce((s: number, b: Backup) => s + (b.sizeAfter ?? 0), 0),
     successRate: backups.length
       ? Math.round(
-          (backups.filter((b) => b.status === "completed").length /
+          (backups.filter((b: Backup) => b.status === "completed").length /
             backups.length) * 100
         )
       : 100,
     hasRunning: backups.some(
-      (b) => b.status === "running" || b.status === "pending"
+      (b: Backup) => b.status === "running" || b.status === "pending"
     ),
   };
-
   // ── Auto-refresh when a backup is running ─────────────────────────────────
   useEffect(() => {
     if (!stats.hasRunning) return;
@@ -104,9 +95,8 @@ export function useBackups(): UseBackupsReturn {
     }, FAST_INTERVAL);
     return () => clearInterval(interval);
   }, [stats.hasRunning, qc]);
-
   // ── Filtered data ─────────────────────────────────────────────────────────
-  const filteredData = backups.filter((b) => {
+  const filteredData = backups.filter((b: Backup) => {
     const term   = searchTerm.toLowerCase();
     const srchOk = !searchTerm ||
       b.filename?.toLowerCase().includes(term)        ||
@@ -117,18 +107,16 @@ export function useBackups(): UseBackupsReturn {
     const tyOk = typeFilter   === "all" || b.backupType === typeFilter;
     return srchOk && stOk && tyOk;
   });
-
   // ── Refresh ───────────────────────────────────────────────────────────────
   const refresh = useCallback(() => {
     qc.invalidateQueries({ queryKey: QUERY_KEY });
   }, [qc]);
-
   // ── Delete single ─────────────────────────────────────────────────────────
   const deleteBackup = useCallback(async (id: string) => {
     setIsDeleting(true);
     try {
       qc.setQueryData<Backup[]>(QUERY_KEY, (old) =>
-        old ? old.filter((b) => b.id !== id) : []
+        old ? old.filter((b: Backup) => b.id !== id) : []
       );
       await backupsApi.remove(id);
       qc.invalidateQueries({ queryKey: QUERY_KEY });
@@ -139,13 +127,12 @@ export function useBackups(): UseBackupsReturn {
       setIsDeleting(false);
     }
   }, [qc]);
-
   // ── Delete many ───────────────────────────────────────────────────────────
   const deleteMany = useCallback(async (ids: string[]) => {
     setIsDeleting(true);
     try {
       qc.setQueryData<Backup[]>(QUERY_KEY, (old) =>
-        old ? old.filter((b) => !ids.includes(b.id)) : []
+        old ? old.filter((b: Backup) => !ids.includes(b.id)) : []
       );
       await Promise.all(ids.map((id) => backupsApi.remove(id)));
       qc.invalidateQueries({ queryKey: QUERY_KEY });
@@ -156,17 +143,14 @@ export function useBackups(): UseBackupsReturn {
       setIsDeleting(false);
     }
   }, [qc]);
-
   // ── Clear filters ─────────────────────────────────────────────────────────
   const clearFilters = useCallback(() => {
     setSearchTerm("");
     setStatusFilter("all");
     setTypeFilter("all");
   }, []);
-
   const hasActiveFilters =
     searchTerm !== "" || statusFilter !== "all" || typeFilter !== "all";
-
   return {
     data:         backups,
     filteredData,
