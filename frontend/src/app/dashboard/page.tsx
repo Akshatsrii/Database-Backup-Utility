@@ -33,7 +33,7 @@ export default function DashboardPage() {
   const { data: connections = [] } = useQuery<DbConnection[]>({
     queryKey: ["connections"],
     queryFn: async () => {
-      try { return (await connectionsApi.list()).data.data ?? []; }
+      try { return (await connectionsApi.list()).data ?? []; }
       catch { return []; }
     },
   });
