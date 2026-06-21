@@ -25,7 +25,7 @@ export default function SchedulerPage() {
   const { data: schedules = [], isLoading, isFetching } = useQuery<Schedule[]>({
     queryKey: ["schedules"],
     queryFn: async () => {
-      try { return (await schedulesApi.list()).data.data ?? []; }
+      try { return (await schedulesApi.list()).data ?? []; }
       catch { return []; }
     },
     refetchInterval: 15_000,
@@ -34,7 +34,7 @@ export default function SchedulerPage() {
   const { data: connections = [] } = useQuery<DbConnection[]>({
     queryKey: ["connections"],
     queryFn: async () => {
-      try { return (await connectionsApi.list()).data.data ?? []; }
+      try { return (await connectionsApi.list()).data ?? []; }
       catch { return []; }
     },
   });
