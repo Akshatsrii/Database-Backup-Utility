@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, Database, HardDrive, Shield, ChevronRight } from "lucide-react";
 import { backupsApi } from "@/lib/api";
-import type { DbConnection, CreateBackupDto, BackupType } from "@/types";
+import type { DbConnection, CreateBackupDto, BackupType, StorageType } from "@/types";
 
 // ─── Types & Constants ────────────────────────────────────────────────────────
 
@@ -32,8 +32,7 @@ const BACKUP_TYPES: { value: BackupType; label: string; desc: string }[] = [
 const STORAGE_TYPES = [
   { value: "local",    label: "local",    icon: "💾" },
   { value: "firebase", label: "firebase", icon: "🔥" },
-  { value: "s3",       label: "s3",       icon: "☁️" },
-] as const;
+] as const satisfies { value: StorageType; label: string; icon: string }[];
 
 const EMPTY: CreateBackupDto = {
   connectionId: "",
