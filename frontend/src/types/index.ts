@@ -45,7 +45,7 @@ export const asLogEntryId    = (s: string): LogEntryId    => s as LogEntryId;
 
 export type DbType            = "mysql" | "postgresql" | "mongodb" | "sqlite";
 export type BackupType        = "full" | "incremental" | "differential";
-export type StorageType       = "local" | "firebase" | "s3";
+export type StorageType       = "local" | "firebase";
 export type ScheduleFrequency = "hourly" | "daily" | "weekly" | "monthly";
 export type LogLevel          = "info" | "warn" | "error" | "success" | "debug";
 
@@ -255,9 +255,22 @@ export interface LogEntry extends Timestamps {
 // Stats
 // =============================================================================
 
+/** Generic history point — used by charts */
 export interface HistoryPoint {
-  date:  string; // "yyyy-MM-dd"
+  date:  string;
   value: number;
+}
+
+/** Size history point — exactly what backend sends */
+export interface SizeHistoryPoint {
+  date:  string;
+  bytes: number;
+}
+
+/** Rate history point — exactly what backend sends */
+export interface RateHistoryPoint {
+  date: string;
+  rate: number;
 }
 
 export interface DashboardStats {
@@ -267,10 +280,16 @@ export interface DashboardStats {
   totalStorageBytes:  number;
   activeConnections:  number;
   schedulesActive:    number;
-  /** Renamed from backupsSizeHistory for consistency */
-  storageHistory:     HistoryPoint[];
-  successRateHistory: HistoryPoint[];
+  /** Backend key — array of {date, bytes} */
+  backupsSizeHistory: SizeHistoryPoint[];
+  /** Backend key — array of {date, rate} */
+  successRateHistory: RateHistoryPoint[];
+  /** @deprecated alias for backupsSizeHistory — will be removed */
+  storageHistory?:    HistoryPoint[];
 }
+
+/** @deprecated Use DashboardStats — kept so old imports don't break */
+export type Stats = DashboardStats;
 
 // =============================================================================
 // API response envelope
@@ -323,14 +342,14 @@ export type UpdateConnectionDto = PartialBy<
 >;
 
 export interface CreateBackupDto {
-  connectionId: ConnectionId;
+  connectionId: string;   // plain string at API boundary
   backupType:   BackupType;
   storageType:  StorageType;
   encrypt?:     boolean;
 }
 
 export interface CreateScheduleDto {
-  connectionId: ConnectionId;
+  connectionId: string;   // plain string at API boundary
   frequency:    ScheduleFrequency;
   backupType:   BackupType;
   /** When omitted the server derives the cron from frequency. */
@@ -344,8 +363,8 @@ export type UpdateScheduleDto = Partial<
 >;
 
 export interface RestoreDto {
-  backupId:     BackupId;
-  connectionId: ConnectionId;
+  backupId:     string;   // plain string at API boundary
+  connectionId: string;
   tables?:      string[];
 }
 
