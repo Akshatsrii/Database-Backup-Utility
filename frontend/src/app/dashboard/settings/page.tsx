@@ -632,7 +632,7 @@ export default function SettingsPage() {
     queryKey: ["connections"],
     queryFn: async () => {
       try {
-        return (await connectionsApi.list()).data.data ?? [];
+        return (await connectionsApi.list()).data ?? [];
       } catch {
         return [];
       }
@@ -679,7 +679,7 @@ export default function SettingsPage() {
     setTesting(id);
     try {
       const res = await connectionsApi.test(id);
-      const ok = res.data.data?.success ?? false;
+      const ok = res.data?.success ?? false;
       setTestResults((p) => ({ ...p, [id]: ok }));
       showToast(ok ? "connection successful" : "connection failed", ok ? "success" : "error");
     } catch {
