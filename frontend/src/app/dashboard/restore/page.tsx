@@ -32,7 +32,7 @@ export default function RestorePage() {
   const { data: backups = [] } = useQuery<Backup[]>({
     queryKey: ["backups"],
     queryFn: async () => {
-      try { return (await backupsApi.list()).data.data ?? []; }
+      try { return (await backupsApi.list()).data ?? []; }
       catch { return []; }
     },
   });
@@ -40,7 +40,7 @@ export default function RestorePage() {
   const { data: connections = [] } = useQuery<DbConnection[]>({
     queryKey: ["connections"],
     queryFn: async () => {
-      try { return (await connectionsApi.list()).data.data ?? []; }
+      try { return (await connectionsApi.list()).data ?? []; }
       catch { return []; }
     },
   });
@@ -48,7 +48,7 @@ export default function RestorePage() {
   const { data: jobs = [], refetch, isFetching } = useQuery<RestoreJob[]>({
     queryKey: ["restore-jobs"],
     queryFn: async () => {
-      try { return (await restoreApi.jobs()).data.data ?? []; }
+      try { return (await restoreApi.jobs()).data ?? []; }
       catch { return []; }
     },
     refetchInterval: 10_000,
