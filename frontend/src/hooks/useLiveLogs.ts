@@ -152,8 +152,8 @@ export function useLiveLogs(arg?: number | UseLogsOptions): UseLogsReturn {
   }, [wsEnabled]);
 
   // ── lastUpdated — derived, duplicate setState nahi ───────────────────────
-  const lastUpdated = query.state.dataUpdatedAt
-    ? new Date(query.state.dataUpdatedAt)
+  const lastUpdated = query.dataUpdatedAt
+    ? new Date(query.dataUpdatedAt)
     : null;
 
   // ── Stats — memoized ──────────────────────────────────────────────────────
