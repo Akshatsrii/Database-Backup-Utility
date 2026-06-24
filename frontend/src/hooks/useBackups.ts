@@ -83,8 +83,8 @@ export function useBackups(): UseBackupsReturn {
   // BUGFIX: pehle queryFn ke andar setLastUpdated() call hota tha — har
   // fetch attempt pe fire hota tha, cache-served data pe bhi. Ab query ke
   // apne `dataUpdatedAt` se hamesha sahi value milti hai.
-  const lastUpdated = query.state.dataUpdatedAt
-    ? new Date(query.state.dataUpdatedAt)
+  const lastUpdated = query.dataUpdatedAt
+    ? new Date(query.dataUpdatedAt)
     : null;
 
   // ── Stats — memoized ─────────────────────────────────────────────────────
