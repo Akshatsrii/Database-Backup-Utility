@@ -2,36 +2,54 @@
 
 import { useState } from "react";
 import {
-  Activity, Wifi, WifiOff, Filter, Download,
-  Trash2, X, ChevronDown, Radio, Terminal,
+  Wifi, WifiOff, Filter, Download,
+  Trash2, X, Radio, Terminal,
   AlertTriangle, CheckCircle2, Info, Zap,
 } from "lucide-react";
 import LiveLogTerminal from "@/components/logs/LiveLogTerminal";
 import { useLiveLogs }  from "@/hooks/useLiveLogs";
 
 const LOG_LEVELS = [
-  { value: "all",     label: "all levels",  dot: "#4a5450",  count: null },
-  { value: "info",    label: "info",         dot: "#60a5fa",  icon: Info          },
-  { value: "success", label: "success",      dot: "#4ade80",  icon: CheckCircle2  },
-  { value: "warn",    label: "warn",         dot: "#fbbf24",  icon: AlertTriangle },
-  { value: "error",   label: "error",        dot: "#f87171",  icon: X             },
+  { value: "all",     label: "all levels", dot: "#4a5450" },
+  { value: "info",    label: "info",       dot: "#60a5fa" },
+  { value: "success", label: "success",    dot: "#4ade80" },
+  { value: "warn",    label: "warn",       dot: "#fbbf24" },
+  { value: "error",   label: "error",      dot: "#f87171" },
 ];
 
 export default function LogsPage() {
-  const { data: initialLogs = [] } = useLiveLogs(300);
+  // BUGFIX: hook ka actual return shape `{ logs, stats, isPaused, ... }` hai,
+  // "data" naam ka koi property kabhi nahi tha — isliye initialLogs hamesha
+  // [] rehta tha aur header ke counts/pills sab 0 dikhte the.
+  const {
+    logs:        initialLogs,
+    stats,
+    wsConnected,
+    refresh,
+  } = useLiveLogs({ limit: 300 });
 
-  const [levelFilter,  setLevelFilter]  = useState("all");
-  const [paused,       setPaused]       = useState(false);
-  const [search,       setSearch]       = useState("");
-  const [autoScroll,   setAutoScroll]   = useState(true);
+  // BUGFIX: yeh page apna khud ka paused/search/levelFilter/autoScroll
+  // state rakhta tha aur <LiveLogTerminal> ko prop ke roop mein bhej raha
+  // tha — lekin LiveLogTerminal ki Props interface mein yeh fields exist
+  // hi nahi karti (sirf `initialLogs` aur `height` leta hai). Matlab:
+  //   • Header ke pause/clear/export buttons kuch nahi karte the
+  //   • Header ka search/filter terminal ko affect nahi karta tha
+  //   • Saath mein LiveLogTerminal apna ALAG socket khud connect karta hai
+  //     (useLiveLogs hook bhi apna socket connect karta hai) — matlab
+  //     2 WebSocket connections ek saath chal rahe the.
+  //
+  // Fix: LiveLogTerminal apne andar pause/filter/search/clear/export
+  // bilkul sahi se already implement karta hai — usko hi single source
+  // of truth rehne do. Yeh page sirf REST snapshot (useLiveLogs hook) se
+  // header stats/pills dikhayega — yeh purely informational hai,
+  // interactive control LiveLogTerminal ke apne UI mein hi hai.
+  const [search, setSearch] = useState("");
 
-  // Derive counts from initialLogs
-  const levelCounts = LOG_LEVELS.slice(1).reduce((acc, l) => {
-    acc[l.value] = initialLogs.filter((lg: any) =>
-      (lg.level ?? lg.type ?? "").toLowerCase() === l.value
-    ).length;
-    return acc;
-  }, {} as Record<string, number>);
+  const filteredPreview = search
+    ? initialLogs.filter((l) =>
+        l.message.toLowerCase().includes(search.toLowerCase())
+      )
+    : initialLogs;
 
   return (
     <>
@@ -49,7 +67,6 @@ export default function LogsPage() {
           to   { opacity: 1; transform: none; }
         }
 
-        /* ── Header ── */
         .lp-header {
           display: flex;
           align-items: flex-start;
@@ -97,38 +114,29 @@ export default function LogsPage() {
           color: #4ade80;
         }
 
-        .lp-ws-badge.paused {
-          background: rgba(251,191,36,0.08);
-          border: 1px solid rgba(251,191,36,0.2);
-          color: #fbbf24;
+        .lp-ws-badge.disconnected {
+          background: rgba(248,113,113,0.08);
+          border: 1px solid rgba(248,113,113,0.2);
+          color: #f87171;
         }
 
-        .lp-ws-dot {
-          width: 5px; height: 5px;
-          border-radius: 50%;
-        }
+        .lp-ws-dot { width: 5px; height: 5px; border-radius: 50%; }
 
         .lp-ws-badge.connected .lp-ws-dot {
           background: #4ade80;
-          box-shadow: 0 0 5px #4ade8099;
+          box-shadow: 0 0 5px rgba(74,222,128,0.6);
           animation: lp-pulse 2s ease-in-out infinite;
         }
 
-        .lp-ws-badge.paused .lp-ws-dot { background: #fbbf24; }
+        .lp-ws-badge.disconnected .lp-ws-dot { background: #f87171; }
 
         @keyframes lp-pulse {
-          0%,100% { box-shadow: 0 0 4px #4ade8066; }
-          50%      { box-shadow: 0 0 9px #4ade80bb; }
+          0%,100% { box-shadow: 0 0 4px rgba(74,222,128,0.4); }
+          50%      { box-shadow: 0 0 9px rgba(74,222,128,0.73); }
         }
 
-        .lp-header-actions {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
+        .lp-header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-        /* ── Buttons ── */
         .lp-btn {
           display: flex;
           align-items: center;
@@ -153,37 +161,7 @@ export default function LogsPage() {
 
         .lp-btn-ghost:hover { background: #0c130e; color: #8aaa80; border-color: #253523; }
 
-        .lp-btn-pause {
-          background: transparent;
-          color: #fbbf24;
-          border: 1px solid rgba(251,191,36,0.25);
-        }
-
-        .lp-btn-pause:hover { background: rgba(251,191,36,0.06); }
-
-        .lp-btn-resume {
-          background: rgba(74,222,128,0.08);
-          color: #4ade80;
-          border: 1px solid rgba(74,222,128,0.25);
-        }
-
-        .lp-btn-resume:hover { background: rgba(74,222,128,0.14); }
-
-        .lp-btn-danger {
-          background: transparent;
-          color: #e05555;
-          border: 1px solid rgba(224,85,85,0.2);
-        }
-
-        .lp-btn-danger:hover { background: rgba(224,85,85,0.06); border-color: rgba(224,85,85,0.35); }
-
-        /* ── Level pills ── */
-        .lp-pill-row {
-          display: flex;
-          gap: 7px;
-          margin-bottom: 16px;
-          flex-wrap: wrap;
-        }
+        .lp-pill-row { display: flex; gap: 7px; margin-bottom: 16px; flex-wrap: wrap; }
 
         .lp-pill {
           display: flex;
@@ -194,30 +172,13 @@ export default function LogsPage() {
           border-radius: 20px;
           background: #0c130e;
           border: 1px solid #1a2418;
-          cursor: pointer;
-          transition: all 0.15s;
           font-family: 'JetBrains Mono', monospace;
         }
 
-        .lp-pill:hover { border-color: #253523; background: #0e160f; }
-
-        .lp-pill.active {
-          border-color: rgba(184,245,58,0.3);
-          background: rgba(184,245,58,0.05);
-        }
-
-        .lp-pill-dot {
-          width: 6px; height: 6px;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-
+        .lp-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
         .lp-pill-label { color: #3d5040; }
         .lp-pill-count { color: #8aaa80; font-weight: 600; }
-        .lp-pill.active .lp-pill-label { color: #8aaa80; }
-        .lp-pill.active .lp-pill-count { color: #b8f53a; }
 
-        /* ── Filter bar ── */
         .lp-filterbar {
           display: flex;
           align-items: center;
@@ -226,12 +187,7 @@ export default function LogsPage() {
           flex-wrap: wrap;
         }
 
-        .lp-search-wrap {
-          position: relative;
-          flex: 1;
-          min-width: 180px;
-          max-width: 300px;
-        }
+        .lp-search-wrap { position: relative; flex: 1; min-width: 180px; max-width: 300px; }
 
         .lp-search-icon {
           position: absolute;
@@ -251,7 +207,6 @@ export default function LogsPage() {
           cursor: pointer;
           display: flex;
           align-items: center;
-          transition: color 0.15s;
           padding: 2px;
         }
 
@@ -277,50 +232,13 @@ export default function LogsPage() {
 
         .lp-input::placeholder { color: #1e2e20; }
 
-        /* ── Auto-scroll toggle ── */
-        .lp-toggle-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 10px;
-          color: #3d5040;
+        .lp-hint {
+          font-size: 9px;
+          color: #2e4035;
+          letter-spacing: 0.04em;
         }
 
-        .lp-toggle {
-          width: 32px; height: 17px;
-          border-radius: 10px;
-          background: #1a2418;
-          border: 1px solid #253523;
-          position: relative;
-          cursor: pointer;
-          transition: background 0.2s;
-          flex-shrink: 0;
-        }
-
-        .lp-toggle.on { background: rgba(184,245,58,0.2); border-color: rgba(184,245,58,0.4); }
-
-        .lp-toggle-thumb {
-          width: 11px; height: 11px;
-          border-radius: 50%;
-          background: #3d5040;
-          position: absolute;
-          top: 2px; left: 2px;
-          transition: all 0.2s;
-        }
-
-        .lp-toggle.on .lp-toggle-thumb {
-          background: #b8f53a;
-          left: 17px;
-          box-shadow: 0 0 6px #b8f53a88;
-        }
-
-        /* ── Stats bar ── */
-        .lp-statsbar {
-          display: flex;
-          gap: 6px;
-          margin-bottom: 14px;
-          flex-wrap: wrap;
-        }
+        .lp-statsbar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
 
         .lp-stat {
           display: flex;
@@ -334,14 +252,13 @@ export default function LogsPage() {
         }
 
         .lp-stat-val { font-weight: 600; }
-        .lp-stat-val.green  { color: #4ade80; }
-        .lp-stat-val.blue   { color: #60a5fa; }
-        .lp-stat-val.amber  { color: #fbbf24; }
-        .lp-stat-val.red    { color: #f87171; }
-        .lp-stat-val.acid   { color: #b8f53a; }
+        .lp-stat-val.green { color: #4ade80; }
+        .lp-stat-val.blue  { color: #60a5fa; }
+        .lp-stat-val.amber { color: #fbbf24; }
+        .lp-stat-val.red   { color: #f87171; }
+        .lp-stat-val.acid  { color: #b8f53a; }
         .lp-stat-label { color: #2e4035; }
 
-        /* ── Terminal wrapper ── */
         .lp-terminal-wrap {
           background: #080d0a;
           border: 1px solid #1a2418;
@@ -350,7 +267,6 @@ export default function LogsPage() {
           position: relative;
         }
 
-        /* Terminal top chrome */
         .lp-term-chrome {
           display: flex;
           align-items: center;
@@ -362,15 +278,11 @@ export default function LogsPage() {
 
         .lp-term-dots { display: flex; gap: 6px; align-items: center; }
 
-        .lp-term-dot {
-          width: 9px; height: 9px;
-          border-radius: 50%;
-          background: #1a2418;
-        }
+        .lp-term-dot { width: 9px; height: 9px; border-radius: 50%; background: #1a2418; }
 
         .lp-term-dot.green {
           background: #b8f53a;
-          box-shadow: 0 0 6px #b8f53a88;
+          box-shadow: 0 0 6px rgba(184,245,58,0.53);
           animation: lp-pulse 2.5s ease-in-out infinite;
         }
 
@@ -385,15 +297,8 @@ export default function LogsPage() {
 
         .lp-term-title em { color: #4a6450; font-style: normal; }
 
-        .lp-term-meta {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 10px;
-          color: #2e4035;
-        }
+        .lp-term-meta { display: flex; align-items: center; gap: 10px; font-size: 10px; color: #2e4035; }
 
-        /* ── Responsive ── */
         @media (max-width: 600px) {
           .lp-header { flex-direction: column; align-items: flex-start; }
           .lp-filterbar { flex-direction: column; align-items: stretch; }
@@ -415,66 +320,51 @@ export default function LogsPage() {
             </div>
             <div className="lp-subtitle">
               real-time backup activity stream via websocket
-              <span className={`lp-ws-badge ${paused ? "paused" : "connected"}`}>
+              <span className={`lp-ws-badge ${wsConnected ? "connected" : "disconnected"}`}>
                 <span className="lp-ws-dot" />
-                {paused ? "paused" : "connected"}
+                {wsConnected ? "connected" : "disconnected"}
               </span>
             </div>
           </div>
 
+          {/* BUGFIX: yeh buttons ab terminal ke real controls ko reflect
+              karte hain — refresh sirf REST snapshot refetch karta hai
+              (header stats/pills update karne ke liye). Live pause/clear/
+              export terminal ke apne top-bar mein hai, woh hi single
+              source of truth hai is data ke liye. */}
           <div className="lp-header-actions">
-            <button
-              onClick={() => setPaused((p) => !p)}
-              className={`lp-btn ${paused ? "lp-btn-resume" : "lp-btn-pause"}`}
-            >
-              {paused ? <Radio size={12} /> : <WifiOff size={12} />}
-              {paused ? "resume" : "pause"}
-            </button>
-
-            <button className="lp-btn lp-btn-ghost">
-              <Download size={12} />
-              export
-            </button>
-
-            <button className="lp-btn lp-btn-danger">
-              <Trash2 size={12} />
-              clear
+            <button onClick={refresh} className="lp-btn lp-btn-ghost">
+              <Radio size={12} />
+              refresh stats
             </button>
           </div>
         </div>
 
-        {/* ── Level pills ── */}
+        {/* ── Level pills — informational snapshot, REST data se ── */}
         <div className="lp-pill-row">
           {LOG_LEVELS.map((l) => (
-            <button
-              key={l.value}
-              className={`lp-pill ${levelFilter === l.value ? "active" : ""}`}
-              onClick={() => setLevelFilter(l.value)}
-            >
+            <span key={l.value} className="lp-pill">
               <span
                 className="lp-pill-dot"
-                style={{
-                  background: l.dot,
-                  boxShadow: levelFilter === l.value ? `0 0 5px ${l.dot}88` : "none",
-                }}
+                style={{ background: l.dot }}
               />
               <span className="lp-pill-label">{l.label}</span>
               <span className="lp-pill-count">
-                {l.value === "all"
-                  ? initialLogs.length
-                  : levelCounts[l.value] ?? 0}
+                {l.value === "all" ? stats.total : (stats as Record<string, number>)[l.value] ?? 0}
               </span>
-            </button>
+            </span>
           ))}
+          <span className="lp-hint">· snapshot from last refresh, live count is below in terminal</span>
         </div>
 
-        {/* ── Filter bar ── */}
+        {/* ── Search — sirf header pills ke preview ke liye, terminal ka
+            apna independent search box hai jo asli filtering karta hai ── */}
         <div className="lp-filterbar">
           <div className="lp-search-wrap">
             <Filter size={11} className="lp-search-icon" />
             <input
               type="text"
-              placeholder="filter logs by keyword..."
+              placeholder="preview filter (snapshot only)..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="lp-input"
@@ -485,55 +375,45 @@ export default function LogsPage() {
               </button>
             )}
           </div>
-
-          {/* Auto-scroll toggle */}
-          <div className="lp-toggle-row">
-            <div
-              className={`lp-toggle ${autoScroll ? "on" : ""}`}
-              onClick={() => setAutoScroll((v) => !v)}
-            >
-              <div className="lp-toggle-thumb" />
-            </div>
-            auto-scroll
-          </div>
         </div>
 
         {/* ── Stats bar ── */}
         <div className="lp-statsbar">
           <div className="lp-stat">
             <Zap size={11} color="#b8f53a" />
-            <span className="lp-stat-val acid">{initialLogs.length}</span>
-            <span className="lp-stat-label">total entries</span>
+            <span className="lp-stat-val acid">{filteredPreview.length}</span>
+            <span className="lp-stat-label">matching entries</span>
           </div>
           <div className="lp-stat">
             <CheckCircle2 size={11} color="#4ade80" />
-            <span className="lp-stat-val green">{levelCounts["success"] ?? 0}</span>
+            <span className="lp-stat-val green">{stats.success}</span>
             <span className="lp-stat-label">success</span>
           </div>
           <div className="lp-stat">
             <Info size={11} color="#60a5fa" />
-            <span className="lp-stat-val blue">{levelCounts["info"] ?? 0}</span>
+            <span className="lp-stat-val blue">{stats.info}</span>
             <span className="lp-stat-label">info</span>
           </div>
           <div className="lp-stat">
             <AlertTriangle size={11} color="#fbbf24" />
-            <span className="lp-stat-val amber">{levelCounts["warn"] ?? 0}</span>
+            <span className="lp-stat-val amber">{stats.warn}</span>
             <span className="lp-stat-label">warnings</span>
           </div>
           <div className="lp-stat">
             <X size={11} color="#f87171" />
-            <span className="lp-stat-val red">{levelCounts["error"] ?? 0}</span>
+            <span className="lp-stat-val red">{stats.error}</span>
             <span className="lp-stat-label">errors</span>
           </div>
         </div>
 
-        {/* ── Terminal with chrome ── */}
+        {/* ── Terminal — single source of truth for live stream,
+            pause, search, level filter, clear, export sab yahi handle
+            karta hai apne andar (self-contained, working component) ── */}
         <div className="lp-terminal-wrap">
-          {/* Chrome bar */}
           <div className="lp-term-chrome">
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div className="lp-term-dots">
-                <div className={`lp-term-dot ${!paused ? "green" : ""}`} />
+                <div className={`lp-term-dot ${wsConnected ? "green" : ""}`} />
                 <div className="lp-term-dot" />
                 <div className="lp-term-dot" />
               </div>
@@ -543,21 +423,13 @@ export default function LogsPage() {
               </div>
             </div>
             <div className="lp-term-meta">
-              {paused && (
-                <span style={{ color: "#fbbf24", fontSize: 10 }}>⏸ stream paused</span>
-              )}
               <span>300 log buffer</span>
             </div>
           </div>
 
-          {/* Actual terminal component */}
           <LiveLogTerminal
             initialLogs={initialLogs}
             height={560}
-            paused={paused}
-            levelFilter={levelFilter}
-            search={search}
-            autoScroll={autoScroll}
           />
         </div>
 
