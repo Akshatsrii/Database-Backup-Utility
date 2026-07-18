@@ -311,3 +311,32 @@
 2026-06-21 19:07:06 [INFO] GET /jobs 304 — 0ms
 2026-06-21 19:07:57 [INFO] GET / 304 — 0ms
 2026-06-21 19:19:28 [INFO] GET / 304 — 1ms
+2026-07-17 16:12:39 [WARN] Firebase not configured — cloud storage disabled
+2026-07-17 16:12:39 [INFO] 
+  ╔══════════════════════════════════════╗
+  ║         BackupOS Backend             ║
+  ║  Server   : http://localhost:4000   ║
+  ║  Env      : development               ║
+  ║  WebSocket: ws://localhost:4000     ║
+  ╚══════════════════════════════════════╝
+  
+2026-07-17 16:12:51 [INFO] GET / 200 — 11ms
+2026-07-17 16:12:51 [INFO] GET /dashboard 200 — 6ms
+2026-07-17 16:12:51 [INFO] GET / 304 — 6ms
+2026-07-17 16:13:06 [INFO] GET / 304 — 1ms
+2026-07-17 16:13:07 [INFO] GET / 304 — 3ms
+2026-07-17 16:13:09 [INFO] GET /jobs 304 — 2ms
+2026-07-17 16:13:11 [INFO] GET / 200 — 1ms
+2026-07-17 16:13:12 [INFO] GET / 200 — 7ms
+2026-07-17 16:13:12 [INFO] WebSocket client connected: LNbharNm_2lzJOMfAAAC
+2026-07-17 16:13:12 [INFO] WebSocket client connected: _CSSr8hFU7bFOIfCAAAE
+2026-07-17 16:13:15 [INFO] WebSocket client disconnected: _CSSr8hFU7bFOIfCAAAE
+2026-07-17 16:13:15 [INFO] WebSocket client disconnected: LNbharNm_2lzJOMfAAAC
+2026-07-17 16:14:28 [INFO] GET / 200 — 9ms
+2026-07-17 16:14:28 [INFO] WebSocket client connected: znP3OkA924-oBhbMAAAG
+2026-07-17 16:14:28 [INFO] WebSocket client connected: siwoHyGjJv-VNjqtAAAI
+2026-07-17 16:14:34 [INFO] WebSocket client disconnected: siwoHyGjJv-VNjqtAAAI
+2026-07-17 16:14:34 [INFO] WebSocket client disconnected: znP3OkA924-oBhbMAAAG
+2026-07-17 16:14:34 [INFO] GET /dashboard 304 — 2ms
+2026-07-17 16:14:34 [INFO] GET / 304 — 2ms
+2026-07-17 16:14:34 [INFO] GET / 304 — 1ms
