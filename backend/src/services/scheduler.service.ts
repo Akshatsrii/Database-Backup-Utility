@@ -9,10 +9,9 @@ import type {
   DbConnection,
 } from "../types";
 
-export const scheduleStore: Schedule[]     = [];
+export const scheduleStore:   Schedule[]     = [];
 export const connectionStore: DbConnection[] = [];
 
-// Active cron tasks map
 const activeTasks = new Map<string, cron.ScheduledTask>();
 
 export class SchedulerService {
@@ -22,11 +21,24 @@ export class SchedulerService {
   }
 
   createSchedule(
-    dto: CreateScheduleDto,
+    dto:        CreateScheduleDto,
     connection: DbConnection
   ): Schedule {
-    const cronExpr = frequencyToCron(dto.frequency);
-    const nextRun  = getNextRunTime(cronExpr);
+    // BUGFIX: Frontend SchedulerForm `time` aur `retention` fields bhejta
+    // hai — lekin backend CreateScheduleDto mein yeh fields exist nahi
+    // karte (backend types/index.ts dekhein). Backend sirf `frequency` se
+    // fixed cron expression banata hai via frequencyToCron().
+    //
+    // `time` field silently discard hota tha — user "daily at 14:00"
+    // set karta tha lekin hamesha midnight (00:00) pe run hota tha.
+    //
+    // Fix: `cronExpression` frontend se allow karo agar bheja gaya ho —
+    // ya frequency se derive karo as fallback.
+    const cronExpr = (dto as CreateScheduleDto & { cronExpression?: string })
+      .cronExpression
+      ?? frequencyToCron(dto.frequency);
+
+    const nextRun = getNextRunTime(cronExpr);
 
     const schedule: Schedule = {
       id:             uuidv4(),
@@ -43,7 +55,7 @@ export class SchedulerService {
     scheduleStore.push(schedule);
     this.startTask(schedule, connection);
 
-    logger.info(`Schedule created: ${schedule.id} (${dto.frequency})`);
+    logger.info(`Schedule created: ${schedule.id} (${dto.frequency} → ${cronExpr})`);
     return schedule;
   }
 
@@ -80,7 +92,7 @@ export class SchedulerService {
 
   private startTask(schedule: Schedule, connection: DbConnection): void {
     if (!cron.validate(schedule.cronExpression)) {
-      logger.error(`Invalid cron: ${schedule.cronExpression}`);
+      logger.error(`Invalid cron expression: ${schedule.cronExpression}`);
       return;
     }
 
