@@ -953,3 +953,11 @@ body {
   .bu-card { padding: 22px 18px; }
   .bu-brand-name { font-size: 21px; }
 }
+/* ── PageWrapper fade-in animation ──────────────────────────
+   Moved here from PageWrapper.tsx to fix hydration mismatch
+   (dangerouslySetInnerHTML causes quote-encoding differences
+   between server and client renders).                        */
+@keyframes pw-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
