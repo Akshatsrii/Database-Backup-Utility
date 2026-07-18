@@ -1,16 +1,14 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Modal } from "@/components/ui/Modal";
-import { schedulesApi } from "@/lib/api";
+import { Modal }         from "@/components/ui/Modal";
+import { schedulesApi }  from "@/lib/api";
 import type {
   DbConnection,
   CreateScheduleDto,
   ScheduleFrequency,
   BackupType,
 } from "@/types";
-
-/* ── types ───────────────────────────────────────────────── */
 
 interface Props {
   open:        boolean;
@@ -19,28 +17,43 @@ interface Props {
   onSuccess:   () => void;
 }
 
-/* ── frequency options ───────────────────────────────────── */
-
 const FREQ_OPTIONS: {
   value: ScheduleFrequency;
   label: string;
   desc:  string;
 }[] = [
-  { value: "hourly",  label: "hourly",  desc: "every hour"            },
-  { value: "daily",   label: "daily",   desc: "every day"             },
-  { value: "weekly",  label: "weekly",  desc: "every sunday"          },
-  { value: "monthly", label: "monthly", desc: "1st of every month"    },
+  { value: "hourly",  label: "hourly",  desc: "every hour"         },
+  { value: "daily",   label: "daily",   desc: "every day"          },
+  { value: "weekly",  label: "weekly",  desc: "every sunday"       },
+  { value: "monthly", label: "monthly", desc: "1st of every month" },
 ];
 
 const BACKUP_TYPES: { value: BackupType; desc: string }[] = [
-  { value: "full",          desc: "complete snapshot"       },
-  { value: "incremental",   desc: "changes since last"      },
-  { value: "differential",  desc: "changes since full"      },
+  { value: "full",         desc: "complete snapshot"  },
+  { value: "incremental",  desc: "changes since last" },
+  { value: "differential", desc: "changes since full" },
 ];
 
-/* ── next-run preview ────────────────────────────────────── */
+// ── Build cron from frequency + time ──────────────────────────────────────
+// BUGFIX: pehle `time` field frontend pe collect hoti thi lekin backend ko
+// `cronExpression` nahi bheja jaata tha — woh silently discard hoti thi.
+// Ab `time` field se actual cron expression banate hain aur backend ko
+// `cronExpression` field mein dete hain.
+function buildCronExpression(freq: ScheduleFrequency, time: string): string {
+  const [hh, mm] = time.split(":").map(Number);
+  const h = isNaN(hh) ? 0 : hh;
+  const m = isNaN(mm) ? 0 : mm;
 
-function nextRun(freq: ScheduleFrequency, timeStr: string): string {
+  switch (freq) {
+    case "hourly":  return "0 * * * *";          // time field ignored for hourly
+    case "daily":   return `${m} ${h} * * *`;
+    case "weekly":  return `${m} ${h} * * 0`;    // Sunday
+    case "monthly": return `${m} ${h} 1 * *`;    // 1st of month
+  }
+}
+
+// ── Next-run preview ──────────────────────────────────────────────────────
+function nextRunPreview(freq: ScheduleFrequency, timeStr: string): string {
   const [hh, mm] = timeStr.split(":").map(Number);
   const now  = new Date();
   const next = new Date(now);
@@ -52,12 +65,10 @@ function nextRun(freq: ScheduleFrequency, timeStr: string): string {
     next.setHours(hh, mm, 0, 0);
     if (next <= now) next.setDate(next.getDate() + 1);
   } else if (freq === "weekly") {
-    const day = now.getDay(); // 0 = Sun
-    const daysUntilSun = day === 0 ? 7 : 7 - day;
+    const daysUntilSun = now.getDay() === 0 ? 7 : 7 - now.getDay();
     next.setDate(now.getDate() + daysUntilSun);
     next.setHours(hh, mm, 0, 0);
   } else {
-    // monthly
     next.setMonth(now.getMonth() + 1, 1);
     next.setHours(hh, mm, 0, 0);
   }
@@ -71,17 +82,13 @@ function nextRun(freq: ScheduleFrequency, timeStr: string): string {
   });
 }
 
-/* ── default form state ──────────────────────────────────── */
-
-const DEFAULT_FORM = (): CreateScheduleDto & { time: string; retention: number } => ({
+const DEFAULT_FORM = () => ({
   connectionId: "",
-  frequency:    "daily",
-  backupType:   "full",
+  frequency:    "daily" as ScheduleFrequency,
+  backupType:   "full"  as BackupType,
   time:         "00:00",
   retention:    7,
 });
-
-/* ── component ───────────────────────────────────────────── */
 
 export default function SchedulerForm({
   open,
@@ -93,21 +100,41 @@ export default function SchedulerForm({
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
 
-  const set = <K extends keyof typeof form>(k: K, v: (typeof form)[K]) =>
-    setForm((p) => ({ ...p, [k]: v }));
+  const set = <K extends keyof ReturnType<typeof DEFAULT_FORM>>(
+    k: K,
+    v: ReturnType<typeof DEFAULT_FORM>[K],
+  ) => setForm((p) => ({ ...p, [k]: v }));
 
   const preview = useMemo(
-    () => nextRun(form.frequency, form.time),
-    [form.frequency, form.time]
+    () => nextRunPreview(form.frequency, form.time),
+    [form.frequency, form.time],
   );
 
   const handleCreate = async () => {
     if (!form.connectionId) { setError("select a connection"); return; }
-    if (form.retention < 1)  { setError("retention must be at least 1 day"); return; }
+    if (form.retention < 1) { setError("retention must be ≥ 1 day"); return; }
+
     setError("");
     setLoading(true);
+
     try {
-      await schedulesApi.create(form);
+      // BUGFIX: `cronExpression` ab explicitly build karke backend ko
+      // bheja jaata hai — warna backend `time` field ignore karke
+      // hamesha fixed midnight cron use karta.
+      const cronExpression = buildCronExpression(form.frequency, form.time);
+
+      const dto: CreateScheduleDto & {
+        cronExpression: string;
+        retention:      number;
+      } = {
+        connectionId:   form.connectionId,
+        frequency:      form.frequency,
+        backupType:     form.backupType,
+        cronExpression,
+        retention:      form.retention,
+      };
+
+      await schedulesApi.create(dto);
       onSuccess();
       handleClose();
     } catch (e: unknown) {
@@ -130,7 +157,6 @@ export default function SchedulerForm({
     <Modal open={open} onClose={handleClose} title="create_schedule">
       <div className="space-y-4">
 
-        {/* error */}
         {error && (
           <p
             className="text-xs px-3 py-2 rounded"
@@ -144,9 +170,11 @@ export default function SchedulerForm({
           </p>
         )}
 
-        {/* connection */}
+        {/* Connection */}
         <div className="space-y-1.5">
-          <label className="text-xs" style={{ color: "#4a5450" }}>connection</label>
+          <label className="text-xs" style={{ color: "#4a5450" }}>
+            connection
+          </label>
           <select
             className="terminal-input"
             value={form.connectionId}
@@ -162,9 +190,11 @@ export default function SchedulerForm({
           </select>
         </div>
 
-        {/* frequency */}
+        {/* Frequency */}
         <div className="space-y-2">
-          <label className="text-xs" style={{ color: "#4a5450" }}>frequency</label>
+          <label className="text-xs" style={{ color: "#4a5450" }}>
+            frequency
+          </label>
           <div className="grid grid-cols-2 gap-2">
             {FREQ_OPTIONS.map((f) => {
               const active = form.frequency === f.value;
@@ -174,11 +204,14 @@ export default function SchedulerForm({
                   onClick={() => set("frequency", f.value)}
                   className="text-left p-3 rounded border transition-all"
                   style={{
-                    borderColor: active ? "#b8f53a"                  : "#252825",
-                    background:  active ? "rgba(184,245,58,0.06)"    : "transparent",
+                    borderColor: active ? "#b8f53a" : "#252825",
+                    background:  active ? "rgba(184,245,58,0.06)" : "transparent",
                   }}
                 >
-                  <p className="text-xs font-semibold" style={{ color: active ? "#b8f53a" : "#e8edea" }}>
+                  <p
+                    className="text-xs font-semibold"
+                    style={{ color: active ? "#b8f53a" : "#e8edea" }}
+                  >
                     {f.label}
                   </p>
                   <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>
@@ -190,7 +223,7 @@ export default function SchedulerForm({
           </div>
         </div>
 
-        {/* time picker — hidden for hourly */}
+        {/* Time picker */}
         {showTimePicker && (
           <div className="space-y-1.5">
             <label className="text-xs" style={{ color: "#4a5450" }}>
@@ -207,9 +240,11 @@ export default function SchedulerForm({
           </div>
         )}
 
-        {/* backup type */}
+        {/* Backup type */}
         <div className="space-y-2">
-          <label className="text-xs" style={{ color: "#4a5450" }}>backup_type</label>
+          <label className="text-xs" style={{ color: "#4a5450" }}>
+            backup_type
+          </label>
           <div className="grid grid-cols-3 gap-2">
             {BACKUP_TYPES.map(({ value, desc }) => {
               const active = form.backupType === value;
@@ -223,21 +258,28 @@ export default function SchedulerForm({
                     background:  active ? "rgba(184,245,58,0.08)" : "transparent",
                   }}
                 >
-                  <p className="font-semibold" style={{ color: active ? "#b8f53a" : "#8a9690" }}>
+                  <p
+                    className="font-semibold"
+                    style={{ color: active ? "#b8f53a" : "#8a9690" }}
+                  >
                     {value}
                   </p>
-                  <p className="mt-0.5" style={{ color: "#3d4040" }}>{desc}</p>
+                  <p className="mt-0.5" style={{ color: "#3d4040" }}>
+                    {desc}
+                  </p>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* retention */}
+        {/* Retention */}
         <div className="space-y-1.5">
           <label className="text-xs" style={{ color: "#4a5450" }}>
             retention_days{" "}
-            <span style={{ color: "#3d4040" }}>(backups older than this are auto-deleted)</span>
+            <span style={{ color: "#3d4040" }}>
+              (auto-delete backups older than this)
+            </span>
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -253,12 +295,12 @@ export default function SchedulerForm({
           </div>
         </div>
 
-        {/* next-run preview */}
+        {/* Next run preview */}
         <div
           className="px-3 py-2.5 rounded text-xs flex items-center justify-between"
           style={{ background: "#1a1d1a", border: "1px solid #252825" }}
         >
-          <span style={{ color: "#4a5450" }}>next_run</span>
+          <span style={{ color: "#4a5450" }}>next_run_preview</span>
           <span style={{ color: "#b8f53a" }}>{preview}</span>
         </div>
 
