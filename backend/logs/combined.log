@@ -363,3 +363,12 @@
 2026-07-19 12:21:37 [INFO] GET / 304 — 1ms
 2026-07-19 12:23:31 [INFO] GET / 304 — 0ms
 2026-07-19 12:23:31 [INFO] GET / 304 — 0ms
+2026-07-19 12:24:46 [WARN] Firebase not configured — cloud storage disabled
+2026-07-19 12:24:46 [INFO] 
+  ╔══════════════════════════════════════╗
+  ║         BackupOS Backend             ║
+  ║  Server   : http://localhost:4000   ║
+  ║  Env      : development               ║
+  ║  WebSocket: ws://localhost:4000     ║
+  ╚══════════════════════════════════════╝
+  
