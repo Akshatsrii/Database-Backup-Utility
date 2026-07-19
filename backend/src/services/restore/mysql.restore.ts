@@ -53,4 +53,4 @@ export class MySQLRestoreService {
   }
 }
 
-export const mysqlRestoreService = new MySQLRestoreService();
+export const mysqlRestoreServe = new MySQLRestoreService();
