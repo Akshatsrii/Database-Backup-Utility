@@ -5,6 +5,8 @@ import { compressionService }  from "../compression.service";
 import { encryptionService }   from "../encryption.service";
 import { localStorageService } from "../storage/local.storage";
 import { firebaseStorageService } from "../storage/firebase.storage";
+import { healthService } from "../health.service";
+import { queueService }  from "../queue.service";
 import { mysqlBackupService }      from "./mysql.service";
 import { postgresqlBackupService } from "./postgresql.service";
 import { mongodbBackupService }    from "./mongodb.service";
@@ -58,6 +60,9 @@ export class BackupService {
     emitLog: (msg: string) => void
   ): Promise<Backup> {
 
+    const connectionBackups = backupStore.filter(b => b.connectionId === connection.id);
+    const versionNumber = connectionBackups.length + 1;
+
     const backup: Backup = {
       id:             uuidv4(),
       connectionId:   connection.id,
@@ -70,62 +75,88 @@ export class BackupService {
       storageType:    dto.storageType,
       startedAt:      new Date().toISOString(),
       encrypted:      dto.encrypt ?? false,
+      version:        `v${versionNumber}`,
     };
 
     backupStore.push(backup);
 
-    try {
-      backup.status = "running";
-      const startTime = Date.now();
+      // Update status to queued
+      backup.status = "pending";
+      
+      const executeBackup = async () => {
+        try {
+          backup.status = "running";
+          const startTime = Date.now();
 
-      // ── Step 1: Dump ────────────────────────────────────
-      emitLog(`[${backup.id}] Connecting to ${connection.type}...`);
-      let filePath = await this.runDump(connection, dto.backupType);
-      const sizeBefore = getFileSize(filePath);
-      backup.sizeBefore = sizeBefore;
+          // ── Step 1: Dump ────────────────────────────────────
+          backup.stage = "connecting";
+          emitLog(`[${backup.id}] Connecting to ${connection.type}...`);
+          let filePath = await this.runDump(connection, dto.backupType);
+          
+          backup.stage = "dumping";
+          const sizeBefore = getFileSize(filePath);
+          backup.sizeBefore = sizeBefore;
 
-      // ── Step 2: Compress ────────────────────────────────
-      emitLog(`[${backup.id}] Compressing backup...`);
-      filePath = await compressionService.compress(filePath);
-      const sizeAfter = getFileSize(filePath);
-      backup.sizeAfter         = sizeAfter;
-      backup.compressionRatio  = compressionService.getCompressionRatio(sizeBefore, sizeAfter);
+          // ── Step 2: Compress ────────────────────────────────
+          backup.stage = "compressing";
+          emitLog(`[${backup.id}] Compressing backup...`);
+          filePath = await compressionService.compress(filePath);
+          const sizeAfter = getFileSize(filePath);
+          backup.sizeAfter         = sizeAfter;
+          backup.compressionRatio  = compressionService.getCompressionRatio(sizeBefore, sizeAfter);
 
-      // ── Step 3: Encrypt (optional) ──────────────────────
-      if (dto.encrypt) {
-        emitLog(`[${backup.id}] Encrypting backup...`);
-        filePath = await encryptionService.encryptFile(filePath);
-      }
+          // ── Step 3: Encrypt (optional) ──────────────────────
+          if (dto.encrypt) {
+            backup.stage = "encrypting";
+            emitLog(`[${backup.id}] Encrypting backup...`);
+            filePath = await encryptionService.encryptFile(filePath);
+          }
 
-      // ── Step 4: Store ───────────────────────────────────
-      emitLog(`[${backup.id}] Uploading to ${dto.storageType}...`);
-      const filename = path.basename(filePath);
+          // ── Step 4: Store ───────────────────────────────────
+          backup.stage = "uploading";
+          emitLog(`[${backup.id}] Uploading to ${dto.storageType}...`);
+          const filename = path.basename(filePath);
 
-      if (dto.storageType === "firebase") {
-        await firebaseStorageService.upload(filePath, filename);
-        backup.storagePath = `firebase://backups/${filename}`;
-        // Keep local copy too
-        await localStorageService.save(filePath, filename);
-      } else {
-        await localStorageService.save(filePath, filename);
-        backup.storagePath = localStorageService.getPath(filename);
-      }
+          if (dto.storageType === "firebase") {
+            await firebaseStorageService.upload(filePath, filename);
+            backup.storagePath = `firebase://backups/${filename}`;
+            // Keep local copy too
+            await localStorageService.save(filePath, filename);
+          } else {
+            await localStorageService.save(filePath, filename);
+            backup.storagePath = localStorageService.getPath(filename);
+          }
 
-      backup.filename     = filename;
-      backup.status       = "completed";
-      backup.completedAt  = new Date().toISOString();
-      backup.durationMs   = Date.now() - startTime;
+          backup.filename     = filename;
+          
+          // ── Step 5: Health Check ─────────────────────────────
+          backup.stage = "health_check";
+          emitLog(`[${backup.id}] Running health verification...`);
+          const health = await healthService.checkHealth(backup.storagePath);
+          backup.sha256 = health.sha256;
+          backup.healthScore = health.healthScore;
+          backup.isCorrupted = health.isCorrupted;
 
-      emitLog(`[${backup.id}] Backup completed in ${backup.durationMs}ms`);
-      logger.info(`Backup completed: ${backup.id}`);
+          backup.stage = "completed";
+          backup.status       = "completed";
+          backup.completedAt  = new Date().toISOString();
+          backup.durationMs   = Date.now() - startTime;
 
-    } catch (err) {
-      backup.status       = "failed";
-      backup.errorMessage = (err as Error).message;
-      backup.completedAt  = new Date().toISOString();
-      emitLog(`[${backup.id}] Backup failed: ${backup.errorMessage}`);
-      logger.error(`Backup failed: ${backup.id}`, { err });
-    }
+          emitLog(`[${backup.id}] Backup completed in ${backup.durationMs}ms`);
+          logger.info(`Backup completed: ${backup.id}`);
+
+        } catch (err) {
+          backup.stage = "failed";
+          backup.status       = "failed";
+          backup.errorMessage = (err as Error).message;
+          backup.completedAt  = new Date().toISOString();
+          emitLog(`[${backup.id}] Backup failed: ${backup.errorMessage}`);
+          logger.error(`Backup failed: ${backup.id}`, { err });
+        }
+      };
+
+      // Add to queue with default priority 10
+      queueService.addJob(backup.id, 10, executeBackup);
 
     return backup;
   }

@@ -25,8 +25,10 @@ export interface Backup {
   connectionId:      string;
   connectionName:    string;
   dbType:            DbType;
+  environment?:      "dev" | "test" | "staging" | "prod";
   backupType:        BackupType;
   status:            BackupStatus;
+  stage?:            "connecting" | "dumping" | "compressing" | "encrypting" | "uploading" | "health_check" | "completed" | "failed";
   filename:          string;
   sizeBefore?:       number;
   sizeAfter?:        number;
@@ -38,6 +40,10 @@ export interface Backup {
   durationMs?:       number;
   errorMessage?:     string;
   encrypted:         boolean;
+  version?:          string;
+  sha256?:           string;
+  healthScore?:      number;
+  isCorrupted?:      boolean;
 }
 
 // ─── Restore ──────────────────────────────────────────────────
@@ -83,19 +89,25 @@ export interface DashboardStats {
   totalStorageBytes:   number;
   activeConnections:   number;
   schedulesActive:     number;
+  compressionSavingsBytes: number;
+  averageBackupSizeBytes:  number;
+  largestBackupSizeBytes:  number;
+  dbUsage:             { name: string; bytes: number }[];
   backupsSizeHistory:  { date: string; bytes: number }[];
   successRateHistory:  { date: string; rate: number }[];
+  aiInsights:          { type: "warning" | "success" | "info"; message: string; recommendation: string }[];
 }
 
 // ─── DTOs ─────────────────────────────────────────────────────
 export interface CreateConnectionDto {
   name:      string;
   type:      DbType;
-  host:      string;
-  port:      number;
-  username:  string;
-  password:  string;
-  database:  string;
+  host:     string;
+  port:     number;
+  username: string;
+  password?: string;
+  database: string;
+  environment?: "dev" | "test" | "staging" | "prod";
 }
 
 export interface CreateBackupDto {

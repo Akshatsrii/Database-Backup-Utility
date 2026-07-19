@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/",        connectionController.getAll);
 router.post("/",       connectionController.create);
+router.put("/:id",     connectionController.update);
 router.delete("/:id",  connectionController.remove);
 router.post("/:id/test", connectionController.test);
 

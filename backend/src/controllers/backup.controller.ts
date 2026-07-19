@@ -19,6 +19,12 @@ export const backupController = {
     res.json(resp);
   },
 
+  previewCleanup(req: Request, res: Response) {
+    const { getCleanupPreview } = require("../jobs/backup.job");
+    const preview = getCleanupPreview();
+    res.json({ success: true, data: preview });
+  },
+
   // GET /api/backups/:id
   getById(req: Request, res: Response) {
     const backup = backupService.getBackupById(req.params.id);

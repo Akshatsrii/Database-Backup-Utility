@@ -9,6 +9,7 @@ import {
 import BackupTable   from "@/components/backup/BackupTable";
 import BackupModal   from "@/components/backup/BackupModal";
 import RestoreModal  from "@/components/restore/RestoreModal";
+import RetentionPreviewModal from "@/components/backup/RetentionPreviewModal";
 import { useBackups } from "@/hooks/useBackups";
 import { useQuery }  from "@tanstack/react-query";
 import { connectionsApi } from "@/lib/api";
@@ -40,6 +41,20 @@ export default function BackupsPage() {
   const [selectedIds,   setSelectedIds]   = useState<string[]>([]);
   const [refreshing,    setRefreshing]    = useState(false);
   const [showFilters,   setShowFilters]   = useState(false);
+  const [showPreview,   setShowPreview]   = useState(false);
+
+  // Fetch previews
+  const { data: previewList = [], isLoading: previewLoading } = useQuery<Backup[]>({
+    queryKey: ["cleanup-preview"],
+    queryFn: async () => {
+      try {
+        const res = await fetch("http://localhost:4000/api/backups/preview-cleanup");
+        const json = await res.json();
+        return json.data || [];
+      } catch { return []; }
+    },
+    enabled: showPreview,
+  });
 
   const filtered = backups.filter((b) => {
     const srchOk =
@@ -452,6 +467,10 @@ export default function BackupsPage() {
               <RefreshCw size={12} className={refreshing ? "bp-spin" : ""} />
               refresh
             </button>
+            <button onClick={() => setShowPreview(true)} className="bp-btn bp-btn-ghost">
+              <Clock size={12} />
+              retention preview
+            </button>
             <button onClick={() => setShowCreate(true)} className="bp-btn bp-btn-primary">
               <Plus size={14} />
               new backup
@@ -629,6 +648,12 @@ export default function BackupsPage() {
         backup={restoreTarget}
         connections={connections}
         onSuccess={refresh}
+      />
+      <RetentionPreviewModal
+        open={showPreview}
+        onClose={() => setShowPreview(false)}
+        previews={previewList}
+        loading={previewLoading}
       />
     </>
   );

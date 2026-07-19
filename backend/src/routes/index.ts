@@ -5,8 +5,12 @@ import restoreRoutes    from "./restore.routes";
 import scheduleRoutes   from "./schedule.routes";
 import logRoutes        from "./log.routes";
 import statsRoutes      from "./stats.routes";
+import authRoutes       from "./auth.routes";
+import auditRoutes      from "./audit.routes";
 
 const router = Router();
+
+router.use("/auth",        authRoutes);
 
 router.use("/connections", connectionRoutes);
 router.use("/backups",     backupRoutes);
@@ -14,6 +18,7 @@ router.use("/restore",     restoreRoutes);
 router.use("/schedules",   scheduleRoutes);
 router.use("/logs",        logRoutes);
 router.use("/stats",       statsRoutes);
+router.use("/audit",       auditRoutes);
 
 // Health check
 router.get("/health", (req, res) => {

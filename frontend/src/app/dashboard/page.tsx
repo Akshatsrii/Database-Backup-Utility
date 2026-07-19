@@ -5,6 +5,7 @@ import { Plus, RefreshCw, Activity, Database, Shield, Clock, TrendingUp, AlertTr
 import StatsCards    from "@/components/dashboard/StatsCard";
 import BackupChart   from "@/components/dashboard/BackupChart";
 import RecentBackups from "@/components/dashboard/RecentBackups";
+import AiAdvisor     from "@/components/dashboard/AiAdvisor";
 import BackupModal   from "@/components/backup/BackupModal";
 import { useStats }  from "@/hooks/useStats";
 import { useBackups } from "@/hooks/useBackups";
@@ -775,6 +776,11 @@ export default function DashboardPage() {
             ) : stats ? (
               <StatsCards stats={stats} />
             ) : null}
+
+            {/* AI Advisor */}
+            {stats && stats.aiInsights && stats.aiInsights.length > 0 && (
+              <AiAdvisor insights={stats.aiInsights} />
+            )}
 
             {/* Chart */}
             {stats && <BackupChart stats={stats} />}

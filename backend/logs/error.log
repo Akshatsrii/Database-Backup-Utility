@@ -1,3 +1,0 @@
-2026-05-26 21:14:12 [ERROR] Firebase initialization failed | {"err":{"code":"app/invalid-credential","message":"Failed to parse private key: Error: error:1E08010C:DECODER routines::unsupported"}}
-2026-05-26 21:21:09 [ERROR] Firebase initialization failed | {"err":{"code":"app/invalid-credential","message":"Failed to parse private key: Error: error:1E08010C:DECODER routines::unsupported"}}
-2026-05-30 11:11:24 [ERROR] Firebase initialization failed | {"err":{"code":"app/invalid-credential","message":"Failed to parse private key: Error: error:1E08010C:DECODER routines::unsupported"}}

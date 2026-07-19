@@ -3,6 +3,7 @@ import { connectionStore } from "./scheduler.service";
 import { scheduleStore }   from "./scheduler.service";
 import { format, subDays } from "date-fns";
 import type { DashboardStats } from "../types";
+import { aiService } from "./ai.service";
 
 export class StatsService {
 
@@ -11,9 +12,20 @@ export class StatsService {
     const successful = backupStore.filter((b) => b.status === "completed").length;
     const failed     = backupStore.filter((b) => b.status === "failed").length;
 
-    const totalStorage = backupStore
-      .filter((b) => b.sizeAfter)
-      .reduce((sum, b) => sum + (b.sizeAfter ?? 0), 0);
+    const completedBackups = backupStore.filter((b) => b.sizeAfter !== undefined);
+
+    const totalStorage = completedBackups.reduce((sum, b) => sum + (b.sizeAfter ?? 0), 0);
+    const totalOriginalSize = completedBackups.reduce((sum, b) => sum + (b.sizeBefore ?? 0), 0);
+    const compressionSavingsBytes = Math.max(0, totalOriginalSize - totalStorage);
+    
+    const averageBackupSizeBytes = completedBackups.length > 0 ? totalStorage / completedBackups.length : 0;
+    const largestBackupSizeBytes = completedBackups.reduce((max, b) => Math.max(max, b.sizeAfter ?? 0), 0);
+
+    const dbUsageMap: Record<string, number> = {};
+    for (const b of completedBackups) {
+      dbUsageMap[b.connectionName] = (dbUsageMap[b.connectionName] || 0) + (b.sizeAfter ?? 0);
+    }
+    const dbUsage = Object.entries(dbUsageMap).map(([name, bytes]) => ({ name, bytes }));
 
     // Last 7 days size history
     const sizeHistory = Array.from({ length: 7 }, (_, i) => {
@@ -53,8 +65,13 @@ export class StatsService {
       totalStorageBytes:   totalStorage,
       activeConnections:   connectionStore.length,
       schedulesActive:     scheduleStore.filter((s) => s.enabled).length,
+      compressionSavingsBytes,
+      averageBackupSizeBytes,
+      largestBackupSizeBytes,
+      dbUsage,
       backupsSizeHistory:  sizeHistory,
       successRateHistory:  rateHistory,
+      aiInsights:          aiService.generateInsights(),
     };
   }
 }

@@ -149,7 +149,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
     : "flat";
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <StatCard
         label="total backups"
         value={stats.totalBackups}
@@ -169,21 +169,35 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
       />
 
       <StatCard
-        label="failed"
-        value={stats.failedBackups}
-        icon={<XCircle size={15} />}
-        sub={stats.failedBackups === 0 ? "all clear" : "needs attention"}
-        accent={stats.failedBackups > 0 ? "#ff4444" : "#4a5450"}
-        trend={failTrend}
-        animate
-      />
-
-      <StatCard
         label="storage used"
         value={formatBytes(stats.totalStorageBytes)}
         icon={<HardDrive size={15} />}
         sub="compressed"
         accent="#38bdf8"
+      />
+
+      <StatCard
+        label="compression savings"
+        value={formatBytes(stats.compressionSavingsBytes)}
+        icon={<TrendingDown size={15} />}
+        sub="space saved"
+        accent="#b8f53a"
+      />
+
+      <StatCard
+        label="average size"
+        value={formatBytes(stats.averageBackupSizeBytes)}
+        icon={<Minus size={15} />}
+        sub="per backup"
+        accent="#fbbf24"
+      />
+
+      <StatCard
+        label="largest backup"
+        value={formatBytes(stats.largestBackupSizeBytes)}
+        icon={<TrendingUp size={15} />}
+        sub="max size"
+        accent="#e05555"
       />
 
       <StatCard
