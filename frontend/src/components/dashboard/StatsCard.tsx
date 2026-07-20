@@ -186,7 +186,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
 
       <StatCard
         label="average size"
-        value={formatBytes(stats.averageBackupSizeBytes)}
+        value={formatBytes(stats.averageBackupSizeBytes || 0)}
         icon={<Minus size={15} />}
         sub="per backup"
         accent="#fbbf24"
@@ -194,7 +194,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
 
       <StatCard
         label="largest backup"
-        value={formatBytes(stats.largestBackupSizeBytes)}
+        value={formatBytes(stats.largestBackupSizeBytes || 0)}
         icon={<TrendingUp size={15} />}
         sub="max size"
         accent="#e05555"

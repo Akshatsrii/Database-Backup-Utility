@@ -290,6 +290,8 @@ export interface DashboardStats {
   storageHistory?:    HistoryPoint[];
   aiInsights?:        any[];
   compressionSavingsBytes?: number;
+  averageBackupSizeBytes?:  number;
+  largestBackupSizeBytes?:  number;
 }
 
 /** @deprecated Use DashboardStats — kept so old imports don't break */
