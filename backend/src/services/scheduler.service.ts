@@ -1,4 +1,4 @@
-import cron  from "node-cron";
+import * as cron from "node-cron";
 import { v4 as uuidv4 } from "uuid";
 import { logger }        from "../config/logger";
 import { backupService } from "./backup/backup.service";
