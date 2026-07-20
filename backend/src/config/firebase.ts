@@ -28,7 +28,7 @@ export function initFirebase(): void {
   }
 }
 
-export function getFirebaseBucket() {
+export function getFirebaseBucket(): any {
   if (!initialized) throw new Error("Firebase not initialized");
   return admin.storage().bucket();
 }

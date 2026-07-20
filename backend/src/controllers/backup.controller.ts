@@ -27,7 +27,7 @@ export const backupController = {
 
   // GET /api/backups/:id
   getById(req: Request, res: Response) {
-    const backup = backupService.getBackupById(req.params.id);
+    const backup = backupService.getBackupById(req.params.id as string);
     if (!backup) {
       return res.status(404).json({
         success: false,
@@ -91,7 +91,7 @@ export const backupController = {
   // DELETE /api/backups/:id
   async remove(req: Request, res: Response) {
     try {
-      await backupService.deleteBackup(req.params.id);
+      await backupService.deleteBackup(req.params.id as string);
       res.json({ success: true, message: "Backup deleted" });
     } catch (err) {
       res.status(404).json({
@@ -103,7 +103,7 @@ export const backupController = {
 
   // GET /api/backups/:id/download
   download(req: Request, res: Response) {
-    const backup = backupService.getBackupById(req.params.id);
+    const backup = backupService.getBackupById(req.params.id as string);
 
     if (!backup) {
       return res.status(404).json({
