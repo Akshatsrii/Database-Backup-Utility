@@ -406,7 +406,7 @@ export default function BackupTable({
                     {/* Saved */}
                     <td style={{ ...td, color: "#4ade80", fontVariantNumeric: "tabular-nums", textAlign: "right" }}>
                       {b.sizeBefore && b.sizeAfter
-                        ? compressionSaved(b.sizeBefore, b.sizeAfter)
+                        ? compressionSaved(b.sizeBefore, b.sizeAfter)?.label
                         : <span style={{ color: "#2e332e" }}>—</span>}
                     </td>
 
