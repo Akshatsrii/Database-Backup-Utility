@@ -123,6 +123,7 @@ interface BackupBase extends Timestamps {
   storageType:      StorageType;
   encrypted:        boolean;
   startedAt:        string;
+  size?:            number | string;
 }
 
 export interface PendingBackup extends BackupBase {
