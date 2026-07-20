@@ -178,7 +178,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
 
       <StatCard
         label="compression savings"
-        value={formatBytes(stats.compressionSavingsBytes)}
+        value={formatBytes(stats.compressionSavingsBytes || 0)}
         icon={<TrendingDown size={15} />}
         sub="space saved"
         accent="#b8f53a"
