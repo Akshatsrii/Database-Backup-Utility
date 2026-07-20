@@ -582,7 +582,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                       encrypt backup at rest
                     </p>
                   </div>
-                  <Toggle checked={form.encrypt} onChange={() => set("encrypt", !form.encrypt)} />
+                  <Toggle checked={form.encrypt || false} onChange={() => set("encrypt", !form.encrypt)} />
                 </div>
 
                 {/* Submit */}
