@@ -153,7 +153,7 @@ function StatusPillEl({ label, value, status }: StatusPill) {
         alignItems:  "center",
         gap:          5,
         fontSize:     10,
-        fontFamily:   inherit",
+        fontFamily:   "inherit",
         color:        "#cbd5e1",
         padding:      "3px 8px",
         borderRadius: 3,
@@ -437,7 +437,7 @@ export default function TopBar({
           background:    "rgba(13,15,13,0.9)",
           borderBottom:  "1px solid #1e293b",
           backdropFilter: "blur(8px)",
-          fontFamily:    inherit",
+          fontFamily:    "inherit",
           overflow:      "hidden",
         }}
       >
@@ -558,7 +558,7 @@ export default function TopBar({
                   background:     "#ff4444",
                   color:          "#fff",
                   fontSize:        8,
-                  fontFamily:     inherit",
+                  fontFamily:     "inherit",
                   fontWeight:      700,
                   display:        "flex",
                   alignItems:     "center",
