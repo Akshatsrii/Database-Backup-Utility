@@ -65,13 +65,13 @@ export default function ConnectionsPage() {
                 {conn.name}
               </CardTitle>
               <div className="flex space-x-1">
-                <Button variant="ghost" size="icon" onClick={() => handleTest(conn.id)} title="Test">
+                <Button variant="ghost" size="sm" onClick={() => handleTest(conn.id)} title="Test">
                   <RefreshCw className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => { setEditingConnection(conn); setIsModalOpen(true); }} title="Edit">
+                <Button variant="ghost" size="sm" onClick={() => { setEditingConnection(conn); setIsModalOpen(true); }} title="Edit">
                   <Edit className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => handleDelete(conn.id)} title="Delete">
+                <Button variant="ghost" size="sm" onClick={() => handleDelete(conn.id)} title="Delete">
                   <Trash2 className="h-4 w-4 text-destructive" />
                 </Button>
               </div>
