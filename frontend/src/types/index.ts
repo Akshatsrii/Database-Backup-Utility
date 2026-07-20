@@ -124,6 +124,7 @@ interface BackupBase extends Timestamps {
   encrypted:        boolean;
   startedAt:        string;
   size?:            number | string;
+  version?:         string;
 }
 
 export interface PendingBackup extends BackupBase {
