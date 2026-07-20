@@ -54,7 +54,7 @@ export default function LogsPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
 
         .lp-root {
           

@@ -94,7 +94,7 @@ export default function BackupsPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
 
         .bp-root {
           

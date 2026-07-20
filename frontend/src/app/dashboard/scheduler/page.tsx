@@ -67,7 +67,7 @@ export default function SchedulerPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
 
         @keyframes sp-in    { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
         @keyframes sp-spin  { to { transform: rotate(360deg) } }

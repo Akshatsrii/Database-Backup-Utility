@@ -73,7 +73,7 @@ export default function RestorePage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
 
         @keyframes rp-in   { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
         @keyframes rp-spin  { to { transform: rotate(360deg) } }
