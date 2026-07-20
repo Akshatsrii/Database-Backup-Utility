@@ -286,6 +286,7 @@ export interface DashboardStats {
   successRateHistory: RateHistoryPoint[];
   /** @deprecated alias for backupsSizeHistory — will be removed */
   storageHistory?:    HistoryPoint[];
+  aiInsights?:        any[];
 }
 
 /** @deprecated Use DashboardStats — kept so old imports don't break */
