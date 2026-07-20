@@ -232,7 +232,7 @@ export default function RestoreModal({
             style={{
               background:  "#1a1d1a",
               border:      "1px solid #252825",
-              divideColor: "#252825",
+
             }}
           >
             {[
