@@ -71,7 +71,8 @@ export function useStats() {
     queryKey:           ["stats"],
     queryFn:            async () => {
       const res = await statsApi.get();
-      return res.data.data ?? res.data;
+      if (!res.data) throw new Error("No data");
+      return res.data;
     },
     refetchInterval:    autoRefresh ? 30_000 : false,
     retry:              1,
