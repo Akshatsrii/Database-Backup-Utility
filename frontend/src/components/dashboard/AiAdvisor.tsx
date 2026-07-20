@@ -11,8 +11,8 @@ export default function AiAdvisor({ insights }: { insights?: Insight[] }) {
 
   return (
     <div className="terminal-card" style={{ marginBottom: 24 }}>
-      <div className="flex items-center justify-between p-4" style={{ borderBottom: "1px solid #1a2418" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#b8f53a", fontWeight: 600, fontSize: 13 }}>
+      <div className="flex items-center justify-between p-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#6366f1", fontWeight: 600, fontSize: 13 }}>
           <Brain size={16} />
           AI Backup Advisor
         </div>
@@ -23,8 +23,8 @@ export default function AiAdvisor({ insights }: { insights?: Insight[] }) {
         {insights.map((insight, i) => {
           const isWarn = insight.type === "warning";
           const isSuccess = insight.type === "success";
-          const color = isWarn ? "#ff4444" : isSuccess ? "#4ade80" : "#38bdf8";
-          const bg = isWarn ? "rgba(255,68,68,0.05)" : isSuccess ? "rgba(74,222,128,0.05)" : "rgba(56,189,248,0.05)";
+          const color = isWarn ? "#ff4444" : isSuccess ? "#10b981" : "#3b82f6";
+          const bg = isWarn ? "rgba(255,68,68,0.05)" : isSuccess ? "rgba(16,185,129,0.05)" : "rgba(56,189,248,0.05)";
           
           return (
             <div key={i} style={{ 

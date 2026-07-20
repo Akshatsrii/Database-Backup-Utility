@@ -230,7 +230,7 @@ export function Modal({
             <div className="flex items-center gap-2 min-w-0">
               <span
                 className="font-mono font-bold text-sm select-none flex-shrink-0"
-                style={{ color: "#b8f53a" }}
+                style={{ color: "#6366f1" }}
                 aria-hidden
               >
                 $

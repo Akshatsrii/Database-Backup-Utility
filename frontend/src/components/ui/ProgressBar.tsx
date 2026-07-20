@@ -46,13 +46,13 @@ const TRACK_H: Record<ProgressSize, string> = {
 };
 
 const STATUS_FILL: Partial<Record<ProgressStatus, string>> = {
-  success: "#4ade80",
+  success: "#10b981",
   error:   "#f87171",
   warning: "#facc15",
 };
 
-const DEFAULT_FILL = "linear-gradient(90deg, #8bbf2a, #b8f53a)";
-const DEFAULT_GLOW = "0 0 8px rgba(184,245,58,0.4)";
+const DEFAULT_FILL = "linear-gradient(90deg, #8bbf2a, #6366f1)";
+const DEFAULT_GLOW = "0 0 8px rgba(99,102,241,0.4)";
 
 // ─── Animated counter ─────────────────────────────────────────────────────────
 
@@ -188,13 +188,13 @@ function SteppedTrack({
             <div
               className="w-2 h-2 rounded-full border transition-colors duration-300"
               style={{
-                background:   reached ? (STATUS_FILL[status] ?? "#b8f53a") : "#252825",
-                borderColor:  reached ? (STATUS_FILL[status] ?? "#b8f53a") : "#4a5450",
+                background:   reached ? (STATUS_FILL[status] ?? "#6366f1") : "#252825",
+                borderColor:  reached ? (STATUS_FILL[status] ?? "#6366f1") : "#4a5450",
               }}
             />
             <span
               className="mt-1.5 text-[9px] font-mono"
-              style={{ color: reached ? "#b8f53a" : "#4a5450" }}
+              style={{ color: reached ? "#6366f1" : "#4a5450" }}
             >
               {step}
             </span>
@@ -219,7 +219,7 @@ function CircularTrack({
   const gap    = circ - dash;
 
   const override = STATUS_FILL[status];
-  const fillColor = override ?? "#b8f53a";
+  const fillColor = override ?? "#6366f1";
 
   return (
     <svg
@@ -250,7 +250,7 @@ function CircularTrack({
         style={{
           transition: indeterminate ? "none" : "stroke-dasharray 500ms ease",
           filter: clamped > 0 && !override
-            ? "drop-shadow(0 0 4px rgba(184,245,58,0.5))"
+            ? "drop-shadow(0 0 4px rgba(99,102,241,0.5))"
             : "none",
         }}
       />
@@ -308,7 +308,7 @@ export function ProgressBar({
             {showLabel && !indeterminate && (
               <span
                 className="absolute font-mono text-xs font-semibold"
-                style={{ color: STATUS_FILL[status] ?? "#b8f53a" }}
+                style={{ color: STATUS_FILL[status] ?? "#6366f1" }}
               >
                 {display}%
               </span>
@@ -328,7 +328,7 @@ export function ProgressBar({
           <div className="flex justify-between text-xs font-mono" style={{ color: "#8a9690" }}>
             <span>{stage ?? "progress"}</span>
             {!indeterminate && (
-              <span style={{ color: STATUS_FILL[status] ?? "#b8f53a" }}>
+              <span style={{ color: STATUS_FILL[status] ?? "#6366f1" }}>
                 {display}%
               </span>
             )}
@@ -388,9 +388,9 @@ const STYLES = `
     background-image: linear-gradient(
       90deg,
       #8bbf2a 0%,
-      #b8f53a 40%,
+      #6366f1 40%,
       #d4ff6a 50%,
-      #b8f53a 60%,
+      #6366f1 60%,
       #8bbf2a 100%
     ) !important;
     animation: progress-shimmer 1.8s linear infinite;

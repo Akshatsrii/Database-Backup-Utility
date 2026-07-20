@@ -60,8 +60,8 @@ export default function DashboardPage() {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          background: #080d0a;
-          font-family: 'JetBrains Mono', 'Courier New', monospace;
+          background: #020617;
+          
           color: #c8d9cc;
         }
 
@@ -71,8 +71,8 @@ export default function DashboardPage() {
           position: fixed;
           inset: 0;
           background-image:
-            linear-gradient(rgba(184,245,58,0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(184,245,58,0.025) 1px, transparent 1px);
+            linear-gradient(rgba(99,102,241,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99,102,241,0.025) 1px, transparent 1px);
           background-size: 40px 40px;
           pointer-events: none;
           z-index: 0;
@@ -92,7 +92,7 @@ export default function DashboardPage() {
           z-index: 50;
           background: rgba(8,13,10,0.92);
           backdrop-filter: blur(12px);
-          border-bottom: 1px solid #1a2418;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
           padding: 0 24px;
           height: 52px;
           display: flex;
@@ -109,7 +109,7 @@ export default function DashboardPage() {
         .db-logo {
           font-size: 15px;
           font-weight: 700;
-          color: #b8f53a;
+          color: #6366f1;
           letter-spacing: -0.3px;
           display: flex;
           align-items: center;
@@ -119,8 +119,8 @@ export default function DashboardPage() {
 
         .db-logo-icon {
           width: 26px; height: 26px;
-          background: rgba(184,245,58,0.1);
-          border: 1px solid rgba(184,245,58,0.25);
+          background: rgba(99,102,241,0.1);
+          border: 1px solid rgba(99,102,241,0.25);
           border-radius: 6px;
           display: flex;
           align-items: center;
@@ -143,8 +143,8 @@ export default function DashboardPage() {
           letter-spacing: 0.04em;
         }
 
-        .db-nav-link:hover { color: #8aaa80; background: rgba(184,245,58,0.05); }
-        .db-nav-link.active { color: #b8f53a; background: rgba(184,245,58,0.08); }
+        .db-nav-link:hover { color: #8aaa80; background: rgba(99,102,241,0.05); }
+        .db-nav-link.active { color: #6366f1; background: rgba(99,102,241,0.08); }
 
         .db-navbar-right {
           display: flex;
@@ -162,18 +162,18 @@ export default function DashboardPage() {
           border: 1px solid;
           cursor: pointer;
           transition: all 0.2s;
-          font-family: 'JetBrains Mono', monospace;
+          
         }
 
         .db-live-badge.on {
-          color: #4ade80;
-          border-color: rgba(74,222,128,0.3);
-          background: rgba(74,222,128,0.06);
+          color: #10b981;
+          border-color: rgba(16,185,129,0.3);
+          background: rgba(16,185,129,0.06);
         }
 
         .db-live-badge.off {
           color: #4a5450;
-          border-color: #1a2418;
+          border-color: rgba(255,255,255,0.1);
           background: transparent;
         }
 
@@ -183,16 +183,16 @@ export default function DashboardPage() {
         }
 
         .db-live-badge.on .db-live-dot {
-          background: #4ade80;
-          box-shadow: 0 0 6px #4ade8099;
+          background: #10b981;
+          box-shadow: 0 0 6px #10b98199;
           animation: live-pulse 2s ease-in-out infinite;
         }
 
         .db-live-badge.off .db-live-dot { background: #4a5450; }
 
         @keyframes live-pulse {
-          0%, 100% { box-shadow: 0 0 4px #4ade8066; }
-          50% { box-shadow: 0 0 10px #4ade80bb; }
+          0%, 100% { box-shadow: 0 0 4px #10b98166; }
+          50% { box-shadow: 0 0 10px #10b981bb; }
         }
 
         .db-user-chip {
@@ -201,8 +201,8 @@ export default function DashboardPage() {
           gap: 7px;
           font-size: 11px;
           color: #4a6450;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 20px;
           padding: 4px 12px 4px 6px;
         }
@@ -210,14 +210,14 @@ export default function DashboardPage() {
         .db-user-avatar {
           width: 22px; height: 22px;
           border-radius: 50%;
-          background: rgba(184,245,58,0.15);
-          border: 1px solid rgba(184,245,58,0.3);
+          background: rgba(99,102,241,0.15);
+          border: 1px solid rgba(99,102,241,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 9px;
           font-weight: 700;
-          color: #b8f53a;
+          color: #6366f1;
         }
 
         /* ── Main area ── */
@@ -248,7 +248,7 @@ export default function DashboardPage() {
           gap: 8px;
         }
 
-        .db-page-title .dollar { color: #b8f53a; }
+        .db-page-title .dollar { color: #6366f1; }
 
         .db-page-subtitle {
           font-size: 10px;
@@ -269,7 +269,7 @@ export default function DashboardPage() {
           display: flex;
           align-items: center;
           gap: 6px;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 11px;
           font-weight: 600;
           padding: 8px 14px;
@@ -283,23 +283,23 @@ export default function DashboardPage() {
         .db-btn-ghost {
           background: transparent;
           color: #4a6450;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
         }
 
         .db-btn-ghost:hover {
-          background: #0c130e;
+          background: #0f172a;
           color: #8aaa80;
           border-color: #253523;
         }
 
         .db-btn-primary {
-          background: #b8f53a;
+          background: #6366f1;
           color: #0a1008;
         }
 
         .db-btn-primary:hover {
           background: #ccff50;
-          box-shadow: 0 4px 16px rgba(184,245,58,0.2);
+          box-shadow: 0 4px 16px rgba(99,102,241,0.2);
           transform: translateY(-1px);
         }
 
@@ -347,15 +347,15 @@ export default function DashboardPage() {
           content: '';
           width: 3px; height: 3px;
           border-radius: 50%;
-          background: #b8f53a;
+          background: #6366f1;
         }
 
         /* ── Stats skeleton ── */
         .db-skeleton {
           height: 88px;
           border-radius: 8px;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           animation: skeleton-pulse 1.5s ease-in-out infinite;
         }
 
@@ -373,8 +373,8 @@ export default function DashboardPage() {
         }
 
         .db-statusbar-item {
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 8px;
           padding: 12px 14px;
           display: flex;
@@ -394,8 +394,8 @@ export default function DashboardPage() {
           flex-shrink: 0;
         }
 
-        .db-statusbar-icon.green { background: rgba(184,245,58,0.1); color: #b8f53a; }
-        .db-statusbar-icon.teal  { background: rgba(74,222,128,0.1); color: #4ade80; }
+        .db-statusbar-icon.green { background: rgba(99,102,241,0.1); color: #6366f1; }
+        .db-statusbar-icon.teal  { background: rgba(16,185,129,0.1); color: #10b981; }
         .db-statusbar-icon.blue  { background: rgba(96,165,250,0.1); color: #60a5fa; }
         .db-statusbar-icon.amber { background: rgba(251,191,36,0.1); color: #fbbf24; }
 
@@ -415,8 +415,8 @@ export default function DashboardPage() {
 
         /* ── Recent backups card ── */
         .db-card {
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 10px;
           overflow: hidden;
           margin-bottom: 24px;
@@ -427,7 +427,7 @@ export default function DashboardPage() {
           align-items: center;
           justify-content: space-between;
           padding: 14px 18px;
-          border-bottom: 1px solid #1a2418;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .db-card-header-right {
@@ -444,7 +444,7 @@ export default function DashboardPage() {
 
         .db-view-all {
           font-size: 11px;
-          color: #b8f53a;
+          color: #6366f1;
           text-decoration: none;
           display: flex;
           align-items: center;
@@ -458,8 +458,8 @@ export default function DashboardPage() {
         .db-footer {
           position: relative;
           z-index: 1;
-          background: #080d0a;
-          border-top: 1px solid #1a2418;
+          background: #020617;
+          border-top: 1px solid rgba(255,255,255,0.1);
           padding: 0 24px;
         }
 
@@ -468,7 +468,7 @@ export default function DashboardPage() {
           grid-template-columns: 1.4fr 1fr 1fr 1fr;
           gap: 32px;
           padding: 28px 0 24px;
-          border-bottom: 1px solid #1a2418;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .db-footer-brand { }
@@ -476,7 +476,7 @@ export default function DashboardPage() {
         .db-footer-logo {
           font-size: 16px;
           font-weight: 700;
-          color: #b8f53a;
+          color: #6366f1;
           display: flex;
           align-items: center;
           gap: 8px;
@@ -497,14 +497,14 @@ export default function DashboardPage() {
           gap: 6px;
           margin-top: 14px;
           font-size: 10px;
-          color: #4ade80;
+          color: #10b981;
         }
 
         .db-footer-status-dot {
           width: 6px; height: 6px;
           border-radius: 50%;
-          background: #4ade80;
-          box-shadow: 0 0 6px #4ade8066;
+          background: #10b981;
+          box-shadow: 0 0 6px #10b98166;
           animation: live-pulse 2s ease-in-out infinite;
         }
 
@@ -563,9 +563,9 @@ export default function DashboardPage() {
           font-weight: 600;
         }
 
-        .db-footer-sys-val.green { color: #4ade80; }
+        .db-footer-sys-val.green { color: #10b981; }
         .db-footer-sys-val.amber { color: #fbbf24; }
-        .db-footer-sys-val.acid  { color: #b8f53a; }
+        .db-footer-sys-val.acid  { color: #6366f1; }
 
         .db-footer-bottom {
           display: flex;
@@ -602,12 +602,12 @@ export default function DashboardPage() {
         .db-footer-meta-item.ok { color: #2a4030; }
         .db-footer-meta-item.ok::before {
           content: '●';
-          color: #4ade80;
+          color: #10b981;
           font-size: 7px;
         }
 
         .db-footer-divider {
-          color: #1a2418;
+          color: rgba(255,255,255,0.1);
         }
 
         /* ── Responsive ── */
@@ -636,7 +636,7 @@ export default function DashboardPage() {
           <div className="db-navbar-left">
             <a href="/dashboard" className="db-logo">
               <div className="db-logo-icon">
-                <Database size={13} color="#b8f53a" />
+                <Database size={13} color="#6366f1" />
               </div>
               [BackupOS]
             </a>
@@ -813,7 +813,7 @@ export default function DashboardPage() {
             {/* Brand col */}
             <div className="db-footer-brand">
               <div className="db-footer-logo">
-                <Database size={15} color="#b8f53a" />
+                <Database size={15} color="#6366f1" />
                 [BackupOS]
               </div>
               <div className="db-footer-tagline">

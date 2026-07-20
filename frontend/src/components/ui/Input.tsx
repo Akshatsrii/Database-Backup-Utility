@@ -241,7 +241,7 @@ export function Input(props: Props) {
             {suffix && !loading && (
               <span
                 className="font-mono font-bold text-sm shrink-0"
-                style={{ color: "#b8f53a" }}
+                style={{ color: "#6366f1" }}
                 aria-hidden
               >
                 {suffix}
@@ -275,7 +275,7 @@ function Label({
     >
       {children}
       {required && (
-        <span style={{ color: "#b8f53a" }} aria-hidden>
+        <span style={{ color: "#6366f1" }} aria-hidden>
           *
         </span>
       )}
@@ -305,7 +305,7 @@ function LeftAdornment({
       {prefix && (
         <span
           className="font-mono font-bold text-sm shrink-0"
-          style={{ color: "#b8f53a" }}
+          style={{ color: "#6366f1" }}
         >
           {prefix}
         </span>
@@ -329,7 +329,7 @@ function RightAdornment({
       {suffix && !loading && (
         <span
           className="font-mono font-bold text-sm"
-          style={{ color: "#b8f53a" }}
+          style={{ color: "#6366f1" }}
           aria-hidden
         >
           {suffix}
@@ -354,7 +354,7 @@ function StatusLine({
 
   const text  = error ?? success ?? hint;
   const icon  = error ? "✗" : success ? "✓" : "·";
-  const color = error ? "#ff4444" : success ? "#4ade80" : "#4a5450";
+  const color = error ? "#ff4444" : success ? "#10b981" : "#4a5450";
 
   return (
     <p

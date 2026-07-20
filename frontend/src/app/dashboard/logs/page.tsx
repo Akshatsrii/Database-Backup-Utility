@@ -12,7 +12,7 @@ import { useLiveLogs }  from "@/hooks/useLiveLogs";
 const LOG_LEVELS = [
   { value: "all",     label: "all levels", dot: "#4a5450" },
   { value: "info",    label: "info",       dot: "#60a5fa" },
-  { value: "success", label: "success",    dot: "#4ade80" },
+  { value: "success", label: "success",    dot: "#10b981" },
   { value: "warn",    label: "warn",       dot: "#fbbf24" },
   { value: "error",   label: "error",      dot: "#f87171" },
 ];
@@ -57,7 +57,7 @@ export default function LogsPage() {
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
         .lp-root {
-          font-family: 'JetBrains Mono', 'Courier New', monospace;
+          
           color: #c8d9cc;
           animation: lp-in 0.3s ease;
         }
@@ -86,7 +86,7 @@ export default function LogsPage() {
           line-height: 1;
         }
 
-        .lp-title .dollar { color: #b8f53a; }
+        .lp-title .dollar { color: #6366f1; }
 
         .lp-subtitle {
           font-size: 10px;
@@ -109,9 +109,9 @@ export default function LogsPage() {
         }
 
         .lp-ws-badge.connected {
-          background: rgba(74,222,128,0.08);
-          border: 1px solid rgba(74,222,128,0.2);
-          color: #4ade80;
+          background: rgba(16,185,129,0.08);
+          border: 1px solid rgba(16,185,129,0.2);
+          color: #10b981;
         }
 
         .lp-ws-badge.disconnected {
@@ -123,16 +123,16 @@ export default function LogsPage() {
         .lp-ws-dot { width: 5px; height: 5px; border-radius: 50%; }
 
         .lp-ws-badge.connected .lp-ws-dot {
-          background: #4ade80;
-          box-shadow: 0 0 5px rgba(74,222,128,0.6);
+          background: #10b981;
+          box-shadow: 0 0 5px rgba(16,185,129,0.6);
           animation: lp-pulse 2s ease-in-out infinite;
         }
 
         .lp-ws-badge.disconnected .lp-ws-dot { background: #f87171; }
 
         @keyframes lp-pulse {
-          0%,100% { box-shadow: 0 0 4px rgba(74,222,128,0.4); }
-          50%      { box-shadow: 0 0 9px rgba(74,222,128,0.73); }
+          0%,100% { box-shadow: 0 0 4px rgba(16,185,129,0.4); }
+          50%      { box-shadow: 0 0 9px rgba(16,185,129,0.73); }
         }
 
         .lp-header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -141,7 +141,7 @@ export default function LogsPage() {
           display: flex;
           align-items: center;
           gap: 6px;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 11px;
           font-weight: 600;
           padding: 8px 13px;
@@ -156,10 +156,10 @@ export default function LogsPage() {
         .lp-btn-ghost {
           background: transparent;
           color: #4a6450;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .lp-btn-ghost:hover { background: #0c130e; color: #8aaa80; border-color: #253523; }
+        .lp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
 
         .lp-pill-row { display: flex; gap: 7px; margin-bottom: 16px; flex-wrap: wrap; }
 
@@ -170,9 +170,9 @@ export default function LogsPage() {
           font-size: 10px;
           padding: 5px 11px;
           border-radius: 20px;
-          background: #0c130e;
-          border: 1px solid #1a2418;
-          font-family: 'JetBrains Mono', monospace;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
+          
         }
 
         .lp-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
@@ -214,20 +214,20 @@ export default function LogsPage() {
 
         .lp-input {
           width: 100%;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
           padding: 8px 30px 8px 32px;
           color: #b8d8bc;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 12px;
           outline: none;
           transition: border-color 0.2s;
         }
 
         .lp-input:focus {
-          border-color: rgba(184,245,58,0.3);
-          box-shadow: 0 0 0 3px rgba(184,245,58,0.04);
+          border-color: rgba(99,102,241,0.3);
+          box-shadow: 0 0 0 3px rgba(99,102,241,0.04);
         }
 
         .lp-input::placeholder { color: #1e2e20; }
@@ -246,22 +246,22 @@ export default function LogsPage() {
           gap: 6px;
           font-size: 10px;
           padding: 6px 12px;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
         }
 
         .lp-stat-val { font-weight: 600; }
-        .lp-stat-val.green { color: #4ade80; }
+        .lp-stat-val.green { color: #10b981; }
         .lp-stat-val.blue  { color: #60a5fa; }
         .lp-stat-val.amber { color: #fbbf24; }
         .lp-stat-val.red   { color: #f87171; }
-        .lp-stat-val.acid  { color: #b8f53a; }
+        .lp-stat-val.acid  { color: #6366f1; }
         .lp-stat-label { color: #2e4035; }
 
         .lp-terminal-wrap {
-          background: #080d0a;
-          border: 1px solid #1a2418;
+          background: #020617;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 10px;
           overflow: hidden;
           position: relative;
@@ -272,17 +272,17 @@ export default function LogsPage() {
           align-items: center;
           justify-content: space-between;
           padding: 10px 16px;
-          background: #0c130e;
-          border-bottom: 1px solid #1a2418;
+          background: #0f172a;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .lp-term-dots { display: flex; gap: 6px; align-items: center; }
 
-        .lp-term-dot { width: 9px; height: 9px; border-radius: 50%; background: #1a2418; }
+        .lp-term-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.1); }
 
         .lp-term-dot.green {
-          background: #b8f53a;
-          box-shadow: 0 0 6px rgba(184,245,58,0.53);
+          background: #6366f1;
+          box-shadow: 0 0 6px rgba(99,102,241,0.53);
           animation: lp-pulse 2.5s ease-in-out infinite;
         }
 
@@ -380,12 +380,12 @@ export default function LogsPage() {
         {/* ── Stats bar ── */}
         <div className="lp-statsbar">
           <div className="lp-stat">
-            <Zap size={11} color="#b8f53a" />
+            <Zap size={11} color="#6366f1" />
             <span className="lp-stat-val acid">{filteredPreview.length}</span>
             <span className="lp-stat-label">matching entries</span>
           </div>
           <div className="lp-stat">
-            <CheckCircle2 size={11} color="#4ade80" />
+            <CheckCircle2 size={11} color="#10b981" />
             <span className="lp-stat-val green">{stats.success}</span>
             <span className="lp-stat-label">success</span>
           </div>

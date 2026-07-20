@@ -123,7 +123,7 @@ function useClock() {
 
 /* ── sub-components ──────────────────────────────────────── */
 
-const DOT_COLORS = { ok: "#b8f53a", warn: "#f0a033", err: "#ff4d4d" } as const;
+const DOT_COLORS = { ok: "#6366f1", warn: "#f0a033", err: "#ff4d4d" } as const;
 
 function PulseDot({ status }: { status: "ok" | "warn" | "err" }) {
   return (
@@ -179,7 +179,7 @@ const NOTIF_ICON: Record<NotifType, React.ReactNode> = {
 };
 
 const NOTIF_COLORS: Record<NotifType, { bg: string; color: string }> = {
-  ok:   { bg: "rgba(184,245,58,0.12)", color: "#b8f53a" },
+  ok:   { bg: "rgba(99,102,241,0.12)", color: "#6366f1" },
   warn: { bg: "rgba(240,160,51,0.12)", color: "#f0a033" },
   err:  { bg: "rgba(255,77,77,0.12)",  color: "#ff4d4d" },
   info: { bg: "rgba(61,232,196,0.10)", color: "#3de8c4" },
@@ -274,7 +274,7 @@ function CommandPalette({
       <div
         style={{
           width:        480,
-          background:   "#0f1210",
+          background:   "#0f172a",
           border:       "1px solid #252d27",
           borderRadius:  6,
           overflow:     "hidden",
@@ -293,7 +293,7 @@ function CommandPalette({
             borderBottom: "1px solid #1e2420",
           }}
         >
-          <span style={{ color: "#b8f53a", fontSize: 13, fontFamily: "JetBrains Mono, monospace" }}>›_</span>
+          <span style={{ color: "#6366f1", fontSize: 13, fontFamily: "inherit" }}>›_</span>
           <input
             ref={inputRef}
             value={query}
@@ -305,10 +305,10 @@ function CommandPalette({
               background: "transparent",
               border:     "none",
               outline:    "none",
-              fontFamily: "JetBrains Mono, monospace",
+              fontFamily: "inherit",
               fontSize:    13,
               color:      "#c8dcd2",
-              caretColor: "#b8f53a",
+              caretColor: "#6366f1",
             }}
           />
           <span style={{ fontSize: 9, color: "#3e4e44", whiteSpace: "nowrap" }}>esc to close</span>
@@ -363,7 +363,7 @@ function CmdRow({ item, onSelect }: { item: CmdItem; onSelect: () => void }) {
         gap:         10,
         padding:    "8px 14px",
         cursor:     "pointer",
-        background:  hovered ? "rgba(184,245,58,0.06)" : "transparent",
+        background:  hovered ? "rgba(99,102,241,0.06)" : "transparent",
         transition: "background 0.1s",
       }}
     >
@@ -458,7 +458,7 @@ export default function TopBar({
 
           {/* breadcrumb */}
           <nav aria-label="Page location" style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, letterSpacing: "0.03em" }}>
-            <span style={{ color: "#b8f53a", marginRight: 4, fontSize: 12, animation: "cur-blink 1.2s step-end infinite" }} aria-hidden="true">›</span>
+            <span style={{ color: "#6366f1", marginRight: 4, fontSize: 12, animation: "cur-blink 1.2s step-end infinite" }} aria-hidden="true">›</span>
             <span style={{ color: "#4a5450" }}>~/</span>
             {segments.map((seg, i) => {
               const isLast = i === segments.length - 1;
@@ -470,7 +470,7 @@ export default function TopBar({
                       <span style={{ color: "#2e3830" }}>/</span>
                     </>
                   ) : (
-                    <span style={{ color: "#b8f53a", fontWeight: 700 }}>{title}</span>
+                    <span style={{ color: "#6366f1", fontWeight: 700 }}>{title}</span>
                   )}
                 </span>
               );
@@ -507,7 +507,7 @@ export default function TopBar({
               background: "rgba(255,255,255,0.02)",
               cursor:     "pointer",
               fontSize:    11,
-              fontFamily: "JetBrains Mono, monospace",
+              fontFamily: "inherit",
               color:      "#6b8070",
             }}
           >
@@ -537,9 +537,9 @@ export default function TopBar({
               height:          32,
               borderRadius:    4,
               border:         drawerOpen ? "1px solid #6ea31e" : "1px solid transparent",
-              background:     drawerOpen ? "rgba(184,245,58,0.1)" : "transparent",
+              background:     drawerOpen ? "rgba(99,102,241,0.1)" : "transparent",
               cursor:         "pointer",
-              color:          drawerOpen ? "#b8f53a" : unread > 0 ? "#c8dcd2" : "#6b8070",
+              color:          drawerOpen ? "#6366f1" : unread > 0 ? "#c8dcd2" : "#6b8070",
               transition:     "all 0.2s",
             }}
           >
@@ -606,7 +606,7 @@ export default function TopBar({
               top:         48,
               right:       0,
               width:       320,
-              background: "#0f1210",
+              background: "#0f172a",
               border:     "1px solid #252d27",
               borderTop:  "none",
               zIndex:      100,
@@ -628,7 +628,7 @@ export default function TopBar({
                   borderRadius: 2,
                   border:     "1px solid transparent",
                   background: "transparent",
-                  fontFamily: "JetBrains Mono, monospace",
+                  fontFamily: "inherit",
                   transition: "all 0.15s",
                 }}
               >

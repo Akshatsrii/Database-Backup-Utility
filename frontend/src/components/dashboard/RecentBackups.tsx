@@ -28,7 +28,7 @@ function ShimmerRow() {
           style={{
             height: 1,
             background:
-              "linear-gradient(90deg, transparent 0%, #b8f53a22 40%, #b8f53a55 50%, #b8f53a22 60%, transparent 100%)",
+              "linear-gradient(90deg, transparent 0%, #6366f122 40%, #6366f155 50%, #6366f122 60%, transparent 100%)",
             backgroundSize: "400px 100%",
             animation: "rb-shimmer 1.6s linear infinite",
           }}
@@ -150,7 +150,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
                     <td
                       className="py-2.5 pr-4 tabular-nums"
                       style={{
-                        color:     isRunning ? "#b8f53a" : "#4a5450",
+                        color:     isRunning ? "#6366f1" : "#4a5450",
                         animation: isRunning
                           ? "rb-pulse 1.4s ease-in-out infinite"
                           : undefined,

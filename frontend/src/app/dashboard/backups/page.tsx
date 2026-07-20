@@ -17,7 +17,7 @@ import type { Backup, DbConnection } from "@/types";
 
 const STATUS_OPTIONS = [
   { value: "all",       label: "all status",  dot: "#4a5450" },
-  { value: "completed", label: "completed",   dot: "#4ade80" },
+  { value: "completed", label: "completed",   dot: "#10b981" },
   { value: "running",   label: "running",     dot: "#60a5fa" },
   { value: "failed",    label: "failed",      dot: "#f87171" },
   { value: "pending",   label: "pending",     dot: "#fbbf24" },
@@ -97,7 +97,7 @@ export default function BackupsPage() {
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
         .bp-root {
-          font-family: 'JetBrains Mono', 'Courier New', monospace;
+          
           color: #c8d9cc;
           animation: bp-fadein 0.3s ease;
         }
@@ -124,7 +124,7 @@ export default function BackupsPage() {
           line-height: 1;
         }
 
-        .bp-title .dollar { color: #b8f53a; }
+        .bp-title .dollar { color: #6366f1; }
 
         .bp-subtitle {
           font-size: 10px;
@@ -155,18 +155,18 @@ export default function BackupsPage() {
           font-size: 10px;
           padding: 6px 12px;
           border-radius: 20px;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           cursor: pointer;
           transition: border-color 0.15s, background 0.15s;
-          font-family: 'JetBrains Mono', monospace;
+          
         }
 
         .bp-stat-pill:hover { border-color: #253523; background: #0e160f; }
 
         .bp-stat-pill.active {
-          border-color: rgba(184,245,58,0.3);
-          background: rgba(184,245,58,0.06);
+          border-color: rgba(99,102,241,0.3);
+          background: rgba(99,102,241,0.06);
         }
 
         .bp-stat-dot {
@@ -178,7 +178,7 @@ export default function BackupsPage() {
         .bp-stat-label { color: #3d5040; }
         .bp-stat-count { color: #8aaa80; font-weight: 600; }
         .bp-stat-pill.active .bp-stat-label { color: #8aaa80; }
-        .bp-stat-pill.active .bp-stat-count { color: #b8f53a; }
+        .bp-stat-pill.active .bp-stat-count { color: #6366f1; }
 
         /* ── Filter bar ── */
         .bp-filterbar {
@@ -224,20 +224,20 @@ export default function BackupsPage() {
 
         .bp-input {
           width: 100%;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
           padding: 9px 32px 9px 32px;
           color: #b8d8bc;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 12px;
           outline: none;
           transition: border-color 0.2s;
         }
 
         .bp-input:focus {
-          border-color: rgba(184,245,58,0.3);
-          box-shadow: 0 0 0 3px rgba(184,245,58,0.05);
+          border-color: rgba(99,102,241,0.3);
+          box-shadow: 0 0 0 3px rgba(99,102,241,0.05);
         }
 
         .bp-input::placeholder { color: #1e2e20; }
@@ -246,12 +246,12 @@ export default function BackupsPage() {
 
         .bp-select {
           appearance: none;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
           padding: 9px 32px 9px 12px;
           color: #6a8a70;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 12px;
           outline: none;
           cursor: pointer;
@@ -259,7 +259,7 @@ export default function BackupsPage() {
           width: 150px;
         }
 
-        .bp-select:focus { border-color: rgba(184,245,58,0.3); }
+        .bp-select:focus { border-color: rgba(99,102,241,0.3); }
 
         .bp-select-arrow {
           position: absolute;
@@ -277,11 +277,11 @@ export default function BackupsPage() {
           font-size: 10px;
           color: #4a6050;
           background: none;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 6px;
           padding: 8px 10px;
           cursor: pointer;
-          font-family: 'JetBrains Mono', monospace;
+          
           transition: color 0.15s, border-color 0.15s;
         }
 
@@ -292,7 +292,7 @@ export default function BackupsPage() {
           display: flex;
           align-items: center;
           gap: 6px;
-          font-family: 'JetBrains Mono', monospace;
+          
           font-size: 11px;
           font-weight: 600;
           padding: 8px 14px;
@@ -307,10 +307,10 @@ export default function BackupsPage() {
         .bp-btn-ghost {
           background: transparent;
           color: #4a6450;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .bp-btn-ghost:hover { background: #0c130e; color: #8aaa80; border-color: #253523; }
+        .bp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
 
         .bp-btn-danger {
           background: transparent;
@@ -321,13 +321,13 @@ export default function BackupsPage() {
         .bp-btn-danger:hover { background: rgba(224,85,85,0.06); border-color: rgba(224,85,85,0.35); }
 
         .bp-btn-primary {
-          background: #b8f53a;
+          background: #6366f1;
           color: #0a1008;
         }
 
         .bp-btn-primary:hover {
           background: #ccff50;
-          box-shadow: 0 4px 16px rgba(184,245,58,0.2);
+          box-shadow: 0 4px 16px rgba(99,102,241,0.2);
           transform: translateY(-1px);
         }
 
@@ -342,8 +342,8 @@ export default function BackupsPage() {
           align-items: center;
           justify-content: space-between;
           padding: 10px 14px;
-          background: rgba(184,245,58,0.05);
-          border: 1px solid rgba(184,245,58,0.15);
+          background: rgba(99,102,241,0.05);
+          border: 1px solid rgba(99,102,241,0.15);
           border-radius: 8px;
           margin-bottom: 12px;
           gap: 12px;
@@ -361,7 +361,7 @@ export default function BackupsPage() {
         .bp-bulk-count {
           font-size: 13px;
           font-weight: 700;
-          color: #b8f53a;
+          color: #6366f1;
         }
 
         .bp-bulk-actions { display: flex; gap: 8px; }
@@ -374,8 +374,8 @@ export default function BackupsPage() {
           justify-content: center;
           gap: 12px;
           padding: 48px 24px;
-          background: #0c130e;
-          border: 1px solid #1a2418;
+          background: #0f172a;
+          border: 1px solid rgba(255,255,255,0.1);
           border-radius: 10px;
           text-align: center;
         }
@@ -383,8 +383,8 @@ export default function BackupsPage() {
         .bp-empty-icon {
           width: 48px; height: 48px;
           border-radius: 12px;
-          background: rgba(184,245,58,0.06);
-          border: 1px solid rgba(184,245,58,0.12);
+          background: rgba(99,102,241,0.06);
+          border: 1px solid rgba(99,102,241,0.12);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -397,10 +397,10 @@ export default function BackupsPage() {
         /* ── Skeleton ── */
         .bp-skeleton-row {
           height: 48px;
-          background: #0c130e;
+          background: #0f172a;
           border-radius: 6px;
           margin-bottom: 6px;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
           animation: sk-pulse 1.4s ease-in-out infinite;
         }
 
@@ -543,7 +543,7 @@ export default function BackupsPage() {
         {selectedIds.length > 0 && (
           <div className="bp-bulk-bar">
             <div className="bp-bulk-info">
-              <CheckSquare size={13} color="#b8f53a" />
+              <CheckSquare size={13} color="#6366f1" />
               <span className="bp-bulk-count">{selectedIds.length}</span>
               <span>backup{selectedIds.length > 1 ? "s" : ""} selected</span>
             </div>

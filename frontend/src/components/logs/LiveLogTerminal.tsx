@@ -10,8 +10,8 @@ const WS_URL = process.env.NEXT_PUBLIC_WS_URL ?? "http://localhost:4000";
 /* ── inline keyframes ────────────────────────────────────── */
 const CSS = `
 @keyframes llt-pulse {
-  0%,100% { opacity:1; box-shadow:0 0 4px #4ade80; }
-  50%      { opacity:.5; box-shadow:0 0 8px #4ade80; }
+  0%,100% { opacity:1; box-shadow:0 0 4px #10b981; }
+  50%      { opacity:.5; box-shadow:0 0 8px #10b981; }
 }
 @keyframes llt-blink { 0%,100%{opacity:1} 50%{opacity:0} }
 `;
@@ -21,10 +21,10 @@ const CSS = `
 const LEVELS = ["all", "info", "success", "warn", "error", "debug"] as const;
 
 const LEVEL_COLOR: Record<string, string> = {
-  info:    "#38bdf8",
+  info:    "#3b82f6",
   warn:    "#ffd700",
   error:   "#ff4444",
-  success: "#4ade80",
+  success: "#10b981",
   debug:   "#4a5450",
 };
 
@@ -39,8 +39,8 @@ function Highlighted({ text, term }: { text: string; term: string }) {
       {text.slice(0, idx)}
       <mark
         style={{
-          background: "rgba(184,245,58,0.25)",
-          color: "#b8f53a",
+          background: "rgba(99,102,241,0.25)",
+          color: "#6366f1",
           borderRadius: 2,
           padding: "0 1px",
         }}
@@ -159,7 +159,7 @@ export default function LiveLogTerminal({
             <div className="flex gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff4444" }} />
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffd700" }} />
-              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#4ade80" }} />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#10b981" }} />
             </div>
             <span className="text-xs" style={{ color: "#4a5450" }}>live_logs.stream</span>
           </div>
@@ -172,7 +172,7 @@ export default function LiveLogTerminal({
               <span
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                 style={{
-                  background: connected ? "#4ade80" : "#ff4444",
+                  background: connected ? "#10b981" : "#ff4444",
                   animation: connected ? "llt-pulse 2s ease-in-out infinite" : undefined,
                 }}
               />
@@ -190,7 +190,7 @@ export default function LiveLogTerminal({
               className="text-xs px-2 py-1 rounded"
               style={{
                 background: "#1a1d1a",
-                border: `1px solid ${search ? "#b8f53a44" : "#252825"}`,
+                border: `1px solid ${search ? "#6366f144" : "#252825"}`,
                 color: "#e8edea",
                 width: 130,
                 outline: "none",
@@ -223,8 +223,8 @@ export default function LiveLogTerminal({
               onClick={() => setPaused((p) => !p)}
               className="text-xs px-2 py-1 rounded border transition-colors"
               style={{
-                borderColor: paused ? "#b8f53a" : "#252825",
-                color:       paused ? "#b8f53a" : "#4a5450",
+                borderColor: paused ? "#6366f1" : "#252825",
+                color:       paused ? "#6366f1" : "#4a5450",
               }}
             >
               {paused ? "resume" : "pause"}
@@ -284,7 +284,7 @@ export default function LiveLogTerminal({
               <button
                 onClick={() => copyLine(log)}
                 className="flex-shrink-0 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ color: copiedId === log.id ? "#b8f53a" : "#4a5450" }}
+                style={{ color: copiedId === log.id ? "#6366f1" : "#4a5450" }}
                 title="Copy line"
               >
                 {copiedId === log.id ? "✓" : "⎘"}

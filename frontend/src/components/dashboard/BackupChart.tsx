@@ -16,7 +16,7 @@ import type { DashboardStats } from "@/types";
 const FONT = "'JetBrains Mono','Fira Code',monospace";
 
 const TOOLTIP_STYLE: React.CSSProperties = {
-  background: "#0f1210",
+  background: "#0f172a",
   border: "1px solid #252825",
   borderRadius: 8,
   fontFamily: FONT,
@@ -40,7 +40,7 @@ function StorageTooltip({ active, payload, label }: TooltipProps<number, string>
   return (
     <div style={TOOLTIP_STYLE}>
       <p style={{ color: "#4a5450", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
-      <p style={{ color: "#b8f53a", display: "flex", alignItems: "center", gap: 6 }}>
+      <p style={{ color: "#6366f1", display: "flex", alignItems: "center", gap: 6 }}>
         <span style={{ color: "#4a5450" }}>size</span>
         <span style={{ fontWeight: 700 }}>{formatBytes(val)}</span>
       </p>
@@ -51,7 +51,7 @@ function StorageTooltip({ active, payload, label }: TooltipProps<number, string>
 function RateTooltip({ active, payload, label }: TooltipProps<number, string>) {
   if (!active || !payload?.length) return null;
   const val = payload[0].value as number;
-  const color = val >= 90 ? "#4ade80" : val >= 70 ? "#fbbf24" : "#ff4444";
+  const color = val >= 90 ? "#10b981" : val >= 70 ? "#fbbf24" : "#ff4444";
   return (
     <div style={TOOLTIP_STYLE}>
       <p style={{ color: "#4a5450", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
@@ -143,7 +143,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
     ? rateHistory.reduce((a, b) => (a.rate <= b.rate ? a : b))
     : null;
 
-  const rateColor = (r: number) => r >= 90 ? "#4ade80" : r >= 70 ? "#fbbf24" : "#ff4444";
+  const rateColor = (r: number) => r >= 90 ? "#10b981" : r >= 70 ? "#fbbf24" : "#ff4444";
 
   return (
     <div
@@ -158,7 +158,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
         title="storage_growth"
         meta={
           latestSize != null
-            ? <MetaPill value={formatBytes(latestSize)} color="#b8f53a" />
+            ? <MetaPill value={formatBytes(latestSize)} color="#6366f1" />
             : null
         }
       >
@@ -166,8 +166,8 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
           <AreaChart data={sizeHistory} margin={{ top: 6, right: 2, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="acidGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stopColor="#b8f53a" stopOpacity={0.22} />
-                <stop offset="100%" stopColor="#b8f53a" stopOpacity={0}    />
+                <stop offset="0%"   stopColor="#6366f1" stopOpacity={0.22} />
+                <stop offset="100%" stopColor="#6366f1" stopOpacity={0}    />
               </linearGradient>
               {/* subtle glow on the line */}
               <filter id="lineGlow">
@@ -201,11 +201,11 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
             <Area
               type="monotone"
               dataKey="bytes"
-              stroke="#b8f53a"
+              stroke="#6366f1"
               strokeWidth={2}
               fill="url(#acidGrad)"
               dot={false}
-              activeDot={{ r: 4, fill: "#b8f53a", stroke: "#0f1210", strokeWidth: 2 }}
+              activeDot={{ r: 4, fill: "#6366f1", stroke: "#0f172a", strokeWidth: 2 }}
               isAnimationActive
               animationDuration={700}
               animationEasing="ease-out"
@@ -215,7 +215,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
 
         {/* mini legend */}
         <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 10, color: "#4a5450" }}>
-          <span style={{ width: 16, height: 2, background: "#b8f53a", borderRadius: 1, display: "inline-block" }} />
+          <span style={{ width: 16, height: 2, background: "#6366f1", borderRadius: 1, display: "inline-block" }} />
           cumulative backup size over time
         </div>
       </ChartCard>
@@ -284,7 +284,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
             <Line
               type="monotone"
               dataKey="rate"
-              stroke="#4ade80"
+              stroke="#10b981"
               strokeWidth={2}
               dot={(props) => {
                 const { cx, cy, payload } = props;
@@ -294,13 +294,13 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
                     key={`dot-${cx}`}
                     cx={cx} cy={cy}
                     r={bad ? 3.5 : 2.5}
-                    fill={bad ? "#ff4444" : "#4ade80"}
+                    fill={bad ? "#ff4444" : "#10b981"}
                     stroke={bad ? "rgba(255,68,68,0.3)" : "none"}
                     strokeWidth={bad ? 4 : 0}
                   />
                 );
               }}
-              activeDot={{ r: 5, fill: "#b8f53a", stroke: "#0f1210", strokeWidth: 2 }}
+              activeDot={{ r: 5, fill: "#6366f1", stroke: "#0f172a", strokeWidth: 2 }}
               isAnimationActive
               animationDuration={700}
               animationEasing="ease-out"
@@ -311,7 +311,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
         {/* mini legend */}
         <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 10, color: "#4a5450" }}>
           <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
-            <span style={{ width: 16, height: 2, background: "#4ade80", borderRadius: 1, display: "inline-block" }} />
+            <span style={{ width: 16, height: 2, background: "#10b981", borderRadius: 1, display: "inline-block" }} />
             success
           </span>
           <span style={{ display: "flex", alignItems: "center", gap: 5 }}>

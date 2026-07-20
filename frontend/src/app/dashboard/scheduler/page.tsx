@@ -14,7 +14,7 @@ import { TextBadge } from "@/components/ui/Badge";
 import { cronLabel, fmtDate } from "@/lib/utils";
 
 const TYPE_COLOR: Record<string, { bg: string; color: string; border: string }> = {
-  full:        { bg: "rgba(184,245,58,.08)",  color: "#b8f53a", border: "rgba(184,245,58,.25)" },
+  full:        { bg: "rgba(99,102,241,.08)",  color: "#6366f1", border: "rgba(99,102,241,.25)" },
   incremental: { bg: "rgba(96,165,250,.08)",  color: "#60a5fa", border: "rgba(96,165,250,.25)" },
   differential:{ bg: "rgba(251,191,36,.08)",  color: "#fbbf24", border: "rgba(251,191,36,.25)" },
 };
@@ -71,7 +71,7 @@ export default function SchedulerPage() {
 
         @keyframes sp-in    { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
         @keyframes sp-spin  { to { transform: rotate(360deg) } }
-        @keyframes sp-pulse { 0%,100%{box-shadow:0 0 4px #4ade8066}50%{box-shadow:0 0 9px #4ade80bb} }
+        @keyframes sp-pulse { 0%,100%{box-shadow:0 0 4px #10b98166}50%{box-shadow:0 0 9px #10b981bb} }
         @keyframes sp-blink { 0%,100%{opacity:1}50%{opacity:0} }
 
         .sp-root {
@@ -92,7 +92,7 @@ export default function SchedulerPage() {
           display: flex; align-items: center; gap: 7px; line-height: 1;
         }
 
-        .sp-title .dollar { color: #b8f53a; }
+        .sp-title .dollar { color: #6366f1; }
         .sp-subtitle { font-size: 10px; color: #3d5040; margin-top: 5px; letter-spacing: .08em; }
 
         .sp-header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -108,14 +108,14 @@ export default function SchedulerPage() {
         }
 
         .sp-btn-ghost {
-          background: transparent; color: #4a6450; border: 1px solid #1a2418;
+          background: transparent; color: #4a6450; border: 1px solid rgba(255,255,255,0.1);
         }
-        .sp-btn-ghost:hover { background: #0c130e; color: #8aaa80; border-color: #253523; }
+        .sp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
 
-        .sp-btn-primary { background: #b8f53a; color: #0a1008; }
+        .sp-btn-primary { background: #6366f1; color: #0a1008; }
         .sp-btn-primary:hover {
           background: #ccff50;
-          box-shadow: 0 4px 16px rgba(184,245,58,.2);
+          box-shadow: 0 4px 16px rgba(99,102,241,.2);
           transform: translateY(-1px);
         }
         .sp-btn-primary:active { transform: scale(.98); }
@@ -131,7 +131,7 @@ export default function SchedulerPage() {
         .sp-stat {
           display: flex; align-items: center; gap: 10px;
           padding: 10px 14px;
-          background: #0c130e; border: 1px solid #1a2418; border-radius: 8px;
+          background: #0f172a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
           flex: 1; min-width: 110px;
         }
 
@@ -141,8 +141,8 @@ export default function SchedulerPage() {
           flex-shrink: 0;
         }
 
-        .sp-stat-icon.acid   { background: rgba(184,245,58,.1); color: #b8f53a; }
-        .sp-stat-icon.green  { background: rgba(74,222,128,.1);  color: #4ade80; }
+        .sp-stat-icon.acid   { background: rgba(99,102,241,.1); color: #6366f1; }
+        .sp-stat-icon.green  { background: rgba(16,185,129,.1);  color: #10b981; }
         .sp-stat-icon.amber  { background: rgba(251,191,36,.1);  color: #fbbf24; }
 
         .sp-stat-val { font-size: 18px; font-weight: 700; color: #d8e8dc; line-height: 1; }
@@ -150,13 +150,13 @@ export default function SchedulerPage() {
 
         /* ── Card ── */
         .sp-card {
-          background: #0c130e; border: 1px solid #1a2418;
+          background: #0f172a; border: 1px solid rgba(255,255,255,0.1);
           border-radius: 10px; overflow: hidden;
         }
 
         .sp-card-header {
           display: flex; align-items: center; justify-content: space-between;
-          padding: 13px 18px; border-bottom: 1px solid #1a2418;
+          padding: 13px 18px; border-bottom: 1px solid rgba(255,255,255,0.1);
           background: #0a100d;
         }
 
@@ -170,21 +170,21 @@ export default function SchedulerPage() {
 
         .sp-section-label::before {
           content: ''; width: 3px; height: 3px;
-          border-radius: 50%; background: #b8f53a;
+          border-radius: 50%; background: #6366f1;
         }
 
         .sp-running-badge {
           display: flex; align-items: center; gap: 5px;
-          font-size: 10px; color: #4ade80;
-          background: rgba(74,222,128,.07);
-          border: 1px solid rgba(74,222,128,.2);
+          font-size: 10px; color: #10b981;
+          background: rgba(16,185,129,.07);
+          border: 1px solid rgba(16,185,129,.2);
           padding: 3px 9px; border-radius: 10px;
         }
 
         .sp-running-dot {
           width: 5px; height: 5px; border-radius: 50%;
-          background: #4ade80;
-          box-shadow: 0 0 5px #4ade8099;
+          background: #10b981;
+          box-shadow: 0 0 5px #10b98199;
           animation: sp-pulse 2s ease-in-out infinite;
         }
 
@@ -192,16 +192,16 @@ export default function SchedulerPage() {
         .sp-list { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
 
         .sp-row {
-          border-radius: 8px; border: 1px solid #1a2418;
+          border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
           background: #0a100d;
           transition: border-color .15s, background .15s;
           overflow: hidden;
         }
 
-        .sp-row.enabled  { border-color: rgba(184,245,58,.18); background: rgba(184,245,58,.025); }
-        .sp-row.disabled { border-color: #1a2418; background: #0a100d; }
+        .sp-row.enabled  { border-color: rgba(99,102,241,.18); background: rgba(99,102,241,.025); }
+        .sp-row.disabled { border-color: rgba(255,255,255,0.1); background: #0a100d; }
         .sp-row:hover    { border-color: #253523; }
-        .sp-row.enabled:hover { border-color: rgba(184,245,58,.35); }
+        .sp-row.enabled:hover { border-color: rgba(99,102,241,.35); }
 
         .sp-row-main {
           display: flex; align-items: center;
@@ -217,19 +217,19 @@ export default function SchedulerPage() {
           flex-shrink: 0; transition: all .2s;
         }
 
-        .sp-status-dot.on  { background: #4ade80; box-shadow: 0 0 7px #4ade8099; animation: sp-pulse 2s ease-in-out infinite; }
+        .sp-status-dot.on  { background: #10b981; box-shadow: 0 0 7px #10b98199; animation: sp-pulse 2s ease-in-out infinite; }
         .sp-status-dot.off { background: #253523; }
 
         /* Connection icon */
         .sp-conn-icon {
           width: 34px; height: 34px; border-radius: 8px;
-          background: #111a14; border: 1px solid #1a2418;
+          background: #111a14; border: 1px solid rgba(255,255,255,0.1);
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0; transition: all .15s;
         }
 
         .sp-row.enabled .sp-conn-icon {
-          background: rgba(184,245,58,.06); border-color: rgba(184,245,58,.15);
+          background: rgba(99,102,241,.06); border-color: rgba(99,102,241,.15);
         }
 
         /* Info */
@@ -275,14 +275,14 @@ export default function SchedulerPage() {
         .sp-toggle-btn.pause:hover { background: rgba(248,113,113,.06); border-color: rgba(248,113,113,.45); }
 
         .sp-toggle-btn.enable {
-          color: #4ade80; border-color: rgba(74,222,128,.25); background: transparent;
+          color: #10b981; border-color: rgba(16,185,129,.25); background: transparent;
         }
-        .sp-toggle-btn.enable:hover { background: rgba(74,222,128,.07); border-color: rgba(74,222,128,.45); }
+        .sp-toggle-btn.enable:hover { background: rgba(16,185,129,.07); border-color: rgba(16,185,129,.45); }
 
         .sp-del-btn {
           width: 30px; height: 30px;
           display: flex; align-items: center; justify-content: center;
-          border-radius: 6px; border: 1px solid #1a2418;
+          border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
           background: transparent; color: #3d5040;
           cursor: pointer; transition: all .15s;
         }
@@ -313,15 +313,15 @@ export default function SchedulerPage() {
           font-family: 'JetBrains Mono',monospace;
           font-size: 10px; font-weight: 600;
           padding: 4px 10px; border-radius: 5px;
-          background: transparent; border: 1px solid #1a2418;
+          background: transparent; border: 1px solid rgba(255,255,255,0.1);
           color: #4a6450; cursor: pointer; transition: all .15s;
         }
         .sp-confirm-no:hover { color: #8aaa80; }
 
         /* ── Skeleton ── */
         .sp-skel {
-          height: 66px; border-radius: 8px; border: 1px solid #1a2418;
-          background: #0c130e;
+          height: 66px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+          background: #0f172a;
           animation: sp-skel 1.4s ease-in-out infinite;
         }
 
@@ -336,7 +336,7 @@ export default function SchedulerPage() {
 
         .sp-empty-icon {
           width: 48px; height: 48px; border-radius: 12px;
-          background: rgba(184,245,58,.05); border: 1px solid rgba(184,245,58,.1);
+          background: rgba(99,102,241,.05); border: 1px solid rgba(99,102,241,.1);
           display: flex; align-items: center; justify-content: center; color: #3d5040;
         }
 
@@ -459,7 +459,7 @@ export default function SchedulerPage() {
 
                         {/* Icon */}
                         <div className="sp-conn-icon">
-                          <Database size={15} color={s.enabled ? "#b8f53a" : "#3d5040"} />
+                          <Database size={15} color={s.enabled ? "#6366f1" : "#3d5040"} />
                         </div>
 
                         {/* Info */}
@@ -498,7 +498,7 @@ export default function SchedulerPage() {
                             style={{
                               background: "#111a14",
                               color: "#3d5040",
-                              borderColor: "#1a2418",
+                              borderColor: "rgba(255,255,255,0.1)",
                             }}
                           >
                             {s.frequency}

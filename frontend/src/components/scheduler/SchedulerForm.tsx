@@ -204,13 +204,13 @@ export default function SchedulerForm({
                   onClick={() => set("frequency", f.value)}
                   className="text-left p-3 rounded border transition-all"
                   style={{
-                    borderColor: active ? "#b8f53a" : "#252825",
-                    background:  active ? "rgba(184,245,58,0.06)" : "transparent",
+                    borderColor: active ? "#6366f1" : "#252825",
+                    background:  active ? "rgba(99,102,241,0.06)" : "transparent",
                   }}
                 >
                   <p
                     className="text-xs font-semibold"
-                    style={{ color: active ? "#b8f53a" : "#e8edea" }}
+                    style={{ color: active ? "#6366f1" : "#e8edea" }}
                   >
                     {f.label}
                   </p>
@@ -254,13 +254,13 @@ export default function SchedulerForm({
                   onClick={() => set("backupType", value)}
                   className="py-2 px-3 rounded text-xs border transition-all text-left"
                   style={{
-                    borderColor: active ? "#b8f53a" : "#252825",
-                    background:  active ? "rgba(184,245,58,0.08)" : "transparent",
+                    borderColor: active ? "#6366f1" : "#252825",
+                    background:  active ? "rgba(99,102,241,0.08)" : "transparent",
                   }}
                 >
                   <p
                     className="font-semibold"
-                    style={{ color: active ? "#b8f53a" : "#8a9690" }}
+                    style={{ color: active ? "#6366f1" : "#8a9690" }}
                   >
                     {value}
                   </p>
@@ -301,7 +301,7 @@ export default function SchedulerForm({
           style={{ background: "#1a1d1a", border: "1px solid #252825" }}
         >
           <span style={{ color: "#4a5450" }}>next_run_preview</span>
-          <span style={{ color: "#b8f53a" }}>{preview}</span>
+          <span style={{ color: "#6366f1" }}>{preview}</span>
         </div>
 
         <button

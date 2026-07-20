@@ -60,7 +60,7 @@ function ProgressBar({ percent }: { percent: number }) {
           style={{
             height: "100%",
             width: `${percent}%`,
-            background: "linear-gradient(90deg, #6fcf20, #b8f53a)",
+            background: "linear-gradient(90deg, #6fcf20, #6366f1)",
             borderRadius: 2,
             transition: "width 0.5s cubic-bezier(0.4,0,0.2,1)",
             position: "relative",
@@ -89,7 +89,7 @@ function ProgressBar({ percent }: { percent: number }) {
         <span
           style={{
             fontSize: 10,
-            color: "#b8f53a",
+            color: "#6366f1",
             fontWeight: 700,
             letterSpacing: "0.5px",
           }}
@@ -120,8 +120,8 @@ function StageList({ stageIdx }: { stageIdx: number }) {
               gap: 10,
               padding: "8px 12px",
               borderRadius: 8,
-              background: active ? "rgba(184,245,58,0.06)" : "transparent",
-              border: `1px solid ${active ? "rgba(184,245,58,0.15)" : "transparent"}`,
+              background: active ? "rgba(99,102,241,0.06)" : "transparent",
+              border: `1px solid ${active ? "rgba(99,102,241,0.15)" : "transparent"}`,
               transition: "all 0.2s",
             }}
           >
@@ -138,11 +138,11 @@ function StageList({ stageIdx }: { stageIdx: number }) {
                 fontWeight: 700,
                 flexShrink: 0,
                 background: done
-                  ? "rgba(74,222,128,0.15)"
+                  ? "rgba(16,185,129,0.15)"
                   : active
-                  ? "rgba(184,245,58,0.15)"
+                  ? "rgba(99,102,241,0.15)"
                   : "#1a1d1a",
-                color: done ? "#4ade80" : active ? "#b8f53a" : "#4a5450",
+                color: done ? "#10b981" : active ? "#6366f1" : "#4a5450",
                 transition: "all 0.25s",
               }}
             >
@@ -152,7 +152,7 @@ function StageList({ stageIdx }: { stageIdx: number }) {
             <span
               style={{
                 fontSize: 12,
-                color: done ? "#4ade80" : active ? "#e8edea" : "#4a5450",
+                color: done ? "#10b981" : active ? "#e8edea" : "#4a5450",
                 transition: "color 0.25s",
                 fontWeight: active ? 600 : 400,
                 flex: 1,
@@ -176,7 +176,7 @@ function StageList({ stageIdx }: { stageIdx: number }) {
                       width: 4,
                       height: 4,
                       borderRadius: "50%",
-                      background: "#b8f53a",
+                      background: "#6366f1",
                       animation: `bounce 0.8s ease ${d * 0.15}s infinite`,
                     }}
                   />
@@ -209,8 +209,8 @@ function Toggle({
         width: 40,
         height: 22,
         borderRadius: 11,
-        background: checked ? "rgba(184,245,58,0.25)" : "#252825",
-        border: `1px solid ${checked ? "rgba(184,245,58,0.4)" : "#2e332e"}`,
+        background: checked ? "rgba(99,102,241,0.25)" : "#252825",
+        border: `1px solid ${checked ? "rgba(99,102,241,0.4)" : "#2e332e"}`,
         cursor: "pointer",
         transition: "all 0.2s",
         flexShrink: 0,
@@ -225,7 +225,7 @@ function Toggle({
           width: 16,
           height: 16,
           borderRadius: "50%",
-          background: checked ? "#b8f53a" : "#4a5450",
+          background: checked ? "#6366f1" : "#4a5450",
           transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1), background 0.2s",
           transform: checked ? "translateX(18px)" : "translateX(0)",
           display: "block",
@@ -368,14 +368,14 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                   width: 28,
                   height: 28,
                   borderRadius: 6,
-                  background: "rgba(184,245,58,0.1)",
-                  border: "1px solid rgba(184,245,58,0.2)",
+                  background: "rgba(99,102,241,0.1)",
+                  border: "1px solid rgba(99,102,241,0.2)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <Database size={13} style={{ color: "#b8f53a" }} />
+                <Database size={13} style={{ color: "#6366f1" }} />
               </div>
               <span style={{ fontSize: 13, fontWeight: 700, color: "#e8edea", letterSpacing: "0.5px" }}>
                 create_backup
@@ -423,7 +423,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                       border: "1px solid #252825",
                     }}
                   >
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#b8f53a", animation: "bounce 1s ease infinite" }} />
+                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#6366f1", animation: "bounce 1s ease infinite" }} />
                     <span style={{ fontSize: 11, color: "#8a9690" }}>
                       {selectedConn.name}
                       <span style={{ color: "#4a5450" }}> · {selectedConn.database}</span>
@@ -463,7 +463,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                       onChange={(e) => set("connectionId", e.target.value)}
                       style={{
                         background: "#1a1d1a",
-                        border: `1px solid ${form.connectionId ? "#b8f53a" : "#252825"}`,
+                        border: `1px solid ${form.connectionId ? "#6366f1" : "#252825"}`,
                         borderRadius: 8,
                         color: form.connectionId ? "#e8edea" : "#4a5450",
                         fontFamily: "inherit",
@@ -513,9 +513,9 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                             justifyContent: "space-between",
                             padding: "10px 12px",
                             borderRadius: 8,
-                            border: `1px solid ${active ? "#b8f53a" : "#252825"}`,
-                            background: active ? "rgba(184,245,58,0.06)" : "#1a1d1a",
-                            color: active ? "#b8f53a" : "#8a9690",
+                            border: `1px solid ${active ? "#6366f1" : "#252825"}`,
+                            background: active ? "rgba(99,102,241,0.06)" : "#1a1d1a",
+                            color: active ? "#6366f1" : "#8a9690",
                             fontFamily: "inherit",
                             fontSize: 12,
                             cursor: "pointer",
@@ -525,7 +525,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                           }}
                         >
                           <span style={{ fontWeight: active ? 700 : 400 }}>{t.label}</span>
-                          <span style={{ fontSize: 10, color: active ? "rgba(184,245,58,0.6)" : "#4a5450" }}>
+                          <span style={{ fontSize: 10, color: active ? "rgba(99,102,241,0.6)" : "#4a5450" }}>
                             {t.desc}
                           </span>
                         </button>
@@ -551,9 +551,9 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                             gap: 4,
                             padding: "10px 8px",
                             borderRadius: 8,
-                            border: `1px solid ${active ? "#38bdf8" : "#252825"}`,
+                            border: `1px solid ${active ? "#3b82f6" : "#252825"}`,
                             background: active ? "rgba(56,189,248,0.06)" : "#1a1d1a",
-                            color: active ? "#38bdf8" : "#8a9690",
+                            color: active ? "#3b82f6" : "#8a9690",
                             fontFamily: "inherit",
                             fontSize: 11,
                             cursor: "pointer",
@@ -575,7 +575,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
                     <p style={{ fontSize: 12, color: "#8a9690", display: "flex", alignItems: "center", gap: 6 }}>
-                      <Shield size={13} style={{ color: form.encrypt ? "#b8f53a" : "#4a5450" }} />
+                      <Shield size={13} style={{ color: form.encrypt ? "#6366f1" : "#4a5450" }} />
                       aes-256 encryption
                     </p>
                     <p style={{ fontSize: 10, color: "#4a5450", marginTop: 2 }}>
@@ -589,7 +589,7 @@ export default function BackupModal({ open, onClose, connections, onSuccess }: P
                 <button
                   onClick={handleSubmit}
                   style={{
-                    background: "#b8f53a",
+                    background: "#6366f1",
                     color: "#0a0f0a",
                     border: "none",
                     borderRadius: 8,

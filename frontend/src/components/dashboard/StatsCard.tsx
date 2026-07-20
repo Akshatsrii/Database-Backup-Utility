@@ -68,7 +68,7 @@ function StatCard({
   value,
   icon,
   sub,
-  accent = "#b8f53a",
+  accent = "#6366f1",
   trend,
   animate = false,
 }: StatsCardProps) {
@@ -163,7 +163,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
         value={stats.successfulBackups}
         icon={<CheckCircle size={15} />}
         sub={`${successRate}% success rate`}
-        accent="#4ade80"
+        accent="#10b981"
         trend={successRate >= 90 ? "up" : successRate >= 70 ? "flat" : "down"}
         animate
       />
@@ -173,7 +173,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
         value={formatBytes(stats.totalStorageBytes)}
         icon={<HardDrive size={15} />}
         sub="compressed"
-        accent="#38bdf8"
+        accent="#3b82f6"
       />
 
       <StatCard
@@ -181,7 +181,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
         value={formatBytes(stats.compressionSavingsBytes || 0)}
         icon={<TrendingDown size={15} />}
         sub="space saved"
-        accent="#b8f53a"
+        accent="#6366f1"
       />
 
       <StatCard
@@ -205,7 +205,7 @@ export default function StatsCards({ stats }: { stats: DashboardStats }) {
         value={stats.activeConnections}
         icon={<Wifi size={15} />}
         sub={stats.activeConnections === 1 ? "1 active" : `${stats.activeConnections} active`}
-        accent="#b8f53a"
+        accent="#6366f1"
         animate
       />
 

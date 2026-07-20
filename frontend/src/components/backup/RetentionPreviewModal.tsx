@@ -23,21 +23,21 @@ export default function RetentionPreviewModal({ open, onClose, previews, loading
         }
         .rpm-modal {
           background: #0a100d;
-          border: 1px solid #1a2418;
+          border: 1px solid rgba(255,255,255,0.1);
           width: 500px;
           border-radius: 12px;
           display: flex; flex-direction: column;
-          font-family: 'JetBrains Mono', monospace;
+          
         }
         .rpm-header {
           padding: 16px 20px;
-          border-bottom: 1px solid #1a2418;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
           display: flex; justify-content: space-between; align-items: center;
         }
-        .rpm-title { font-size: 14px; font-weight: 600; color: #b8f53a; display: flex; align-items: center; gap: 8px;}
+        .rpm-title { font-size: 14px; font-weight: 600; color: #6366f1; display: flex; align-items: center; gap: 8px;}
         .rpm-body { padding: 20px; max-height: 400px; overflow-y: auto; }
         .rpm-item {
-          background: #0c130e; border: 1px solid #1a2418; padding: 12px;
+          background: #0f172a; border: 1px solid rgba(255,255,255,0.1); padding: 12px;
           border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between;
         }
         .rpm-name { font-size: 12px; color: #8aaa80; }

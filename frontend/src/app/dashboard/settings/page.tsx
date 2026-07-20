@@ -46,10 +46,10 @@ interface ToastState {
 function Toast({ toast }: { toast: ToastState }) {
   const dotColor =
     toast.type === "success"
-      ? "#4ade80"
+      ? "#10b981"
       : toast.type === "error"
       ? "#ff4444"
-      : "#b8f53a";
+      : "#6366f1";
 
   return (
     <div
@@ -93,9 +93,9 @@ function Toast({ toast }: { toast: ToastState }) {
 function StatusDot({ state }: { state: "unknown" | "ok" | "err" | "testing" }) {
   const colors = {
     unknown: "#4a5450",
-    ok: "#4ade80",
+    ok: "#10b981",
     err: "#ff4444",
-    testing: "#b8f53a",
+    testing: "#6366f1",
   };
 
   return (
@@ -106,7 +106,7 @@ function StatusDot({ state }: { state: "unknown" | "ok" | "err" | "testing" }) {
         borderRadius: "50%",
         background: colors[state],
         flexShrink: 0,
-        boxShadow: state === "ok" ? "0 0 6px rgba(74,222,128,0.4)" : "none",
+        boxShadow: state === "ok" ? "0 0 6px rgba(16,185,129,0.4)" : "none",
         animation: state === "testing" ? "pulse 0.8s ease infinite" : "none",
       }}
     />
@@ -138,7 +138,7 @@ function ConnectionItem({
 
   const borderColor =
     testResult === true
-      ? "rgba(74,222,128,0.2)"
+      ? "rgba(16,185,129,0.2)"
       : testResult === false
       ? "rgba(255,68,68,0.2)"
       : "#252825";
@@ -215,9 +215,9 @@ function ConnectionItem({
             textTransform: "uppercase",
             padding: "3px 7px",
             borderRadius: 4,
-            background: "rgba(184,245,58,0.08)",
-            color: "#b8f53a",
-            border: "1px solid rgba(184,245,58,0.2)",
+            background: "rgba(99,102,241,0.08)",
+            color: "#6366f1",
+            border: "1px solid rgba(99,102,241,0.2)",
           }}
         >
           {conn.type}
@@ -240,8 +240,8 @@ function ConnectionItem({
           }}
           onMouseEnter={(e) => {
             if (!isTesting) {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "#b8f53a";
-              (e.currentTarget as HTMLButtonElement).style.color = "#b8f53a";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#6366f1";
+              (e.currentTarget as HTMLButtonElement).style.color = "#6366f1";
             }
           }}
           onMouseLeave={(e) => {
@@ -453,9 +453,9 @@ function BottomSheet({
                   style={{
                     padding: "10px 8px",
                     borderRadius: 8,
-                    border: `1px solid ${form.type === t ? "#b8f53a" : "#252825"}`,
-                    background: form.type === t ? "rgba(184,245,58,0.08)" : "transparent",
-                    color: form.type === t ? "#b8f53a" : "#6b7870",
+                    border: `1px solid ${form.type === t ? "#6366f1" : "#252825"}`,
+                    background: form.type === t ? "rgba(99,102,241,0.08)" : "transparent",
+                    color: form.type === t ? "#6366f1" : "#6b7870",
                     fontFamily: "inherit",
                     fontSize: 11,
                     fontWeight: 600,
@@ -487,8 +487,8 @@ function BottomSheet({
               value={form.name}
               onChange={(e) => set("name", e.target.value)}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#b8f53a";
-                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                e.currentTarget.style.borderColor = "#6366f1";
+                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "#252825";
@@ -507,8 +507,8 @@ function BottomSheet({
                 value={form.host}
                 onChange={(e) => set("host", e.target.value)}
                 onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "#b8f53a";
-                  e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                  e.currentTarget.style.borderColor = "#6366f1";
+                  e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.borderColor = "#252825";
@@ -525,8 +525,8 @@ function BottomSheet({
                   value={form.port}
                   onChange={(e) => set("port", Number(e.target.value))}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#b8f53a";
-                    e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                    e.currentTarget.style.borderColor = "#6366f1";
+                    e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
                   }}
                   onBlur={(e) => {
                     e.currentTarget.style.borderColor = "#252825";
@@ -546,8 +546,8 @@ function BottomSheet({
               value={form.database}
               onChange={(e) => set("database", e.target.value)}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#b8f53a";
-                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                e.currentTarget.style.borderColor = "#6366f1";
+                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "#252825";
@@ -565,8 +565,8 @@ function BottomSheet({
               value={form.username}
               onChange={(e) => set("username", e.target.value)}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#b8f53a";
-                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                e.currentTarget.style.borderColor = "#6366f1";
+                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "#252825";
@@ -585,8 +585,8 @@ function BottomSheet({
               value={form.password}
               onChange={(e) => set("password", e.target.value)}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#b8f53a";
-                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(184,245,58,0.08)";
+                e.currentTarget.style.borderColor = "#6366f1";
+                e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = "#252825";
@@ -600,7 +600,7 @@ function BottomSheet({
             onClick={onSave}
             disabled={saving}
             style={{
-              background: saving ? "rgba(184,245,58,0.5)" : "#b8f53a",
+              background: saving ? "rgba(99,102,241,0.5)" : "#6366f1",
               color: "#0a0f0a",
               border: "none",
               borderRadius: 8,
@@ -723,7 +723,7 @@ export default function SettingsPage() {
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
           <div>
             <h1 style={{ fontSize: 16, fontWeight: 700, color: "#e8edea", letterSpacing: "-0.3px" }}>
-              <span style={{ color: "#b8f53a" }}>$</span> settings
+              <span style={{ color: "#6366f1" }}>$</span> settings
             </h1>
             <p style={{ fontSize: 11, color: "#4a5450", marginTop: 3, letterSpacing: "0.3px" }}>
               database connections
@@ -733,7 +733,7 @@ export default function SettingsPage() {
           <button
             onClick={() => setShowAdd(true)}
             style={{
-              background: "#b8f53a",
+              background: "#6366f1",
               color: "#0a0f0a",
               border: "none",
               borderRadius: 8,
@@ -777,7 +777,7 @@ export default function SettingsPage() {
               style={{
                 fontSize: 10,
                 fontWeight: 700,
-                color: "#b8f53a",
+                color: "#6366f1",
                 letterSpacing: "1.2px",
                 textTransform: "uppercase",
               }}

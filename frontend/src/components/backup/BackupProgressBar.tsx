@@ -88,14 +88,14 @@ function StageIcon({
   icon:   React.ReactNode;
 }) {
   if (status === "done")
-    return <CheckCircle size={14} style={{ color: "#4ade80" }} />;
+    return <CheckCircle size={14} style={{ color: "#10b981" }} />;
   if (status === "failed")
     return <XCircle size={14} style={{ color: "#ff4444" }} />;
   if (status === "skipped")
     return <Circle size={14} style={{ color: "#3d4040" }} />;
   if (status === "current")
     return (
-      <span style={{ color: "#b8f53a" }}>
+      <span style={{ color: "#6366f1" }}>
         <Loader2 size={14} className="animate-spin" />
       </span>
     );
@@ -162,16 +162,16 @@ export function BackupProgressBar({
           {isFailed ? (
             <AlertTriangle size={12} style={{ color: "#ff4444" }} />
           ) : isComplete ? (
-            <CheckCircle size={12} style={{ color: "#4ade80" }} />
+            <CheckCircle size={12} style={{ color: "#10b981" }} />
           ) : (
-            <PulseDot color="#b8f53a" />
+            <PulseDot color="#6366f1" />
           )}
           <span
             style={{
               color: isFailed
                 ? "#ff4444"
                 : isComplete
-                ? "#4ade80"
+                ? "#10b981"
                 : "#e8edea",
             }}
           >
@@ -218,8 +218,8 @@ export function BackupProgressBar({
               color: isFailed
                 ? "#ff4444"
                 : isComplete
-                ? "#4ade80"
-                : "#b8f53a",
+                ? "#10b981"
+                : "#6366f1",
             }}
           >
             {Math.round(displayPct)}%
@@ -238,13 +238,13 @@ export function BackupProgressBar({
               background: isFailed
                 ? "#ff4444"
                 : isComplete
-                ? "#4ade80"
-                : "linear-gradient(90deg, #8bbf2a, #b8f53a, #d4f55a)",
+                ? "#10b981"
+                : "linear-gradient(90deg, #8bbf2a, #6366f1, #d4f55a)",
               boxShadow: isFailed
                 ? "0 0 8px rgba(255,68,68,0.4)"
                 : isComplete
-                ? "0 0 8px rgba(74,222,128,0.4)"
-                : "0 0 10px rgba(184,245,58,0.5)",
+                ? "0 0 8px rgba(16,185,129,0.4)"
+                : "0 0 10px rgba(99,102,241,0.5)",
               transition: "width 0.4s ease-out",
             }}
           />
@@ -270,10 +270,10 @@ export function BackupProgressBar({
                          transition-all duration-200 text-xs"
               style={{
                 background: isCur
-                  ? "rgba(184,245,58,0.04)"
+                  ? "rgba(99,102,241,0.04)"
                   : "transparent",
                 border: isCur
-                  ? "1px solid rgba(184,245,58,0.12)"
+                  ? "1px solid rgba(99,102,241,0.12)"
                   : "1px solid transparent",
               }}
             >
@@ -289,7 +289,7 @@ export function BackupProgressBar({
                   style={{
                     color:
                       status === "done"
-                        ? "#4ade80"
+                        ? "#10b981"
                         : status === "current"
                         ? "#e8edea"
                         : status === "failed"
@@ -318,15 +318,15 @@ export function BackupProgressBar({
                   <>
                     <span
                       className="tabular-nums font-bold"
-                      style={{ color: "#b8f53a" }}
+                      style={{ color: "#6366f1" }}
                     >
                       {Math.round(displayPct)}%
                     </span>
-                    <PulseDot color="#b8f53a" />
+                    <PulseDot color="#6366f1" />
                   </>
                 )}
                 {status === "done" && (
-                  <span style={{ color: "#4ade80", fontSize: 10 }}>✓</span>
+                  <span style={{ color: "#10b981", fontSize: 10 }}>✓</span>
                 )}
                 {status === "failed" && (
                   <span style={{ color: "#ff4444", fontSize: 10 }}>✗</span>
@@ -342,9 +342,9 @@ export function BackupProgressBar({
         <div
           className="flex items-center gap-2 px-3 py-3 rounded text-xs"
           style={{
-            background: "rgba(74,222,128,0.07)",
-            border:     "1px solid rgba(74,222,128,0.2)",
-            color:      "#4ade80",
+            background: "rgba(16,185,129,0.07)",
+            border:     "1px solid rgba(16,185,129,0.2)",
+            color:      "#10b981",
           }}
         >
           <CheckCircle size={13} />

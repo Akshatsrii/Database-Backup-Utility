@@ -48,14 +48,14 @@ function SortIcon({ col, sortKey, sortDir }: { col: SortKey | null; sortKey: Sor
   if (!col) return null;
   if (sortKey !== col) return <ChevronsUpDown size={10} style={{ color: "#2e3830", flexShrink: 0 }} />;
   return sortDir === "asc"
-    ? <ChevronUp   size={10} style={{ color: "#b8f53a", flexShrink: 0 }} />
-    : <ChevronDown size={10} style={{ color: "#b8f53a", flexShrink: 0 }} />;
+    ? <ChevronUp   size={10} style={{ color: "#6366f1", flexShrink: 0 }} />
+    : <ChevronDown size={10} style={{ color: "#6366f1", flexShrink: 0 }} />;
 }
 
 function StatusBadge({ status }: { status: Backup["status"] }) {
   const map: Record<string, { bg: string; color: string; border: string; dot: string }> = {
-    completed: { bg: "rgba(74,222,128,0.08)",  color: "#4ade80", border: "rgba(74,222,128,0.2)",  dot: "#4ade80"  },
-    running:   { bg: "rgba(184,245,58,0.08)",  color: "#b8f53a", border: "rgba(184,245,58,0.2)",  dot: "#b8f53a"  },
+    completed: { bg: "rgba(16,185,129,0.08)",  color: "#10b981", border: "rgba(16,185,129,0.2)",  dot: "#10b981"  },
+    running:   { bg: "rgba(99,102,241,0.08)",  color: "#6366f1", border: "rgba(99,102,241,0.2)",  dot: "#6366f1"  },
     failed:    { bg: "rgba(255,68,68,0.08)",   color: "#ff4444", border: "rgba(255,68,68,0.2)",   dot: "#ff4444"  },
     pending:   { bg: "rgba(74,84,80,0.2)",     color: "#8a9690", border: "rgba(74,84,80,0.3)",    dot: "#4a5450"  },
   };
@@ -92,8 +92,8 @@ function StatusBadge({ status }: { status: Backup["status"] }) {
 
 function TypeBadge({ type }: { type: Backup["backupType"] }) {
   const map: Record<string, { bg: string; color: string; border: string }> = {
-    full:         { bg: "rgba(184,245,58,0.08)", color: "#b8f53a", border: "rgba(184,245,58,0.2)" },
-    incremental:  { bg: "rgba(56,189,248,0.08)", color: "#38bdf8", border: "rgba(56,189,248,0.2)" },
+    full:         { bg: "rgba(99,102,241,0.08)", color: "#6366f1", border: "rgba(99,102,241,0.2)" },
+    incremental:  { bg: "rgba(56,189,248,0.08)", color: "#3b82f6", border: "rgba(56,189,248,0.2)" },
     differential: { bg: "rgba(251,191,36,0.08)", color: "#fbbf24", border: "rgba(251,191,36,0.2)" },
   };
   const s = map[type] ?? map.full;
@@ -245,7 +245,7 @@ export default function BackupTable({
     whiteSpace: "nowrap",
     userSelect: "none",
     borderBottom: "1px solid #252825",
-    background: "#0f1210",
+    background: "#0f172a",
   };
 
   const td: React.CSSProperties = {
@@ -285,7 +285,7 @@ export default function BackupTable({
               color: "#8a9690",
             }}
           >
-            <span style={{ color: "#b8f53a", fontWeight: 700 }}>{selectedIds.length}</span>
+            <span style={{ color: "#6366f1", fontWeight: 700 }}>{selectedIds.length}</span>
             <span>row{selectedIds.length !== 1 ? "s" : ""} selected</span>
           </div>
         )}
@@ -308,7 +308,7 @@ export default function BackupTable({
                     checked={allSelected}
                     ref={headerCbRef}
                     onChange={onToggleAll}
-                    style={{ cursor: "pointer", accentColor: "#b8f53a" }}
+                    style={{ cursor: "pointer", accentColor: "#6366f1" }}
                   />
                 </th>
 
@@ -361,7 +361,7 @@ export default function BackupTable({
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => onToggleSelect(b.id)}
-                        style={{ cursor: "pointer", accentColor: "#b8f53a" }}
+                        style={{ cursor: "pointer", accentColor: "#6366f1" }}
                       />
                     </td>
 
@@ -404,7 +404,7 @@ export default function BackupTable({
                     </td>
 
                     {/* Saved */}
-                    <td style={{ ...td, color: "#4ade80", fontVariantNumeric: "tabular-nums", textAlign: "right" }}>
+                    <td style={{ ...td, color: "#10b981", fontVariantNumeric: "tabular-nums", textAlign: "right" }}>
                       {b.sizeBefore && b.sizeAfter
                         ? compressionSaved(b.sizeBefore, b.sizeAfter)?.label
                         : <span style={{ color: "#2e332e" }}>—</span>}
@@ -448,7 +448,7 @@ export default function BackupTable({
                                 alignItems: "center",
                                 padding: 6,
                                 borderRadius: 6,
-                                color: "#38bdf8",
+                                color: "#3b82f6",
                                 border: "1px solid transparent",
                                 transition: "all 0.15s",
                                 textDecoration: "none",
@@ -469,7 +469,7 @@ export default function BackupTable({
 
                             <ActionBtn
                               onClick={() => onRestore(b)}
-                              color="#b8f53a"
+                              color="#6366f1"
                               title="Restore backup"
                               label="Restore backup"
                               disabled={isDeleting}

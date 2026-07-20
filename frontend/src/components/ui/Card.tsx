@@ -250,7 +250,7 @@ type CardBadgeOwnProps = {
 
 const badgeColors: Record<BadgeVariant, React.CSSProperties> = {
   default: { color: "#4a5450", borderColor: "#252825" },
-  success: { color: "#4ade80", borderColor: "#14532d" },
+  success: { color: "#10b981", borderColor: "#14532d" },
   warning: { color: "#facc15", borderColor: "#713f12" },
   danger:  { color: "#f87171", borderColor: "#7f1d1d" },
   info:    { color: "#60a5fa", borderColor: "#1e3a5f" },

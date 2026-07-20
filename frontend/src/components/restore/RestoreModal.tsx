@@ -143,7 +143,7 @@ export default function RestoreModal({
             style={{ background: "#1a1d1a", border: "1px solid #252825" }}
           >
             <p style={{ color: "#4a5450" }}>restoring from:</p>
-            <p style={{ color: "#b8f53a" }}>{backup.filename}</p>
+            <p style={{ color: "#6366f1" }}>{backup.filename}</p>
             {backup.sizeAfter && (
               <p style={{ color: "#4a5450" }}>
                 {(backup.sizeAfter / 1024 / 1024).toFixed(1)} MB compressed
@@ -288,7 +288,7 @@ export default function RestoreModal({
           <div className="flex items-center justify-between">
             <p className="text-xs" style={{ color: "#8a9690" }}>
               restoring from{" "}
-              <span style={{ color: "#b8f53a" }}>{backup.filename}</span>
+              <span style={{ color: "#6366f1" }}>{backup.filename}</span>
             </p>
             <span className="text-xs tabular-nums" style={{ color: "#4a5450" }}>
               {elapsed}
@@ -309,8 +309,8 @@ export default function RestoreModal({
                 <div key={i} className="flex items-center gap-2 text-xs">
                   <span style={{
                     color: failed  ? "#ff4444"
-                         : done   ? "#4ade80"
-                         : active ? "#b8f53a"
+                         : done   ? "#10b981"
+                         : active ? "#6366f1"
                          : "#4a5450",
                     flexShrink: 0,
                     width: 10,
@@ -319,7 +319,7 @@ export default function RestoreModal({
                   </span>
                   <span style={{
                     color: failed  ? "#ff4444"
-                         : done   ? "#4ade80"
+                         : done   ? "#10b981"
                          : active ? "#e8edea"
                          : "#4a5450",
                   }}>
