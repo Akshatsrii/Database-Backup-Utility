@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { PlusCircle, Database, Trash2, Edit, RefreshCw } from 'lucide-react';
 import ConnectionModal from '@/components/ConnectionModal';
 
