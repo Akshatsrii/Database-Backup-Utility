@@ -19,6 +19,7 @@ const NAV = [
   { href: "/dashboard/scheduler", icon: Clock,           label: "scheduler", exact: false, badge: null   },
   { href: "/dashboard/logs",      icon: ScrollText,      label: "logs",      exact: false, badge: "live" },
   { href: "/dashboard/settings",  icon: Settings,        label: "settings",  exact: false, badge: null   },
+  { href: "/about",               icon: Shield,          label: "about",     exact: true,  badge: null   },
 ];
 
 // ─── Live clock ──────────────────────────────────────────────────────────────
@@ -50,7 +51,7 @@ function useUptime() {
 }
 
 // ─── Mini progress bar ────────────────────────────────────────────────────────
-function MiniBar({ value, color = "#b8f53a" }: { value: number; color?: string }) {
+function MiniBar({ value, color = "#6366f1" }: { value: number; color?: string }) {
   return (
     <div className="h-0.5 w-full rounded-full overflow-hidden"
       style={{ background: "rgba(255,255,255,0.06)" }}>
@@ -136,8 +137,8 @@ export default function Sidebar() {
             >
               <span className="sb-nav-accent" style={{ opacity: active ? 1 : 0 }} />
               <span className="sb-nav-icon" style={{
-                background: active ? "rgba(184,245,58,0.12)" : hovered ? "rgba(255,255,255,0.04)" : "transparent",
-                color: active ? "#b8f53a" : "#4a5450",
+                background: active ? "rgba(99,102,241,0.12)" : hovered ? "rgba(255,255,255,0.04)" : "transparent",
+                color: active ? "#6366f1" : "#4a5450",
               }}>
                 <Icon size={13} />
               </span>
@@ -150,7 +151,7 @@ export default function Sidebar() {
                 {badge
                   ? <span className="sb-badge">{badge}</span>
                   : active
-                  ? <ChevronRight size={10} style={{ color: "#b8f53a" }} />
+                  ? <ChevronRight size={10} style={{ color: "#6366f1" }} />
                   : null}
               </span>
             </Link>
@@ -167,9 +168,9 @@ export default function Sidebar() {
               <HardDrive size={10} style={{ color: "#4a5450" }} />
               <span>storage</span>
             </div>
-            <span style={{ color: "#b8f53a" }}>{sysStats.storage}%</span>
+            <span style={{ color: "#6366f1" }}>{sysStats.storage}%</span>
           </div>
-          <MiniBar value={sysStats.storage} color="#b8f53a" />
+          <MiniBar value={sysStats.storage} color="#6366f1" />
         </div>
         <div className="sb-stat-row">
           <div className="sb-stat-head">
@@ -177,20 +178,20 @@ export default function Sidebar() {
               <Zap size={10} style={{ color: "#4a5450" }} />
               <span>uptime</span>
             </div>
-            <span style={{ color: "#4ade80" }}>{sysStats.uptime}%</span>
+            <span style={{ color: "#10b981" }}>{sysStats.uptime}%</span>
           </div>
-          <MiniBar value={sysStats.uptime} color="#4ade80" />
+          <MiniBar value={sysStats.uptime} color="#10b981" />
         </div>
         <div className="sb-stat-counts">
           <div className="sb-count-item">
-            <Database size={10} style={{ color: "#b8f53a" }} />
-            <span style={{ color: "#b8f53a" }}>{sysStats.backups}</span>
+            <Database size={10} style={{ color: "#6366f1" }} />
+            <span style={{ color: "#6366f1" }}>{sysStats.backups}</span>
             <span>backups</span>
           </div>
           <div className="sb-count-divider" style={{ background: "#252825" }} />
           <div className="sb-count-item">
-            <Wifi size={10} style={{ color: "#38bdf8" }} />
-            <span style={{ color: "#38bdf8" }}>{sysStats.connections}</span>
+            <Wifi size={10} style={{ color: "#3b82f6" }} />
+            <span style={{ color: "#3b82f6" }}>{sysStats.connections}</span>
             <span>conns</span>
           </div>
         </div>
