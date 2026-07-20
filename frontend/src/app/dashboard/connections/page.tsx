@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, Database, Trash2, Edit, RefreshCw } from 'lucide-react';
 import ConnectionModal from '@/components/ConnectionModal';
@@ -76,12 +76,12 @@ export default function ConnectionsPage() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardBody>
               <div className="text-xs text-muted-foreground mt-2">
                 Type: {conn.type.toUpperCase()} <br/>
                 Host: {conn.host || 'N/A'}:{conn.port || ''}
               </div>
-            </CardContent>
+            </CardBody>
           </Card>
         ))}
         {connections.length === 0 && (

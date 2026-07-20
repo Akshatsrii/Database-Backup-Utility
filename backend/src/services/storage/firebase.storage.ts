@@ -77,7 +77,7 @@ export class FirebaseStorageService {
     const bucket     = getFirebaseBucket();
     const [files]    = await bucket.getFiles({ prefix: "backups/" });
 
-    return files.map((f) => path.basename(f.name));
+    return files.map((f: any) => path.basename(f.name));
   }
 
   // Check if Firebase is available
