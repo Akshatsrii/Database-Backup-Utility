@@ -289,6 +289,7 @@ export interface DashboardStats {
   /** @deprecated alias for backupsSizeHistory — will be removed */
   storageHistory?:    HistoryPoint[];
   aiInsights?:        any[];
+  compressionSavingsBytes?: number;
 }
 
 /** @deprecated Use DashboardStats — kept so old imports don't break */
