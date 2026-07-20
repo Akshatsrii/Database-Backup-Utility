@@ -108,7 +108,7 @@ export function CardHeader<E extends ElementType = "div">({
         "flex items-center gap-3 mb-4 pb-3 border-b",
         className
       )}
-      style={{ borderColor: "#252825" }}
+      style={{ borderColor: "#334155" }}
       {...props}
     >
       {icon && (
@@ -165,7 +165,7 @@ export function CardTitle<E extends ElementType = "h3">({
       {subtitle && (
         <p
           className="font-mono text-xs truncate"
-          style={{ color: "#4a5450" }}
+          style={{ color: "#64748b" }}
         >
           {subtitle}
         </p>
@@ -228,7 +228,7 @@ export function CardFooter<E extends ElementType = "div">({
         "mt-4 pt-3 border-t",
         className
       )}
-      style={{ borderColor: "#252825" }}
+      style={{ borderColor: "#334155" }}
       {...props}
     >
       {children}
@@ -249,7 +249,7 @@ type CardBadgeOwnProps = {
 };
 
 const badgeColors: Record<BadgeVariant, React.CSSProperties> = {
-  default: { color: "#4a5450", borderColor: "#252825" },
+  default: { color: "#64748b", borderColor: "#334155" },
   success: { color: "#10b981", borderColor: "#14532d" },
   warning: { color: "#facc15", borderColor: "#713f12" },
   danger:  { color: "#f87171", borderColor: "#7f1d1d" },
@@ -310,12 +310,12 @@ export function SectionLabel({ children, dot = false, className }: SectionLabelP
         "flex items-center gap-1.5 text-xs tracking-widest uppercase font-mono",
         className
       )}
-      style={{ color: "#4a5450" }}
+      style={{ color: "#64748b" }}
     >
       {dot && (
         <span
           className="w-1 h-1 rounded-full shrink-0"
-          style={{ backgroundColor: "#4a5450" }}
+          style={{ backgroundColor: "#64748b" }}
           aria-hidden
         />
       )}

@@ -172,7 +172,7 @@ export default function SchedulerForm({
 
         {/* Connection */}
         <div className="space-y-1.5">
-          <label className="text-xs" style={{ color: "#4a5450" }}>
+          <label className="text-xs" style={{ color: "#64748b" }}>
             connection
           </label>
           <select
@@ -192,7 +192,7 @@ export default function SchedulerForm({
 
         {/* Frequency */}
         <div className="space-y-2">
-          <label className="text-xs" style={{ color: "#4a5450" }}>
+          <label className="text-xs" style={{ color: "#64748b" }}>
             frequency
           </label>
           <div className="grid grid-cols-2 gap-2">
@@ -204,17 +204,17 @@ export default function SchedulerForm({
                   onClick={() => set("frequency", f.value)}
                   className="text-left p-3 rounded border transition-all"
                   style={{
-                    borderColor: active ? "#6366f1" : "#252825",
+                    borderColor: active ? "#6366f1" : "#334155",
                     background:  active ? "rgba(99,102,241,0.06)" : "transparent",
                   }}
                 >
                   <p
                     className="text-xs font-semibold"
-                    style={{ color: active ? "#6366f1" : "#e8edea" }}
+                    style={{ color: active ? "#6366f1" : "#ffffff" }}
                   >
                     {f.label}
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#4a5450" }}>
+                  <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>
                     {f.desc}
                   </p>
                 </button>
@@ -226,9 +226,9 @@ export default function SchedulerForm({
         {/* Time picker */}
         {showTimePicker && (
           <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: "#4a5450" }}>
+            <label className="text-xs" style={{ color: "#64748b" }}>
               run_at{" "}
-              <span style={{ color: "#3d4040" }}>(local time)</span>
+              <span style={{ color: "#64748b" }}>(local time)</span>
             </label>
             <input
               type="time"
@@ -242,7 +242,7 @@ export default function SchedulerForm({
 
         {/* Backup type */}
         <div className="space-y-2">
-          <label className="text-xs" style={{ color: "#4a5450" }}>
+          <label className="text-xs" style={{ color: "#64748b" }}>
             backup_type
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -254,17 +254,17 @@ export default function SchedulerForm({
                   onClick={() => set("backupType", value)}
                   className="py-2 px-3 rounded text-xs border transition-all text-left"
                   style={{
-                    borderColor: active ? "#6366f1" : "#252825",
+                    borderColor: active ? "#6366f1" : "#334155",
                     background:  active ? "rgba(99,102,241,0.08)" : "transparent",
                   }}
                 >
                   <p
                     className="font-semibold"
-                    style={{ color: active ? "#6366f1" : "#8a9690" }}
+                    style={{ color: active ? "#6366f1" : "#cbd5e1" }}
                   >
                     {value}
                   </p>
-                  <p className="mt-0.5" style={{ color: "#3d4040" }}>
+                  <p className="mt-0.5" style={{ color: "#64748b" }}>
                     {desc}
                   </p>
                 </button>
@@ -275,9 +275,9 @@ export default function SchedulerForm({
 
         {/* Retention */}
         <div className="space-y-1.5">
-          <label className="text-xs" style={{ color: "#4a5450" }}>
+          <label className="text-xs" style={{ color: "#64748b" }}>
             retention_days{" "}
-            <span style={{ color: "#3d4040" }}>
+            <span style={{ color: "#64748b" }}>
               (auto-delete backups older than this)
             </span>
           </label>
@@ -291,16 +291,16 @@ export default function SchedulerForm({
               onChange={(e) => set("retention", Number(e.target.value))}
               style={{ width: 80 }}
             />
-            <span className="text-xs" style={{ color: "#4a5450" }}>days</span>
+            <span className="text-xs" style={{ color: "#64748b" }}>days</span>
           </div>
         </div>
 
         {/* Next run preview */}
         <div
           className="px-3 py-2.5 rounded text-xs flex items-center justify-between"
-          style={{ background: "#1a1d1a", border: "1px solid #252825" }}
+          style={{ background: "#1a1d1a", border: "1px solid #334155" }}
         >
-          <span style={{ color: "#4a5450" }}>next_run_preview</span>
+          <span style={{ color: "#64748b" }}>next_run_preview</span>
           <span style={{ color: "#6366f1" }}>{preview}</span>
         </div>
 

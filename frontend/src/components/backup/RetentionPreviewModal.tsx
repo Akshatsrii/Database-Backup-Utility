@@ -22,7 +22,7 @@ export default function RetentionPreviewModal({ open, onClose, previews, loading
           animation: rpm-fadein 0.2s ease;
         }
         .rpm-modal {
-          background: #0a100d;
+          background: #020617;
           border: 1px solid rgba(255,255,255,0.1);
           width: 500px;
           border-radius: 12px;
@@ -40,8 +40,8 @@ export default function RetentionPreviewModal({ open, onClose, previews, loading
           background: #0f172a; border: 1px solid rgba(255,255,255,0.1); padding: 12px;
           border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between;
         }
-        .rpm-name { font-size: 12px; color: #8aaa80; }
-        .rpm-ver { font-size: 10px; color: #4a6450; margin-top: 4px; }
+        .rpm-name { font-size: 12px; color: #cbd5e1; }
+        .rpm-ver { font-size: 10px; color: #94a3b8; margin-top: 4px; }
         .rpm-action { font-size: 11px; display: flex; align-items: center; gap: 4px; color: #fbbf24; }
       `}</style>
 
@@ -52,7 +52,7 @@ export default function RetentionPreviewModal({ open, onClose, previews, loading
               <AlertTriangle size={16} />
               Retention Policy Preview
             </div>
-            <button onClick={onClose} style={{ background: "none", border: "none", color: "#4a6450", cursor: "pointer" }}>
+            <button onClick={onClose} style={{ background: "none", border: "none", color: "#94a3b8", cursor: "pointer" }}>
               <X size={16} />
             </button>
           </div>
@@ -61,9 +61,9 @@ export default function RetentionPreviewModal({ open, onClose, previews, loading
               The following backups are scheduled to be <strong>Archived</strong> during the next cron run because they exceed the retention limit (older than config limit and not in top 5).
             </p>
             {loading ? (
-              <div style={{ color: "#4a6450", fontSize: 12, textAlign: "center" }}>Loading preview...</div>
+              <div style={{ color: "#94a3b8", fontSize: 12, textAlign: "center" }}>Loading preview...</div>
             ) : previews.length === 0 ? (
-              <div style={{ color: "#4a6450", fontSize: 12, textAlign: "center" }}>No backups scheduled for deletion/archiving.</div>
+              <div style={{ color: "#94a3b8", fontSize: 12, textAlign: "center" }}>No backups scheduled for deletion/archiving.</div>
             ) : (
               previews.map(b => (
                 <div key={b.id} className="rpm-item">

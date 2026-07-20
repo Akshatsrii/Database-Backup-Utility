@@ -224,7 +224,7 @@ export function Modal({
           {/* ── Header ─────────────────────────────────────────────────── */}
           <div
             className="modal-header flex-shrink-0"
-            style={{ borderColor: "#252825" }}
+            style={{ borderColor: "#334155" }}
           >
             {/* Left: prompt glyph + title */}
             <div className="flex items-center gap-2 min-w-0">
@@ -238,7 +238,7 @@ export function Modal({
               <h2
                 id={titleId}
                 className="text-sm font-semibold truncate"
-                style={{ color: "#e8edea" }}
+                style={{ color: "#ffffff" }}
               >
                 {title}
               </h2>
@@ -249,7 +249,7 @@ export function Modal({
               <button
                 onClick={onClose}
                 className="modal-close-btn flex-shrink-0"
-                style={{ color: "#4a5450" }}
+                style={{ color: "#64748b" }}
                 aria-label="Close modal"
               >
                 <X size={14} strokeWidth={2} />
@@ -266,7 +266,7 @@ export function Modal({
           {footer && (
             <div
               className="modal-footer flex-shrink-0"
-              style={{ borderColor: "#252825" }}
+              style={{ borderColor: "#334155" }}
             >
               {footer}
             </div>
@@ -347,7 +347,7 @@ const STYLES = `
 
   .modal-close-btn:hover {
     background-color: var(--bg-tertiary, rgba(255,255,255,0.06));
-    color: #e8edea !important;
+    color: #ffffff !important;
   }
 
   .modal-close-btn:focus-visible {
@@ -358,5 +358,5 @@ const STYLES = `
   /* Scrollbar styling for the body region */
   .modal-body::-webkit-scrollbar       { width: 4px; }
   .modal-body::-webkit-scrollbar-track { background: transparent; }
-  .modal-body::-webkit-scrollbar-thumb { background: #252825; border-radius: 2px; }
+  .modal-body::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
 `;

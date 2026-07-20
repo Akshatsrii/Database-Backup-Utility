@@ -88,19 +88,19 @@ export default function SchedulerPage() {
         }
 
         .sp-title {
-          font-size: 18px; font-weight: 700; color: #e8edea;
+          font-size: 18px; font-weight: 700; color: #ffffff;
           display: flex; align-items: center; gap: 7px; line-height: 1;
         }
 
         .sp-title .dollar { color: #6366f1; }
-        .sp-subtitle { font-size: 10px; color: #3d5040; margin-top: 5px; letter-spacing: .08em; }
+        .sp-subtitle { font-size: 10px; color: #64748b; margin-top: 5px; letter-spacing: .08em; }
 
         .sp-header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
         /* ── Buttons ── */
         .sp-btn {
           display: flex; align-items: center; gap: 6px;
-          font-family: 'JetBrains Mono',monospace;
+          
           font-size: 11px; font-weight: 600;
           padding: 8px 13px; border-radius: 6px;
           cursor: pointer; transition: all .15s;
@@ -108,11 +108,11 @@ export default function SchedulerPage() {
         }
 
         .sp-btn-ghost {
-          background: transparent; color: #4a6450; border: 1px solid rgba(255,255,255,0.1);
+          background: transparent; color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);
         }
-        .sp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
+        .sp-btn-ghost:hover { background: #0f172a; color: #cbd5e1; border-color: #253523; }
 
-        .sp-btn-primary { background: #6366f1; color: #0a1008; }
+        .sp-btn-primary { background: #6366f1; color: #020617; }
         .sp-btn-primary:hover {
           background: #ccff50;
           box-shadow: 0 4px 16px rgba(99,102,241,.2);
@@ -145,8 +145,8 @@ export default function SchedulerPage() {
         .sp-stat-icon.green  { background: rgba(16,185,129,.1);  color: #10b981; }
         .sp-stat-icon.amber  { background: rgba(251,191,36,.1);  color: #fbbf24; }
 
-        .sp-stat-val { font-size: 18px; font-weight: 700; color: #d8e8dc; line-height: 1; }
-        .sp-stat-label { font-size: 10px; color: #2e4035; margin-top: 3px; letter-spacing: .05em; }
+        .sp-stat-val { font-size: 18px; font-weight: 700; color: #f8fafc; line-height: 1; }
+        .sp-stat-label { font-size: 10px; color: #475569; margin-top: 3px; letter-spacing: .05em; }
 
         /* ── Card ── */
         .sp-card {
@@ -157,13 +157,13 @@ export default function SchedulerPage() {
         .sp-card-header {
           display: flex; align-items: center; justify-content: space-between;
           padding: 13px 18px; border-bottom: 1px solid rgba(255,255,255,0.1);
-          background: #0a100d;
+          background: #020617;
         }
 
         .sp-card-header-right { display: flex; align-items: center; gap: 10px; }
 
         .sp-section-label {
-          font-size: 10px; color: #3d5040; letter-spacing: .14em;
+          font-size: 10px; color: #64748b; letter-spacing: .14em;
           text-transform: uppercase;
           display: flex; align-items: center; gap: 6px;
         }
@@ -193,13 +193,13 @@ export default function SchedulerPage() {
 
         .sp-row {
           border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
-          background: #0a100d;
+          background: #020617;
           transition: border-color .15s, background .15s;
           overflow: hidden;
         }
 
         .sp-row.enabled  { border-color: rgba(99,102,241,.18); background: rgba(99,102,241,.025); }
-        .sp-row.disabled { border-color: rgba(255,255,255,0.1); background: #0a100d; }
+        .sp-row.disabled { border-color: rgba(255,255,255,0.1); background: #020617; }
         .sp-row:hover    { border-color: #253523; }
         .sp-row.enabled:hover { border-color: rgba(99,102,241,.35); }
 
@@ -234,17 +234,17 @@ export default function SchedulerPage() {
 
         /* Info */
         .sp-row-name {
-          font-size: 12px; font-weight: 600; color: #d8e8dc;
+          font-size: 12px; font-weight: 600; color: #f8fafc;
           white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
         .sp-row-meta {
-          font-size: 10px; color: #3d5040; margin-top: 3px;
+          font-size: 10px; color: #64748b; margin-top: 3px;
           display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
         }
 
         .sp-meta-chip {
-          display: flex; align-items: center; gap: 4px; color: #3d5040;
+          display: flex; align-items: center; gap: 4px; color: #64748b;
         }
 
         /* Tags */
@@ -262,7 +262,7 @@ export default function SchedulerPage() {
 
         .sp-toggle-btn {
           display: flex; align-items: center; gap: 5px;
-          font-family: 'JetBrains Mono',monospace;
+          
           font-size: 10px; font-weight: 600;
           padding: 6px 11px; border-radius: 6px;
           cursor: pointer; transition: all .15s; border: 1px solid;
@@ -283,7 +283,7 @@ export default function SchedulerPage() {
           width: 30px; height: 30px;
           display: flex; align-items: center; justify-content: center;
           border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
-          background: transparent; color: #3d5040;
+          background: transparent; color: #64748b;
           cursor: pointer; transition: all .15s;
         }
 
@@ -301,7 +301,7 @@ export default function SchedulerPage() {
         .sp-confirm-strip span { display: flex; align-items: center; gap: 6px; }
 
         .sp-confirm-yes {
-          font-family: 'JetBrains Mono',monospace;
+          
           font-size: 10px; font-weight: 700;
           padding: 4px 10px; border-radius: 5px;
           background: rgba(248,113,113,.15); border: 1px solid rgba(248,113,113,.35);
@@ -310,13 +310,13 @@ export default function SchedulerPage() {
         .sp-confirm-yes:hover { background: rgba(248,113,113,.25); }
 
         .sp-confirm-no {
-          font-family: 'JetBrains Mono',monospace;
+          
           font-size: 10px; font-weight: 600;
           padding: 4px 10px; border-radius: 5px;
           background: transparent; border: 1px solid rgba(255,255,255,0.1);
-          color: #4a6450; cursor: pointer; transition: all .15s;
+          color: #94a3b8; cursor: pointer; transition: all .15s;
         }
-        .sp-confirm-no:hover { color: #8aaa80; }
+        .sp-confirm-no:hover { color: #cbd5e1; }
 
         /* ── Skeleton ── */
         .sp-skel {
@@ -337,11 +337,11 @@ export default function SchedulerPage() {
         .sp-empty-icon {
           width: 48px; height: 48px; border-radius: 12px;
           background: rgba(99,102,241,.05); border: 1px solid rgba(99,102,241,.1);
-          display: flex; align-items: center; justify-content: center; color: #3d5040;
+          display: flex; align-items: center; justify-content: center; color: #64748b;
         }
 
-        .sp-empty-title { font-size: 13px; font-weight: 600; color: #3d5040; }
-        .sp-empty-sub   { font-size: 10px; color: #1e2e20; letter-spacing: .05em; }
+        .sp-empty-title { font-size: 13px; font-weight: 600; color: #64748b; }
+        .sp-empty-sub   { font-size: 10px; color: #1e293b; letter-spacing: .05em; }
 
         /* ── Responsive ── */
         @media (max-width: 640px) {
@@ -459,7 +459,7 @@ export default function SchedulerPage() {
 
                         {/* Icon */}
                         <div className="sp-conn-icon">
-                          <Database size={15} color={s.enabled ? "#6366f1" : "#3d5040"} />
+                          <Database size={15} color={s.enabled ? "#6366f1" : "#64748b"} />
                         </div>
 
                         {/* Info */}
@@ -497,7 +497,7 @@ export default function SchedulerPage() {
                             className="sp-tag"
                             style={{
                               background: "#111a14",
-                              color: "#3d5040",
+                              color: "#64748b",
                               borderColor: "rgba(255,255,255,0.1)",
                             }}
                           >

@@ -108,7 +108,7 @@ function BarTrack({
   return (
     <div
       className={cn("w-full rounded-full overflow-hidden", TRACK_H[size])}
-      style={{ background: "#252825" }}
+      style={{ background: "#334155" }}
     >
       <div
         className={cn(
@@ -144,7 +144,7 @@ function SegmentedTrack({
           key={i}
           className="flex-1 rounded-sm transition-all duration-300"
           style={{
-            background:  i < filled ? (fs.background as string) : "#252825",
+            background:  i < filled ? (fs.background as string) : "#334155",
             boxShadow:   i < filled && i === filled - 1 ? fs.boxShadow as string : "none",
             transitionDelay: `${i * 20}ms`,
           }}
@@ -168,7 +168,7 @@ function SteppedTrack({
       {/* Base bar */}
       <div
         className={cn("w-full rounded-full overflow-hidden", TRACK_H[size])}
-        style={{ background: "#252825" }}
+        style={{ background: "#334155" }}
       >
         <div
           className="h-full rounded-full transition-[width] duration-500"
@@ -188,13 +188,13 @@ function SteppedTrack({
             <div
               className="w-2 h-2 rounded-full border transition-colors duration-300"
               style={{
-                background:   reached ? (STATUS_FILL[status] ?? "#6366f1") : "#252825",
-                borderColor:  reached ? (STATUS_FILL[status] ?? "#6366f1") : "#4a5450",
+                background:   reached ? (STATUS_FILL[status] ?? "#6366f1") : "#334155",
+                borderColor:  reached ? (STATUS_FILL[status] ?? "#6366f1") : "#64748b",
               }}
             />
             <span
               className="mt-1.5 text-[9px] font-mono"
-              style={{ color: reached ? "#6366f1" : "#4a5450" }}
+              style={{ color: reached ? "#6366f1" : "#64748b" }}
             >
               {step}
             </span>
@@ -234,7 +234,7 @@ function CircularTrack({
       <circle
         cx={diameter / 2} cy={diameter / 2} r={r}
         fill="none"
-        stroke="#252825"
+        stroke="#334155"
         strokeWidth={stroke}
       />
       {/* Fill */}
@@ -318,14 +318,14 @@ export function ProgressBar({
 
         {/* ── Circular stage label ─────────────────────────────────────── */}
         {isCirc && showLabel && stage && (
-          <span className="text-xs font-mono" style={{ color: "#8a9690" }}>
+          <span className="text-xs font-mono" style={{ color: "#cbd5e1" }}>
             {stage}
           </span>
         )}
 
         {/* ── Bar layout label ─────────────────────────────────────────── */}
         {!isCirc && showLabel && (
-          <div className="flex justify-between text-xs font-mono" style={{ color: "#8a9690" }}>
+          <div className="flex justify-between text-xs font-mono" style={{ color: "#cbd5e1" }}>
             <span>{stage ?? "progress"}</span>
             {!indeterminate && (
               <span style={{ color: STATUS_FILL[status] ?? "#6366f1" }}>

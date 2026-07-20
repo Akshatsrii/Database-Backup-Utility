@@ -46,7 +46,7 @@ const COLUMNS: { key: SortKey | null; label: string; align?: "right" }[] = [
 
 function SortIcon({ col, sortKey, sortDir }: { col: SortKey | null; sortKey: SortKey | null; sortDir: SortDir }) {
   if (!col) return null;
-  if (sortKey !== col) return <ChevronsUpDown size={10} style={{ color: "#2e3830", flexShrink: 0 }} />;
+  if (sortKey !== col) return <ChevronsUpDown size={10} style={{ color: "#334155", flexShrink: 0 }} />;
   return sortDir === "asc"
     ? <ChevronUp   size={10} style={{ color: "#6366f1", flexShrink: 0 }} />
     : <ChevronDown size={10} style={{ color: "#6366f1", flexShrink: 0 }} />;
@@ -57,7 +57,7 @@ function StatusBadge({ status }: { status: Backup["status"] }) {
     completed: { bg: "rgba(16,185,129,0.08)",  color: "#10b981", border: "rgba(16,185,129,0.2)",  dot: "#10b981"  },
     running:   { bg: "rgba(99,102,241,0.08)",  color: "#6366f1", border: "rgba(99,102,241,0.2)",  dot: "#6366f1"  },
     failed:    { bg: "rgba(255,68,68,0.08)",   color: "#ff4444", border: "rgba(255,68,68,0.2)",   dot: "#ff4444"  },
-    pending:   { bg: "rgba(74,84,80,0.2)",     color: "#8a9690", border: "rgba(74,84,80,0.3)",    dot: "#4a5450"  },
+    pending:   { bg: "rgba(74,84,80,0.2)",     color: "#cbd5e1", border: "rgba(74,84,80,0.3)",    dot: "#64748b"  },
   };
   const s = map[status] ?? map.pending;
   return (
@@ -138,7 +138,7 @@ function ActionBtn({
         background: hovered ? `${color}18` : "transparent",
         border: `1px solid ${hovered ? color + "44" : "transparent"}`,
         borderRadius: 6,
-        color: disabled ? "#4a5450" : color,
+        color: disabled ? "#64748b" : color,
         padding: 6,
         display: "flex",
         alignItems: "center",
@@ -167,12 +167,12 @@ function EmptyState() {
         padding: "64px 24px",
         gap: 10,
         background: "#141714",
-        border: "1px solid #252825",
+        border: "1px solid #334155",
         borderRadius: 12,
       }}
     >
-      <DatabaseBackup size={28} style={{ color: "#252825" }} />
-      <p style={{ fontSize: 12, color: "#4a5450", letterSpacing: "1px" }}>no backups found</p>
+      <DatabaseBackup size={28} style={{ color: "#334155" }} />
+      <p style={{ fontSize: 12, color: "#64748b", letterSpacing: "1px" }}>no backups found</p>
       <p style={{ fontSize: 11, color: "#2e332e" }}>create your first backup using the button above</p>
     </div>
   );
@@ -244,7 +244,7 @@ export default function BackupTable({
     textTransform: "uppercase",
     whiteSpace: "nowrap",
     userSelect: "none",
-    borderBottom: "1px solid #252825",
+    borderBottom: "1px solid #334155",
     background: "#0f172a",
   };
 
@@ -265,7 +265,7 @@ export default function BackupTable({
       <div
         style={{
           background: "#141714",
-          border: "1px solid #252825",
+          border: "1px solid #334155",
           borderRadius: 12,
           overflow: "hidden",
           fontFamily: "'JetBrains Mono','Fira Code',monospace",
@@ -279,10 +279,10 @@ export default function BackupTable({
               alignItems: "center",
               gap: 8,
               padding: "8px 16px",
-              background: "#0d0f0d",
-              borderBottom: "1px solid #252825",
+              background: "#020617",
+              borderBottom: "1px solid #334155",
               fontSize: 11,
-              color: "#8a9690",
+              color: "#cbd5e1",
             }}
           >
             <span style={{ color: "#6366f1", fontWeight: 700 }}>{selectedIds.length}</span>
@@ -317,7 +317,7 @@ export default function BackupTable({
                     key={label + (key ?? "")}
                     style={{
                       ...th,
-                      color: sortKey === key && key ? "#8a9690" : "#4a5450",
+                      color: sortKey === key && key ? "#cbd5e1" : "#64748b",
                       cursor: key ? "pointer" : "default",
                       textAlign: align ?? "left",
                     }}
@@ -366,7 +366,7 @@ export default function BackupTable({
                     </td>
 
                     {/* Filename */}
-                    <td style={{ ...td, maxWidth: 200, color: "#e8edea", fontWeight: 600 }}>
+                    <td style={{ ...td, maxWidth: 200, color: "#ffffff", fontWeight: 600 }}>
                       <span
                         title={b.filename}
                         style={{
@@ -387,7 +387,7 @@ export default function BackupTable({
                     </td>
 
                     {/* DB type */}
-                    <td style={{ ...td, color: "#8a9690" }}>
+                    <td style={{ ...td, color: "#cbd5e1" }}>
                       {dbLabels[b.dbType]}
                     </td>
 
@@ -397,7 +397,7 @@ export default function BackupTable({
                     </td>
 
                     {/* Size */}
-                    <td style={{ ...td, color: "#8a9690", fontVariantNumeric: "tabular-nums" }}>
+                    <td style={{ ...td, color: "#cbd5e1", fontVariantNumeric: "tabular-nums" }}>
                       <span>{b.sizeBefore ? formatBytes(b.sizeBefore) : "—"}</span>
                       <span style={{ color: "#2e332e", margin: "0 4px" }}>→</span>
                       <span>{b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}</span>
@@ -411,12 +411,12 @@ export default function BackupTable({
                     </td>
 
                     {/* Duration */}
-                    <td style={{ ...td, color: "#4a5450", fontVariantNumeric: "tabular-nums" }}>
+                    <td style={{ ...td, color: "#64748b", fontVariantNumeric: "tabular-nums" }}>
                       {b.durationMs ? formatDuration(b.durationMs) : <span style={{ color: "#2e332e" }}>—</span>}
                     </td>
 
                     {/* Date */}
-                    <td style={{ ...td, color: "#4a5450", fontVariantNumeric: "tabular-nums" }}>
+                    <td style={{ ...td, color: "#64748b", fontVariantNumeric: "tabular-nums" }}>
                       {fmtDate(b.startedAt)}
                     </td>
 
@@ -487,7 +487,7 @@ export default function BackupTable({
                           disabled={isDeleting}
                         >
                           {isDeleting
-                            ? <span style={{ fontSize: 10, color: "#4a5450" }}>…</span>
+                            ? <span style={{ fontSize: 10, color: "#64748b" }}>…</span>
                             : <Trash2 size={13} />
                           }
                         </ActionBtn>
@@ -507,15 +507,15 @@ export default function BackupTable({
             alignItems: "center",
             justifyContent: "space-between",
             padding: "9px 16px",
-            borderTop: "1px solid #252825",
+            borderTop: "1px solid #334155",
             fontSize: 10,
-            color: "#4a5450",
+            color: "#64748b",
           }}
         >
           <span>
             {backups.length} backup{backups.length !== 1 ? "s" : ""}
             {selectedIds.length > 0 && (
-              <span style={{ color: "#8a9690" }}> · {selectedIds.length} selected</span>
+              <span style={{ color: "#cbd5e1" }}> · {selectedIds.length} selected</span>
             )}
           </span>
           {sortKey && (

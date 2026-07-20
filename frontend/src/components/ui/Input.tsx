@@ -50,7 +50,7 @@ function Spinner() {
       className="w-3 h-3 rounded-full border border-current border-t-transparent shrink-0"
       style={{
         animation: "input-spin 650ms linear infinite",
-        color: "#4a5450",
+        color: "#64748b",
       }}
       aria-hidden
     />
@@ -271,7 +271,7 @@ function Label({
     <label
       htmlFor={htmlFor}
       className="text-xs tracking-wide font-mono flex items-center gap-1"
-      style={{ color: "#4a5450" }}
+      style={{ color: "#64748b" }}
     >
       {children}
       {required && (
@@ -354,7 +354,7 @@ function StatusLine({
 
   const text  = error ?? success ?? hint;
   const icon  = error ? "✗" : success ? "✓" : "·";
-  const color = error ? "#ff4444" : success ? "#10b981" : "#4a5450";
+  const color = error ? "#ff4444" : success ? "#10b981" : "#64748b";
 
   return (
     <p

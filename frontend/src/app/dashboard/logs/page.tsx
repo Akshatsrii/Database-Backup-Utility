@@ -10,7 +10,7 @@ import LiveLogTerminal from "@/components/logs/LiveLogTerminal";
 import { useLiveLogs }  from "@/hooks/useLiveLogs";
 
 const LOG_LEVELS = [
-  { value: "all",     label: "all levels", dot: "#4a5450" },
+  { value: "all",     label: "all levels", dot: "#64748b" },
   { value: "info",    label: "info",       dot: "#60a5fa" },
   { value: "success", label: "success",    dot: "#10b981" },
   { value: "warn",    label: "warn",       dot: "#fbbf24" },
@@ -79,7 +79,7 @@ export default function LogsPage() {
         .lp-title {
           font-size: 18px;
           font-weight: 700;
-          color: #e8edea;
+          color: #ffffff;
           display: flex;
           align-items: center;
           gap: 7px;
@@ -90,7 +90,7 @@ export default function LogsPage() {
 
         .lp-subtitle {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           margin-top: 5px;
           letter-spacing: 0.08em;
           display: flex;
@@ -155,11 +155,11 @@ export default function LogsPage() {
 
         .lp-btn-ghost {
           background: transparent;
-          color: #4a6450;
+          color: #94a3b8;
           border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .lp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
+        .lp-btn-ghost:hover { background: #0f172a; color: #cbd5e1; border-color: #253523; }
 
         .lp-pill-row { display: flex; gap: 7px; margin-bottom: 16px; flex-wrap: wrap; }
 
@@ -176,8 +176,8 @@ export default function LogsPage() {
         }
 
         .lp-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-        .lp-pill-label { color: #3d5040; }
-        .lp-pill-count { color: #8aaa80; font-weight: 600; }
+        .lp-pill-label { color: #64748b; }
+        .lp-pill-count { color: #cbd5e1; font-weight: 600; }
 
         .lp-filterbar {
           display: flex;
@@ -193,7 +193,7 @@ export default function LogsPage() {
           position: absolute;
           left: 11px; top: 50%;
           transform: translateY(-50%);
-          color: #3d5040;
+          color: #64748b;
           pointer-events: none;
         }
 
@@ -203,14 +203,14 @@ export default function LogsPage() {
           transform: translateY(-50%);
           background: none;
           border: none;
-          color: #3d5040;
+          color: #64748b;
           cursor: pointer;
           display: flex;
           align-items: center;
           padding: 2px;
         }
 
-        .lp-search-clear:hover { color: #8aaa80; }
+        .lp-search-clear:hover { color: #cbd5e1; }
 
         .lp-input {
           width: 100%;
@@ -218,7 +218,7 @@ export default function LogsPage() {
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
           padding: 8px 30px 8px 32px;
-          color: #b8d8bc;
+          color: #e2e8f0;
           
           font-size: 12px;
           outline: none;
@@ -230,11 +230,11 @@ export default function LogsPage() {
           box-shadow: 0 0 0 3px rgba(99,102,241,0.04);
         }
 
-        .lp-input::placeholder { color: #1e2e20; }
+        .lp-input::placeholder { color: #1e293b; }
 
         .lp-hint {
           font-size: 9px;
-          color: #2e4035;
+          color: #475569;
           letter-spacing: 0.04em;
         }
 
@@ -257,7 +257,7 @@ export default function LogsPage() {
         .lp-stat-val.amber { color: #fbbf24; }
         .lp-stat-val.red   { color: #f87171; }
         .lp-stat-val.acid  { color: #6366f1; }
-        .lp-stat-label { color: #2e4035; }
+        .lp-stat-label { color: #475569; }
 
         .lp-terminal-wrap {
           background: #020617;
@@ -288,16 +288,16 @@ export default function LogsPage() {
 
         .lp-term-title {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           letter-spacing: 0.1em;
           display: flex;
           align-items: center;
           gap: 6px;
         }
 
-        .lp-term-title em { color: #4a6450; font-style: normal; }
+        .lp-term-title em { color: #94a3b8; font-style: normal; }
 
-        .lp-term-meta { display: flex; align-items: center; gap: 10px; font-size: 10px; color: #2e4035; }
+        .lp-term-meta { display: flex; align-items: center; gap: 10px; font-size: 10px; color: #475569; }
 
         @media (max-width: 600px) {
           .lp-header { flex-direction: column; align-items: flex-start; }

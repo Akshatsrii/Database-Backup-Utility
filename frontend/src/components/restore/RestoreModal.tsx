@@ -140,12 +140,12 @@ export default function RestoreModal({
           {/* source info */}
           <div
             className="px-3 py-2.5 rounded text-xs space-y-1"
-            style={{ background: "#1a1d1a", border: "1px solid #252825" }}
+            style={{ background: "#1a1d1a", border: "1px solid #334155" }}
           >
-            <p style={{ color: "#4a5450" }}>restoring from:</p>
+            <p style={{ color: "#64748b" }}>restoring from:</p>
             <p style={{ color: "#6366f1" }}>{backup.filename}</p>
             {backup.sizeAfter && (
-              <p style={{ color: "#4a5450" }}>
+              <p style={{ color: "#64748b" }}>
                 {(backup.sizeAfter / 1024 / 1024).toFixed(1)} MB compressed
               </p>
             )}
@@ -166,7 +166,7 @@ export default function RestoreModal({
 
           {/* target connection */}
           <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: "#4a5450" }}>
+            <label className="text-xs" style={{ color: "#64748b" }}>
               target_connection
             </label>
             <select
@@ -186,9 +186,9 @@ export default function RestoreModal({
 
           {/* selective tables */}
           <div className="space-y-1.5">
-            <label className="text-xs" style={{ color: "#4a5450" }}>
+            <label className="text-xs" style={{ color: "#64748b" }}>
               selective_tables{" "}
-              <span style={{ color: "#3d4040" }}>
+              <span style={{ color: "#64748b" }}>
                 (optional · comma separated · empty = full restore)
               </span>
             </label>
@@ -222,7 +222,7 @@ export default function RestoreModal({
       {/* ── confirm ──────────────────────────────────────── */}
       {view === "confirm" && (
         <div className="space-y-4">
-          <p className="text-xs" style={{ color: "#8a9690" }}>
+          <p className="text-xs" style={{ color: "#cbd5e1" }}>
             please review before proceeding:
           </p>
 
@@ -231,7 +231,7 @@ export default function RestoreModal({
             className="rounded text-xs divide-y"
             style={{
               background:  "#1a1d1a",
-              border:      "1px solid #252825",
+              border:      "1px solid #334155",
 
             }}
           >
@@ -242,8 +242,8 @@ export default function RestoreModal({
               ["mode",    backup.backupType],
             ].map(([k, v]) => (
               <div key={k} className="flex gap-3 px-3 py-2">
-                <span className="w-16 flex-shrink-0" style={{ color: "#4a5450" }}>{k}</span>
-                <span style={{ color: "#e8edea" }}>{v}</span>
+                <span className="w-16 flex-shrink-0" style={{ color: "#64748b" }}>{k}</span>
+                <span style={{ color: "#ffffff" }}>{v}</span>
               </div>
             ))}
           </div>
@@ -256,7 +256,7 @@ export default function RestoreModal({
               onChange={(e) => setConfirmed(e.target.checked)}
               style={{ marginTop: 1, cursor: "pointer", flexShrink: 0 }}
             />
-            <span style={{ color: "#8a9690" }}>
+            <span style={{ color: "#cbd5e1" }}>
               I understand this will <span style={{ color: "#ff4444" }}>overwrite existing data</span> in the
               target database and the action cannot be undone
             </span>
@@ -266,7 +266,7 @@ export default function RestoreModal({
             <button
               onClick={() => setView("form")}
               className="flex-1 text-xs px-3 py-2 rounded border transition-colors"
-              style={{ borderColor: "#252825", color: "#4a5450" }}
+              style={{ borderColor: "#334155", color: "#64748b" }}
             >
               ← back
             </button>
@@ -286,11 +286,11 @@ export default function RestoreModal({
       {(view === "progress" || view === "done") && (
         <div className="space-y-5">
           <div className="flex items-center justify-between">
-            <p className="text-xs" style={{ color: "#8a9690" }}>
+            <p className="text-xs" style={{ color: "#cbd5e1" }}>
               restoring from{" "}
               <span style={{ color: "#6366f1" }}>{backup.filename}</span>
             </p>
-            <span className="text-xs tabular-nums" style={{ color: "#4a5450" }}>
+            <span className="text-xs tabular-nums" style={{ color: "#64748b" }}>
               {elapsed}
             </span>
           </div>
@@ -311,7 +311,7 @@ export default function RestoreModal({
                     color: failed  ? "#ff4444"
                          : done   ? "#10b981"
                          : active ? "#6366f1"
-                         : "#4a5450",
+                         : "#64748b",
                     flexShrink: 0,
                     width: 10,
                   }}>
@@ -320,8 +320,8 @@ export default function RestoreModal({
                   <span style={{
                     color: failed  ? "#ff4444"
                          : done   ? "#10b981"
-                         : active ? "#e8edea"
-                         : "#4a5450",
+                         : active ? "#ffffff"
+                         : "#64748b",
                   }}>
                     {s.label}
                   </span>
@@ -344,7 +344,7 @@ export default function RestoreModal({
               <button
                 onClick={() => { setView("form"); setStageIdx(-1); setStageError(""); }}
                 className="text-xs underline"
-                style={{ color: "#8a9690" }}
+                style={{ color: "#cbd5e1" }}
               >
                 ← back to form
               </button>

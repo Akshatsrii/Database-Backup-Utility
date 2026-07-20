@@ -16,7 +16,7 @@ export default function AiAdvisor({ insights }: { insights?: Insight[] }) {
           <Brain size={16} />
           AI Backup Advisor
         </div>
-        <span style={{ fontSize: 10, color: "#4a6450", letterSpacing: "0.04em" }}>heuristic engine v1.0</span>
+        <span style={{ fontSize: 10, color: "#94a3b8", letterSpacing: "0.04em" }}>heuristic engine v1.0</span>
       </div>
       
       <div className="p-4" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -40,8 +40,8 @@ export default function AiAdvisor({ insights }: { insights?: Insight[] }) {
                 {isWarn ? <AlertCircle size={16} /> : isSuccess ? <CheckCircle size={16} /> : <Info size={16} />}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                <span style={{ fontSize: 12, color: "#e8edea", fontWeight: 500 }}>{insight.message}</span>
-                <span style={{ fontSize: 11, color: "#8aaa80" }}>💡 {insight.recommendation}</span>
+                <span style={{ fontSize: 12, color: "#ffffff", fontWeight: 500 }}>{insight.message}</span>
+                <span style={{ fontSize: 11, color: "#cbd5e1" }}>💡 {insight.recommendation}</span>
               </div>
             </div>
           );

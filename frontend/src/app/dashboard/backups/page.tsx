@@ -16,7 +16,7 @@ import { connectionsApi } from "@/lib/api";
 import type { Backup, DbConnection } from "@/types";
 
 const STATUS_OPTIONS = [
-  { value: "all",       label: "all status",  dot: "#4a5450" },
+  { value: "all",       label: "all status",  dot: "#64748b" },
   { value: "completed", label: "completed",   dot: "#10b981" },
   { value: "running",   label: "running",     dot: "#60a5fa" },
   { value: "failed",    label: "failed",      dot: "#f87171" },
@@ -117,7 +117,7 @@ export default function BackupsPage() {
         .bp-title {
           font-size: 18px;
           font-weight: 700;
-          color: #e8edea;
+          color: #ffffff;
           display: flex;
           align-items: center;
           gap: 7px;
@@ -128,7 +128,7 @@ export default function BackupsPage() {
 
         .bp-subtitle {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           margin-top: 5px;
           letter-spacing: 0.08em;
         }
@@ -175,9 +175,9 @@ export default function BackupsPage() {
           flex-shrink: 0;
         }
 
-        .bp-stat-label { color: #3d5040; }
-        .bp-stat-count { color: #8aaa80; font-weight: 600; }
-        .bp-stat-pill.active .bp-stat-label { color: #8aaa80; }
+        .bp-stat-label { color: #64748b; }
+        .bp-stat-count { color: #cbd5e1; font-weight: 600; }
+        .bp-stat-pill.active .bp-stat-label { color: #cbd5e1; }
         .bp-stat-pill.active .bp-stat-count { color: #6366f1; }
 
         /* ── Filter bar ── */
@@ -201,7 +201,7 @@ export default function BackupsPage() {
           left: 11px;
           top: 50%;
           transform: translateY(-50%);
-          color: #3d5040;
+          color: #64748b;
           pointer-events: none;
         }
 
@@ -210,7 +210,7 @@ export default function BackupsPage() {
           right: 10px;
           top: 50%;
           transform: translateY(-50%);
-          color: #3d5040;
+          color: #64748b;
           cursor: pointer;
           background: none;
           border: none;
@@ -220,7 +220,7 @@ export default function BackupsPage() {
           transition: color 0.15s;
         }
 
-        .bp-search-clear:hover { color: #8aaa80; }
+        .bp-search-clear:hover { color: #cbd5e1; }
 
         .bp-input {
           width: 100%;
@@ -228,7 +228,7 @@ export default function BackupsPage() {
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 7px;
           padding: 9px 32px 9px 32px;
-          color: #b8d8bc;
+          color: #e2e8f0;
           
           font-size: 12px;
           outline: none;
@@ -240,7 +240,7 @@ export default function BackupsPage() {
           box-shadow: 0 0 0 3px rgba(99,102,241,0.05);
         }
 
-        .bp-input::placeholder { color: #1e2e20; }
+        .bp-input::placeholder { color: #1e293b; }
 
         .bp-select-wrap { position: relative; }
 
@@ -266,7 +266,7 @@ export default function BackupsPage() {
           right: 9px;
           top: 50%;
           transform: translateY(-50%);
-          color: #3d5040;
+          color: #64748b;
           pointer-events: none;
         }
 
@@ -285,7 +285,7 @@ export default function BackupsPage() {
           transition: color 0.15s, border-color 0.15s;
         }
 
-        .bp-filter-clear:hover { color: #8aaa80; border-color: #253523; }
+        .bp-filter-clear:hover { color: #cbd5e1; border-color: #253523; }
 
         /* ── Buttons ── */
         .bp-btn {
@@ -306,11 +306,11 @@ export default function BackupsPage() {
 
         .bp-btn-ghost {
           background: transparent;
-          color: #4a6450;
+          color: #94a3b8;
           border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .bp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
+        .bp-btn-ghost:hover { background: #0f172a; color: #cbd5e1; border-color: #253523; }
 
         .bp-btn-danger {
           background: transparent;
@@ -322,7 +322,7 @@ export default function BackupsPage() {
 
         .bp-btn-primary {
           background: #6366f1;
-          color: #0a1008;
+          color: #020617;
         }
 
         .bp-btn-primary:hover {
@@ -388,11 +388,11 @@ export default function BackupsPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #4a6450;
+          color: #94a3b8;
         }
 
-        .bp-empty-title { font-size: 13px; font-weight: 600; color: #4a6450; }
-        .bp-empty-sub { font-size: 10px; color: #2a3828; letter-spacing: 0.05em; }
+        .bp-empty-title { font-size: 13px; font-weight: 600; color: #94a3b8; }
+        .bp-empty-sub { font-size: 10px; color: #334155; letter-spacing: 0.05em; }
 
         /* ── Skeleton ── */
         .bp-skeleton-row {
@@ -411,7 +411,7 @@ export default function BackupsPage() {
 
         .bp-skeleton-header {
           height: 36px;
-          background: #0a100d;
+          background: #020617;
           border-radius: 6px;
           margin-bottom: 6px;
           border: 1px solid #141e12;
@@ -430,11 +430,11 @@ export default function BackupsPage() {
 
         .bp-results-count {
           font-size: 10px;
-          color: #2e4035;
+          color: #475569;
           letter-spacing: 0.06em;
         }
 
-        .bp-results-count em { color: #4a6450; font-style: normal; font-weight: 600; }
+        .bp-results-count em { color: #94a3b8; font-style: normal; font-weight: 600; }
 
         /* ── Responsive ── */
         @media (max-width: 600px) {

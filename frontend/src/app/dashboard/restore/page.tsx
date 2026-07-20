@@ -98,7 +98,7 @@ export default function RestorePage() {
         .rp-title {
           font-size: 18px;
           font-weight: 700;
-          color: #e8edea;
+          color: #ffffff;
           display: flex;
           align-items: center;
           gap: 7px;
@@ -106,7 +106,7 @@ export default function RestorePage() {
         }
 
         .rp-title .dollar { color: #6366f1; }
-        .rp-subtitle { font-size: 10px; color: #3d5040; margin-top: 5px; letter-spacing: .08em; }
+        .rp-subtitle { font-size: 10px; color: #64748b; margin-top: 5px; letter-spacing: .08em; }
 
         /* ── Stat row ── */
         .rp-statrow {
@@ -132,7 +132,7 @@ export default function RestorePage() {
         .rp-stat-val.green  { color: #10b981; }
         .rp-stat-val.blue   { color: #60a5fa; }
         .rp-stat-val.red    { color: #f87171; }
-        .rp-stat-label { color: #2e4035; margin-top: 2px; }
+        .rp-stat-label { color: #475569; margin-top: 2px; }
 
         /* ── Section card ── */
         .rp-card {
@@ -149,7 +149,7 @@ export default function RestorePage() {
           justify-content: space-between;
           padding: 13px 18px;
           border-bottom: 1px solid rgba(255,255,255,0.1);
-          background: #0a100d;
+          background: #020617;
         }
 
         .rp-card-header-right {
@@ -160,7 +160,7 @@ export default function RestorePage() {
 
         .rp-section-label {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           letter-spacing: .14em;
           text-transform: uppercase;
           display: flex;
@@ -195,7 +195,7 @@ export default function RestorePage() {
           position: absolute;
           left: 28px; top: 50%;
           transform: translateY(-50%);
-          color: #3d5040;
+          color: #64748b;
           pointer-events: none;
         }
 
@@ -204,12 +204,12 @@ export default function RestorePage() {
           right: 28px; top: 50%;
           transform: translateY(-50%);
           background: none; border: none;
-          color: #3d5040; cursor: pointer;
+          color: #64748b; cursor: pointer;
           display: flex; align-items: center;
           transition: color .15s; padding: 2px;
         }
 
-        .rp-search-clear:hover { color: #8aaa80; }
+        .rp-search-clear:hover { color: #cbd5e1; }
 
         .rp-input {
           width: 100%;
@@ -217,15 +217,15 @@ export default function RestorePage() {
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 6px;
           padding: 8px 30px 8px 32px;
-          color: #b8d8bc;
-          font-family: 'JetBrains Mono',monospace;
+          color: #e2e8f0;
+          
           font-size: 12px;
           outline: none;
           transition: border-color .2s;
         }
 
         .rp-input:focus { border-color: rgba(99,102,241,.3); box-shadow: 0 0 0 3px rgba(99,102,241,.04); }
-        .rp-input::placeholder { color: #1e2e20; }
+        .rp-input::placeholder { color: #1e293b; }
 
         /* ── Backup list ── */
         .rp-backup-list { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
@@ -298,7 +298,7 @@ export default function RestorePage() {
         .rp-backup-name {
           font-size: 12px;
           font-weight: 600;
-          color: #d8e8dc;
+          color: #f8fafc;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -306,7 +306,7 @@ export default function RestorePage() {
 
         .rp-backup-meta {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           margin-top: 3px;
           display: flex;
           align-items: center;
@@ -335,7 +335,7 @@ export default function RestorePage() {
           border: none;
           letter-spacing: .04em;
           background: #6366f1;
-          color: #0a1008;
+          color: #020617;
         }
 
         .rp-restore-btn:hover {
@@ -364,11 +364,11 @@ export default function RestorePage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #3d5040;
+          color: #64748b;
         }
 
-        .rp-empty-title { font-size: 12px; font-weight: 600; color: #3d5040; }
-        .rp-empty-sub   { font-size: 10px; color: #1e2e20; letter-spacing: .05em; }
+        .rp-empty-title { font-size: 12px; font-weight: 600; color: #64748b; }
+        .rp-empty-sub   { font-size: 10px; color: #1e293b; letter-spacing: .05em; }
 
         /* ── History table ── */
         .rp-table-wrap { overflow-x: auto; }
@@ -385,8 +385,8 @@ export default function RestorePage() {
           font-size: 9px;
           letter-spacing: .14em;
           text-transform: uppercase;
-          color: #2e4035;
-          background: #0a100d;
+          color: #475569;
+          background: #020617;
           border-bottom: 1px solid rgba(255,255,255,0.1);
           white-space: nowrap;
         }
@@ -399,11 +399,11 @@ export default function RestorePage() {
         }
 
         .rp-table tbody tr:last-child td { border-bottom: none; }
-        .rp-table tbody tr:hover td { background: #0a100d; }
+        .rp-table tbody tr:hover td { background: #020617; }
 
-        .rp-cell-primary { color: #d8e8dc; font-weight: 500; }
-        .rp-cell-muted   { color: #3d5040; }
-        .rp-cell-mono    { color: #4a6450; font-variant-numeric: tabular-nums; }
+        .rp-cell-primary { color: #f8fafc; font-weight: 500; }
+        .rp-cell-muted   { color: #64748b; }
+        .rp-cell-mono    { color: #94a3b8; font-variant-numeric: tabular-nums; }
 
         .rp-status-chip {
           display: inline-flex;
@@ -424,7 +424,7 @@ export default function RestorePage() {
         /* ── Buttons ── */
         .rp-btn {
           display: flex; align-items: center; gap: 6px;
-          font-family: 'JetBrains Mono',monospace;
+          
           font-size: 11px; font-weight: 600;
           padding: 7px 12px; border-radius: 6px;
           cursor: pointer; transition: all .15s;
@@ -432,11 +432,11 @@ export default function RestorePage() {
         }
 
         .rp-btn-ghost {
-          background: transparent; color: #4a6450;
+          background: transparent; color: #94a3b8;
           border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .rp-btn-ghost:hover { background: #0f172a; color: #8aaa80; border-color: #253523; }
+        .rp-btn-ghost:hover { background: #0f172a; color: #cbd5e1; border-color: #253523; }
 
         .rp-spin { animation: rp-spin .8s linear infinite; }
 
@@ -572,7 +572,7 @@ export default function RestorePage() {
 
                     {/* Icon */}
                     <div className="rp-backup-icon">
-                      <Database size={14} color={selected?.id === b.id ? "#6366f1" : "#3d5040"} />
+                      <Database size={14} color={selected?.id === b.id ? "#6366f1" : "#64748b"} />
                     </div>
 
                     {/* Info */}
@@ -580,16 +580,16 @@ export default function RestorePage() {
                       <div className="rp-backup-name">{b.filename}</div>
                       <div className="rp-backup-meta">
                         <span className="rp-backup-meta-chip">
-                          <Database size={9} color="#2e4035" />
+                          <Database size={9} color="#475569" />
                           {b.connectionName ?? "unknown"}
                         </span>
                         <span className="rp-backup-meta-chip">
-                          <Clock size={9} color="#2e4035" />
+                          <Clock size={9} color="#475569" />
                           {fmtDate(b.startedAt)}
                         </span>
                         {b.size && (
                           <span className="rp-backup-meta-chip">
-                            <HardDrive size={9} color="#2e4035" />
+                            <HardDrive size={9} color="#475569" />
                             {b.size}
                           </span>
                         )}
@@ -621,7 +621,7 @@ export default function RestorePage() {
                   {runningJobs} running
                 </span>
               )}
-              <span style={{ fontSize: 10, color: "#2e4035" }}>
+              <span style={{ fontSize: 10, color: "#475569" }}>
                 auto-refresh 10s
               </span>
             </div>
@@ -661,7 +661,7 @@ export default function RestorePage() {
                       <td>
                         <span className="rp-cell-muted">
                           {j.tables?.join(", ") || (
-                            <span style={{ color: "#1e2e20" }}>full</span>
+                            <span style={{ color: "#1e293b" }}>full</span>
                           )}
                         </span>
                       </td>
@@ -675,7 +675,7 @@ export default function RestorePage() {
                                 new Date(j.completedAt).getTime() -
                                 new Date(j.startedAt).getTime()
                               )
-                            : <span style={{ color: "#1e2e20" }}>—</span>}
+                            : <span style={{ color: "#1e293b" }}>—</span>}
                         </span>
                       </td>
                       <td>

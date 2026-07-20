@@ -153,11 +153,11 @@ function StatusPillEl({ label, value, status }: StatusPill) {
         alignItems:  "center",
         gap:          5,
         fontSize:     10,
-        fontFamily:   "JetBrains Mono, monospace",
-        color:        "#8a9e93",
+        fontFamily:   inherit",
+        color:        "#cbd5e1",
         padding:      "3px 8px",
         borderRadius: 3,
-        border:       "1px solid #1e2420",
+        border:       "1px solid #1e293b",
         background:   "rgba(255,255,255,0.02)",
         letterSpacing: "0.04em",
         cursor:       "default",
@@ -166,7 +166,7 @@ function StatusPillEl({ label, value, status }: StatusPill) {
     >
       <PulseDot status={status} />
       <span>{label}</span>
-      <span style={{ color: "#c8dcd2", fontWeight: 500 }}>{value}</span>
+      <span style={{ color: "#f1f5f9", fontWeight: 500 }}>{value}</span>
     </div>
   );
 }
@@ -193,7 +193,7 @@ function NotifItem({ notif }: { notif: Notification }) {
         display:      "flex",
         gap:           10,
         padding:       "10px 14px",
-        borderBottom:  "1px solid #1e2420",
+        borderBottom:  "1px solid #1e293b",
         listStyle:     "none",
       }}
     >
@@ -214,10 +214,10 @@ function NotifItem({ notif }: { notif: Notification }) {
         {NOTIF_ICON[notif.type]}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 11, color: "#c8dcd2", lineHeight: 1.5, wordBreak: "break-word" }}>
+        <div style={{ fontSize: 11, color: "#f1f5f9", lineHeight: 1.5, wordBreak: "break-word" }}>
           {notif.msg}
         </div>
-        <div style={{ fontSize: 9, color: "#3e4e44", marginTop: 3, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+        <div style={{ fontSize: 9, color: "#64748b", marginTop: 3, textTransform: "uppercase", letterSpacing: "0.05em" }}>
           {notif.time}
         </div>
       </div>
@@ -275,7 +275,7 @@ function CommandPalette({
         style={{
           width:        480,
           background:   "#0f172a",
-          border:       "1px solid #252d27",
+          border:       "1px solid #1e293b",
           borderRadius:  6,
           overflow:     "hidden",
         }}
@@ -290,7 +290,7 @@ function CommandPalette({
             alignItems:  "center",
             gap:          10,
             padding:      "12px 14px",
-            borderBottom: "1px solid #1e2420",
+            borderBottom: "1px solid #1e293b",
           }}
         >
           <span style={{ color: "#6366f1", fontSize: 13, fontFamily: "inherit" }}>›_</span>
@@ -307,18 +307,18 @@ function CommandPalette({
               outline:    "none",
               fontFamily: "inherit",
               fontSize:    13,
-              color:      "#c8dcd2",
+              color:      "#f1f5f9",
               caretColor: "#6366f1",
             }}
           />
-          <span style={{ fontSize: 9, color: "#3e4e44", whiteSpace: "nowrap" }}>esc to close</span>
+          <span style={{ fontSize: 9, color: "#64748b", whiteSpace: "nowrap" }}>esc to close</span>
         </div>
 
         {/* results */}
         <div style={{ maxHeight: 260, overflowY: "auto" }}>
           {pages.length > 0 && (
             <>
-              <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "#3e4e44", padding: "8px 14px 4px" }}>
+              <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "#64748b", padding: "8px 14px 4px" }}>
                 navigate
               </div>
               {pages.map((p) => (
@@ -328,7 +328,7 @@ function CommandPalette({
           )}
           {cmds.length > 0 && (
             <>
-              <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "#3e4e44", padding: "8px 14px 4px" }}>
+              <div style={{ fontSize: 9, textTransform: "uppercase", letterSpacing: "0.1em", color: "#64748b", padding: "8px 14px 4px" }}>
                 actions
               </div>
               {cmds.map((c) => (
@@ -337,7 +337,7 @@ function CommandPalette({
             </>
           )}
           {pages.length === 0 && cmds.length === 0 && (
-            <div style={{ padding: "20px 14px", fontSize: 11, color: "#3e4e44", textAlign: "center" }}>
+            <div style={{ padding: "20px 14px", fontSize: 11, color: "#64748b", textAlign: "center" }}>
               no results for &ldquo;{query}&rdquo;
             </div>
           )}
@@ -367,10 +367,10 @@ function CmdRow({ item, onSelect }: { item: CmdItem; onSelect: () => void }) {
         transition: "background 0.1s",
       }}
     >
-      <span style={{ color: "#6b8070", width: 14, display: "flex", justifyContent: "center" }}>{item.icon}</span>
-      <span style={{ fontSize: 12, color: "#c8dcd2", flex: 1 }}>{item.label}</span>
+      <span style={{ color: "#94a3b8", width: 14, display: "flex", justifyContent: "center" }}>{item.icon}</span>
+      <span style={{ fontSize: 12, color: "#f1f5f9", flex: 1 }}>{item.label}</span>
       {item.shortcut && (
-        <span style={{ fontSize: 9, color: "#3e4e44", letterSpacing: "0.06em" }}>{item.shortcut}</span>
+        <span style={{ fontSize: 9, color: "#64748b", letterSpacing: "0.06em" }}>{item.shortcut}</span>
       )}
     </div>
   );
@@ -435,9 +435,9 @@ export default function TopBar({
           display:       "flex",
           alignItems:    "stretch",
           background:    "rgba(13,15,13,0.9)",
-          borderBottom:  "1px solid #1e2420",
+          borderBottom:  "1px solid #1e293b",
           backdropFilter: "blur(8px)",
-          fontFamily:    "JetBrains Mono, monospace",
+          fontFamily:    inherit",
           overflow:      "hidden",
         }}
       >
@@ -459,15 +459,15 @@ export default function TopBar({
           {/* breadcrumb */}
           <nav aria-label="Page location" style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, letterSpacing: "0.03em" }}>
             <span style={{ color: "#6366f1", marginRight: 4, fontSize: 12, animation: "cur-blink 1.2s step-end infinite" }} aria-hidden="true">›</span>
-            <span style={{ color: "#4a5450" }}>~/</span>
+            <span style={{ color: "#64748b" }}>~/</span>
             {segments.map((seg, i) => {
               const isLast = i === segments.length - 1;
               return (
                 <span key={seg.full} style={{ display: "flex", alignItems: "center", gap: 4 }}>
                   {!isLast ? (
                     <>
-                      <span style={{ color: "#4a5450" }}>{seg.label}</span>
-                      <span style={{ color: "#2e3830" }}>/</span>
+                      <span style={{ color: "#64748b" }}>{seg.label}</span>
+                      <span style={{ color: "#334155" }}>/</span>
                     </>
                   ) : (
                     <span style={{ color: "#6366f1", fontWeight: 700 }}>{title}</span>
@@ -478,7 +478,7 @@ export default function TopBar({
           </nav>
 
           {/* divider */}
-          <div aria-hidden="true" style={{ width: 1, background: "#1e2420", margin: "10px 14px", flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ width: 1, background: "#1e293b", margin: "10px 14px", flexShrink: 0 }} />
 
           {/* status pills */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }} aria-label="System status">
@@ -503,19 +503,19 @@ export default function TopBar({
               padding:    "5px 11px",
               marginRight: 4,
               borderRadius: 4,
-              border:     "1px solid #1e2420",
+              border:     "1px solid #1e293b",
               background: "rgba(255,255,255,0.02)",
               cursor:     "pointer",
               fontSize:    11,
               fontFamily: "inherit",
-              color:      "#6b8070",
+              color:      "#94a3b8",
             }}
           >
             <Search size={11} />
             <span>search</span>
             <span style={{ display: "flex", gap: 2, alignItems: "center" }} aria-hidden="true">
               {["ctrl", "K"].map((k) => (
-                <span key={k} style={{ fontSize: 9, padding: "1px 4px", borderRadius: 2, background: "#1e2420", color: "#3e4e44", border: "1px solid #252825", lineHeight: 1.5 }}>{k}</span>
+                <span key={k} style={{ fontSize: 9, padding: "1px 4px", borderRadius: 2, background: "#1e293b", color: "#64748b", border: "1px solid #334155", lineHeight: 1.5 }}>{k}</span>
               ))}
             </span>
           </button>
@@ -536,10 +536,10 @@ export default function TopBar({
               width:           32,
               height:          32,
               borderRadius:    4,
-              border:         drawerOpen ? "1px solid #6ea31e" : "1px solid transparent",
+              border:         drawerOpen ? "1px solid #4f46e5" : "1px solid transparent",
               background:     drawerOpen ? "rgba(99,102,241,0.1)" : "transparent",
               cursor:         "pointer",
-              color:          drawerOpen ? "#6366f1" : unread > 0 ? "#c8dcd2" : "#6b8070",
+              color:          drawerOpen ? "#6366f1" : unread > 0 ? "#f1f5f9" : "#94a3b8",
               transition:     "all 0.2s",
             }}
           >
@@ -558,7 +558,7 @@ export default function TopBar({
                   background:     "#ff4444",
                   color:          "#fff",
                   fontSize:        8,
-                  fontFamily:     "JetBrains Mono, monospace",
+                  fontFamily:     inherit",
                   fontWeight:      700,
                   display:        "flex",
                   alignItems:     "center",
@@ -573,7 +573,7 @@ export default function TopBar({
           </button>
 
           {/* divider */}
-          <div aria-hidden="true" style={{ width: 1, background: "#1e2420", margin: "10px 14px 10px 10px", flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ width: 1, background: "#1e293b", margin: "10px 14px 10px 10px", flexShrink: 0 }} />
 
           {/* clock */}
           <div
@@ -587,10 +587,10 @@ export default function TopBar({
               minWidth:        80,
             }}
           >
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#c8dcd2", letterSpacing: "0.1em", fontVariantNumeric: "tabular-nums" }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9", letterSpacing: "0.1em", fontVariantNumeric: "tabular-nums" }}>
               {clock.time}
             </span>
-            <span style={{ fontSize: 9, color: "#3e4e44", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: 9, color: "#64748b", letterSpacing: "0.06em", textTransform: "uppercase" }}>
               {clock.date}
             </span>
           </div>
@@ -607,20 +607,20 @@ export default function TopBar({
               right:       0,
               width:       320,
               background: "#0f172a",
-              border:     "1px solid #252d27",
+              border:     "1px solid #1e293b",
               borderTop:  "none",
               zIndex:      100,
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderBottom: "1px solid #1e2420" }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: "#8a9e93", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderBottom: "1px solid #1e293b" }}>
+              <span style={{ fontSize: 10, fontWeight: 700, color: "#cbd5e1", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 notifications
               </span>
               <button
                 onClick={() => { setNotifs([]); setDrawerOpen(false); }}
                 style={{
                   fontSize:   9,
-                  color:      "#3e4e44",
+                  color:      "#64748b",
                   cursor:     "pointer",
                   textTransform: "uppercase",
                   letterSpacing: "0.06em",
@@ -637,7 +637,7 @@ export default function TopBar({
             </div>
             <ul style={{ maxHeight: 280, overflowY: "auto", margin: 0, padding: 0 }}>
               {notifs.length === 0 ? (
-                <li style={{ padding: "20px 14px", fontSize: 11, color: "#3e4e44", textAlign: "center", listStyle: "none" }}>
+                <li style={{ padding: "20px 14px", fontSize: 11, color: "#64748b", textAlign: "center", listStyle: "none" }}>
                   no notifications
                 </li>
               ) : (

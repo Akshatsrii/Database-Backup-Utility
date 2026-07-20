@@ -59,11 +59,11 @@ function Toast({ toast }: { toast: ToastState }) {
         left: "50%",
         transform: `translateX(-50%) translateY(${toast.visible ? "0" : "80px"})`,
         background: "#141714",
-        border: "1px solid #252825",
+        border: "1px solid #334155",
         borderRadius: 10,
         padding: "10px 16px",
         fontSize: 12,
-        color: "#e8edea",
+        color: "#ffffff",
         display: "flex",
         alignItems: "center",
         gap: 8,
@@ -92,7 +92,7 @@ function Toast({ toast }: { toast: ToastState }) {
 
 function StatusDot({ state }: { state: "unknown" | "ok" | "err" | "testing" }) {
   const colors = {
-    unknown: "#4a5450",
+    unknown: "#64748b",
     ok: "#10b981",
     err: "#ff4444",
     testing: "#6366f1",
@@ -141,7 +141,7 @@ function ConnectionItem({
       ? "rgba(16,185,129,0.2)"
       : testResult === false
       ? "rgba(255,68,68,0.2)"
-      : "#252825";
+      : "#334155";
 
   return (
     <div
@@ -166,7 +166,7 @@ function ConnectionItem({
             width: 32,
             height: 32,
             borderRadius: 6,
-            background: "#252825",
+            background: "#334155",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -182,7 +182,7 @@ function ConnectionItem({
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#e8edea",
+              color: "#ffffff",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -193,7 +193,7 @@ function ConnectionItem({
           <p
             style={{
               fontSize: 10,
-              color: "#4a5450",
+              color: "#64748b",
               marginTop: 2,
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -228,7 +228,7 @@ function ConnectionItem({
           disabled={isTesting}
           style={{
             background: "transparent",
-            color: isTesting ? "#4a5450" : "#6b7870",
+            color: isTesting ? "#64748b" : "#6b7870",
             border: "1px solid #2e332e",
             borderRadius: 8,
             fontFamily: "inherit",
@@ -259,7 +259,7 @@ function ConnectionItem({
             background: "transparent",
             border: "1px solid transparent",
             borderRadius: 8,
-            color: "#4a5450",
+            color: "#64748b",
             padding: 7,
             cursor: "pointer",
             display: "flex",
@@ -275,7 +275,7 @@ function ConnectionItem({
           }}
           onMouseLeave={(e) => {
             const btn = e.currentTarget as HTMLButtonElement;
-            btn.style.color = "#4a5450";
+            btn.style.color = "#64748b";
             btn.style.borderColor = "transparent";
             btn.style.background = "transparent";
           }}
@@ -330,9 +330,9 @@ function BottomSheet({
 
   const inputStyle: React.CSSProperties = {
     background: "#1a1d1a",
-    border: "1px solid #252825",
+    border: "1px solid #334155",
     borderRadius: 8,
-    color: "#e8edea",
+    color: "#ffffff",
     fontFamily: "inherit",
     fontSize: 12,
     padding: "10px 12px",
@@ -372,7 +372,7 @@ function BottomSheet({
         ref={sheetRef}
         style={{
           background: "#141714",
-          border: "1px solid #252825",
+          border: "1px solid #334155",
           borderRadius: "18px 18px 0 0",
           width: "100%",
           maxWidth: 480,
@@ -393,10 +393,10 @@ function BottomSheet({
             alignItems: "center",
             justifyContent: "space-between",
             padding: "16px 18px 14px",
-            borderBottom: "1px solid #252825",
+            borderBottom: "1px solid #334155",
           }}
         >
-          <span style={{ fontSize: 13, fontWeight: 700, color: "#e8edea", letterSpacing: "0.5px" }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: "#ffffff", letterSpacing: "0.5px" }}>
             add_connection
           </span>
           <button
@@ -407,7 +407,7 @@ function BottomSheet({
               height: 28,
               borderRadius: "50%",
               background: "#1a1d1a",
-              border: "1px solid #252825",
+              border: "1px solid #334155",
               color: "#6b7870",
               fontSize: 14,
               display: "flex",
@@ -453,7 +453,7 @@ function BottomSheet({
                   style={{
                     padding: "10px 8px",
                     borderRadius: 8,
-                    border: `1px solid ${form.type === t ? "#6366f1" : "#252825"}`,
+                    border: `1px solid ${form.type === t ? "#6366f1" : "#334155"}`,
                     background: form.type === t ? "rgba(99,102,241,0.08)" : "transparent",
                     color: form.type === t ? "#6366f1" : "#6b7870",
                     fontFamily: "inherit",
@@ -476,7 +476,7 @@ function BottomSheet({
           </div>
 
           {/* Divider */}
-          <div style={{ height: 1, background: "#252825" }} />
+          <div style={{ height: 1, background: "#334155" }} />
 
           {/* Name */}
           <div>
@@ -491,7 +491,7 @@ function BottomSheet({
                 e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "#252825";
+                e.currentTarget.style.borderColor = "#334155";
                 e.currentTarget.style.boxShadow = "none";
               }}
             />
@@ -511,7 +511,7 @@ function BottomSheet({
                   e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
                 }}
                 onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "#252825";
+                  e.currentTarget.style.borderColor = "#334155";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               />
@@ -529,7 +529,7 @@ function BottomSheet({
                     e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "#252825";
+                    e.currentTarget.style.borderColor = "#334155";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 />
@@ -550,7 +550,7 @@ function BottomSheet({
                 e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "#252825";
+                e.currentTarget.style.borderColor = "#334155";
                 e.currentTarget.style.boxShadow = "none";
               }}
             />
@@ -569,7 +569,7 @@ function BottomSheet({
                 e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "#252825";
+                e.currentTarget.style.borderColor = "#334155";
                 e.currentTarget.style.boxShadow = "none";
               }}
             />
@@ -589,7 +589,7 @@ function BottomSheet({
                 e.currentTarget.style.boxShadow = "0 0 0 2px rgba(99,102,241,0.08)";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "#252825";
+                e.currentTarget.style.borderColor = "#334155";
                 e.currentTarget.style.boxShadow = "none";
               }}
             />
@@ -722,10 +722,10 @@ export default function SettingsPage() {
         {/* Header */}
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
           <div>
-            <h1 style={{ fontSize: 16, fontWeight: 700, color: "#e8edea", letterSpacing: "-0.3px" }}>
+            <h1 style={{ fontSize: 16, fontWeight: 700, color: "#ffffff", letterSpacing: "-0.3px" }}>
               <span style={{ color: "#6366f1" }}>$</span> settings
             </h1>
-            <p style={{ fontSize: 11, color: "#4a5450", marginTop: 3, letterSpacing: "0.3px" }}>
+            <p style={{ fontSize: 11, color: "#64748b", marginTop: 3, letterSpacing: "0.3px" }}>
               database connections
             </p>
           </div>
@@ -758,7 +758,7 @@ export default function SettingsPage() {
         <div
           style={{
             background: "#141714",
-            border: "1px solid #252825",
+            border: "1px solid #334155",
             borderRadius: 12,
             overflow: "hidden",
           }}
@@ -770,7 +770,7 @@ export default function SettingsPage() {
               alignItems: "center",
               justifyContent: "space-between",
               padding: "14px 16px",
-              borderBottom: "1px solid #252825",
+              borderBottom: "1px solid #334155",
             }}
           >
             <span
@@ -784,7 +784,7 @@ export default function SettingsPage() {
             >
               db_connections
             </span>
-            <span style={{ fontSize: 11, color: "#4a5450" }}>
+            <span style={{ fontSize: 11, color: "#64748b" }}>
               {connections.length} configured
             </span>
           </div>
@@ -807,8 +807,8 @@ export default function SettingsPage() {
             </div>
           ) : connections.length === 0 ? (
             <div style={{ padding: "48px 24px", textAlign: "center" }}>
-              <WifiOff size={28} style={{ color: "#252825", margin: "0 auto 12px" }} />
-              <p style={{ fontSize: 12, color: "#4a5450", lineHeight: 1.6 }}>
+              <WifiOff size={28} style={{ color: "#334155", margin: "0 auto 12px" }} />
+              <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6 }}>
                 no connections configured
                 <br />
                 add a database connection to start taking backups

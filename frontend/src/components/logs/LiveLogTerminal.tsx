@@ -25,7 +25,7 @@ const LEVEL_COLOR: Record<string, string> = {
   warn:    "#ffd700",
   error:   "#ff4444",
   success: "#10b981",
-  debug:   "#4a5450",
+  debug:   "#64748b",
 };
 
 /* ── highlight search term inside a string ───────────────── */
@@ -152,7 +152,7 @@ export default function LiveLogTerminal({
         {/* ── top bar ── */}
         <div
           className="flex items-center justify-between px-4 py-2.5 border-b flex-shrink-0"
-          style={{ borderColor: "#252825" }}
+          style={{ borderColor: "#334155" }}
         >
           {/* left: dots + title */}
           <div className="flex items-center gap-3">
@@ -161,7 +161,7 @@ export default function LiveLogTerminal({
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffd700" }} />
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#10b981" }} />
             </div>
-            <span className="text-xs" style={{ color: "#4a5450" }}>live_logs.stream</span>
+            <span className="text-xs" style={{ color: "#64748b" }}>live_logs.stream</span>
           </div>
 
           {/* right: controls */}
@@ -176,7 +176,7 @@ export default function LiveLogTerminal({
                   animation: connected ? "llt-pulse 2s ease-in-out infinite" : undefined,
                 }}
               />
-              <span style={{ color: "#4a5450" }}>
+              <span style={{ color: "#64748b" }}>
                 {connected ? "live" : "disconnected"}
               </span>
             </span>
@@ -190,8 +190,8 @@ export default function LiveLogTerminal({
               className="text-xs px-2 py-1 rounded"
               style={{
                 background: "#1a1d1a",
-                border: `1px solid ${search ? "#6366f144" : "#252825"}`,
-                color: "#e8edea",
+                border: `1px solid ${search ? "#6366f144" : "#334155"}`,
+                color: "#ffffff",
                 width: 130,
                 outline: "none",
                 transition: "border-color 0.15s",
@@ -205,8 +205,8 @@ export default function LiveLogTerminal({
               className="text-xs px-2 py-1 rounded"
               style={{
                 background:  "#1a1d1a",
-                border:      "1px solid #252825",
-                color:       filter === "all" ? "#8a9690" : (LEVEL_COLOR[filter] ?? "#e8edea"),
+                border:      "1px solid #334155",
+                color:       filter === "all" ? "#cbd5e1" : (LEVEL_COLOR[filter] ?? "#ffffff"),
                 appearance:  "none",
                 cursor:      "pointer",
               }}
@@ -223,8 +223,8 @@ export default function LiveLogTerminal({
               onClick={() => setPaused((p) => !p)}
               className="text-xs px-2 py-1 rounded border transition-colors"
               style={{
-                borderColor: paused ? "#6366f1" : "#252825",
-                color:       paused ? "#6366f1" : "#4a5450",
+                borderColor: paused ? "#6366f1" : "#334155",
+                color:       paused ? "#6366f1" : "#64748b",
               }}
             >
               {paused ? "resume" : "pause"}
@@ -234,7 +234,7 @@ export default function LiveLogTerminal({
             <button
               onClick={() => setLogs([])}
               className="text-xs px-2 py-1 rounded border transition-colors"
-              style={{ borderColor: "#252825", color: "#4a5450" }}
+              style={{ borderColor: "#334155", color: "#64748b" }}
             >
               clear
             </button>
@@ -249,7 +249,7 @@ export default function LiveLogTerminal({
           style={{ background: "#0a0c0a" }}
         >
           {filtered.length === 0 && (
-            <p style={{ color: "#3d4040" }}>
+            <p style={{ color: "#64748b" }}>
               waiting for logs… {connected ? "●" : "○"}
             </p>
           )}
@@ -263,7 +263,7 @@ export default function LiveLogTerminal({
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
             >
               {/* timestamp */}
-              <span className="tabular-nums flex-shrink-0" style={{ color: "#3d4040" }}>
+              <span className="tabular-nums flex-shrink-0" style={{ color: "#64748b" }}>
                 {new Date(log.timestamp).toLocaleTimeString("en-GB", { hour12: false })}
               </span>
 
@@ -284,7 +284,7 @@ export default function LiveLogTerminal({
               <button
                 onClick={() => copyLine(log)}
                 className="flex-shrink-0 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ color: copiedId === log.id ? "#6366f1" : "#4a5450" }}
+                style={{ color: copiedId === log.id ? "#6366f1" : "#64748b" }}
                 title="Copy line"
               >
                 {copiedId === log.id ? "✓" : "⎘"}
@@ -301,8 +301,8 @@ export default function LiveLogTerminal({
               className="sticky bottom-2 left-full text-xs px-2 py-1 rounded border"
               style={{
                 background:  "#141614",
-                borderColor: "#252825",
-                color:       "#8a9690",
+                borderColor: "#334155",
+                color:       "#cbd5e1",
                 marginRight: 4,
                 display:     "block",
               }}
@@ -317,7 +317,7 @@ export default function LiveLogTerminal({
           className="px-4 py-1.5 border-t flex items-center justify-between flex-shrink-0"
           style={{ borderColor: "#1a1d1a" }}
         >
-          <span className="text-xs tabular-nums" style={{ color: "#3d4040" }}>
+          <span className="text-xs tabular-nums" style={{ color: "#64748b" }}>
             {filtered.length}
             {filtered.length !== logs.length && (
               <span> / {logs.length} total</span>
@@ -341,7 +341,7 @@ export default function LiveLogTerminal({
             <span
               className="text-xs"
               style={{
-                color: paused ? "#ffd700" : "#3d4040",
+                color: paused ? "#ffd700" : "#64748b",
                 animation: paused ? "llt-blink 1s step-end infinite" : undefined,
               }}
             >

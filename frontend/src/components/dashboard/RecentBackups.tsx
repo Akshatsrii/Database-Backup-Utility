@@ -45,7 +45,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
     return (
       <div
         className="flex items-center justify-center h-24 text-xs"
-        style={{ color: "#4a5450" }}
+        style={{ color: "#64748b" }}
       >
         no backups yet · run your first backup →
       </div>
@@ -61,12 +61,12 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
       <div className="overflow-x-auto">
         <table className="w-full text-xs" style={{ borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ borderBottom: "1px solid #252825" }}>
+            <tr style={{ borderBottom: "1px solid #334155" }}>
               {["name", "type", "db", "size", "time", "status"].map((h) => (
                 <th
                   key={h}
                   className="text-left pb-2 pr-4 tracking-widest uppercase"
-                  style={{ color: "#4a5450" }}
+                  style={{ color: "#64748b" }}
                 >
                   {h}
                 </th>
@@ -100,7 +100,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
                     <td
                       className="py-2.5 pr-4 font-medium"
                       style={{
-                        color:    isFailed ? "#ff4444" : "#e8edea",
+                        color:    isFailed ? "#ff4444" : "#ffffff",
                         maxWidth: 160,
                       }}
                     >
@@ -134,14 +134,14 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
                     </td>
 
                     {/* db */}
-                    <td className="py-2.5 pr-4" style={{ color: "#8a9690" }}>
+                    <td className="py-2.5 pr-4" style={{ color: "#cbd5e1" }}>
                       {dbLabels[b.dbType]}
                     </td>
 
                     {/* size */}
                     <td
                       className="py-2.5 pr-4 tabular-nums"
-                      style={{ color: "#8a9690" }}
+                      style={{ color: "#cbd5e1" }}
                     >
                       {b.sizeAfter ? formatBytes(b.sizeAfter) : "—"}
                     </td>
@@ -150,7 +150,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
                     <td
                       className="py-2.5 pr-4 tabular-nums"
                       style={{
-                        color:     isRunning ? "#6366f1" : "#4a5450",
+                        color:     isRunning ? "#6366f1" : "#64748b",
                         animation: isRunning
                           ? "rb-pulse 1.4s ease-in-out infinite"
                           : undefined,
@@ -176,7 +176,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
           <div
             className="pt-2 text-xs tabular-nums"
             style={{
-              color:         "#4a5450",
+              color:         "#64748b",
               borderTop:     "1px solid #1a1d1a",
               marginTop:     4,
               display:       "flex",
@@ -185,7 +185,7 @@ export default function RecentBackups({ backups }: { backups: Backup[] }) {
           >
             <span>{backups.length} total</span>
             {remaining > 0 && (
-              <span style={{ color: "#4a5450" }}>+{remaining} more</span>
+              <span style={{ color: "#64748b" }}>+{remaining} more</span>
             )}
           </div>
         )}

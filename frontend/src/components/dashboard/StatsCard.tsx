@@ -47,7 +47,7 @@ type Trend = "up" | "down" | "flat";
 function TrendIcon({ trend, accent }: { trend: Trend; accent: string }) {
   if (trend === "up")   return <TrendingUp   size={11} style={{ color: accent }} />;
   if (trend === "down") return <TrendingDown size={11} style={{ color: "#ff4444" }} />;
-  return <Minus size={11} style={{ color: "#4a5450" }} />;
+  return <Minus size={11} style={{ color: "#64748b" }} />;
 }
 
 /* ── stat card ──────────────────────────────────────────── */
@@ -83,7 +83,7 @@ function StatCard({
     <div
       className="terminal-card p-4 flex flex-col gap-3"
       style={{
-        borderColor: hovered ? accent + "55" : "#252825",
+        borderColor: hovered ? accent + "55" : "#334155",
         transition: "border-color 0.2s ease, box-shadow 0.2s ease",
         boxShadow: hovered ? `0 0 0 1px ${accent}22` : "none",
         cursor: "default",
@@ -95,7 +95,7 @@ function StatCard({
       <div className="flex items-center justify-between">
         <span
           className="text-xs tracking-widest uppercase"
-          style={{ color: "#4a5450" }}
+          style={{ color: "#64748b" }}
         >
           {label}
         </span>
@@ -127,7 +127,7 @@ function StatCard({
         </div>
 
         {sub && (
-          <p className="text-xs mt-1" style={{ color: "#4a5450" }}>
+          <p className="text-xs mt-1" style={{ color: "#64748b" }}>
             {sub}
           </p>
         )}

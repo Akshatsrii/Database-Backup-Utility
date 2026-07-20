@@ -135,7 +135,7 @@ export default function DashboardPage() {
 
         .db-nav-link {
           font-size: 11px;
-          color: #3d5040;
+          color: #64748b;
           padding: 5px 10px;
           border-radius: 5px;
           text-decoration: none;
@@ -143,7 +143,7 @@ export default function DashboardPage() {
           letter-spacing: 0.04em;
         }
 
-        .db-nav-link:hover { color: #8aaa80; background: rgba(99,102,241,0.05); }
+        .db-nav-link:hover { color: #cbd5e1; background: rgba(99,102,241,0.05); }
         .db-nav-link.active { color: #6366f1; background: rgba(99,102,241,0.08); }
 
         .db-navbar-right {
@@ -172,7 +172,7 @@ export default function DashboardPage() {
         }
 
         .db-live-badge.off {
-          color: #4a5450;
+          color: #64748b;
           border-color: rgba(255,255,255,0.1);
           background: transparent;
         }
@@ -188,7 +188,7 @@ export default function DashboardPage() {
           animation: live-pulse 2s ease-in-out infinite;
         }
 
-        .db-live-badge.off .db-live-dot { background: #4a5450; }
+        .db-live-badge.off .db-live-dot { background: #64748b; }
 
         @keyframes live-pulse {
           0%, 100% { box-shadow: 0 0 4px #10b98166; }
@@ -200,7 +200,7 @@ export default function DashboardPage() {
           align-items: center;
           gap: 7px;
           font-size: 11px;
-          color: #4a6450;
+          color: #94a3b8;
           background: #0f172a;
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 20px;
@@ -241,7 +241,7 @@ export default function DashboardPage() {
         .db-page-title {
           font-size: 18px;
           font-weight: 700;
-          color: #e8edea;
+          color: #ffffff;
           line-height: 1;
           display: flex;
           align-items: center;
@@ -252,7 +252,7 @@ export default function DashboardPage() {
 
         .db-page-subtitle {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           margin-top: 5px;
           letter-spacing: 0.08em;
         }
@@ -282,19 +282,19 @@ export default function DashboardPage() {
 
         .db-btn-ghost {
           background: transparent;
-          color: #4a6450;
+          color: #94a3b8;
           border: 1px solid rgba(255,255,255,0.1);
         }
 
         .db-btn-ghost:hover {
           background: #0f172a;
-          color: #8aaa80;
+          color: #cbd5e1;
           border-color: #253523;
         }
 
         .db-btn-primary {
           background: #6366f1;
-          color: #0a1008;
+          color: #020617;
         }
 
         .db-btn-primary:hover {
@@ -335,7 +335,7 @@ export default function DashboardPage() {
         /* ── Section label ── */
         .db-section-label {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           letter-spacing: 0.14em;
           text-transform: uppercase;
           display: flex;
@@ -402,13 +402,13 @@ export default function DashboardPage() {
         .db-statusbar-val {
           font-size: 15px;
           font-weight: 700;
-          color: #d8e8dc;
+          color: #f8fafc;
           line-height: 1;
         }
 
         .db-statusbar-label {
           font-size: 10px;
-          color: #3d5040;
+          color: #64748b;
           margin-top: 3px;
           letter-spacing: 0.06em;
         }
@@ -438,7 +438,7 @@ export default function DashboardPage() {
 
         .db-last-updated {
           font-size: 10px;
-          color: #2e4035;
+          color: #475569;
           letter-spacing: 0.04em;
         }
 
@@ -485,7 +485,7 @@ export default function DashboardPage() {
 
         .db-footer-tagline {
           font-size: 10px;
-          color: #2e4035;
+          color: #475569;
           line-height: 1.7;
           max-width: 200px;
           letter-spacing: 0.04em;
@@ -510,7 +510,7 @@ export default function DashboardPage() {
 
         .db-footer-col-title {
           font-size: 10px;
-          color: #4a6450;
+          color: #94a3b8;
           letter-spacing: 0.14em;
           text-transform: uppercase;
           margin-bottom: 14px;
@@ -526,7 +526,7 @@ export default function DashboardPage() {
 
         .db-footer-links a {
           font-size: 11px;
-          color: #2e4035;
+          color: #475569;
           text-decoration: none;
           transition: color 0.15s;
           display: flex;
@@ -534,11 +534,11 @@ export default function DashboardPage() {
           gap: 5px;
         }
 
-        .db-footer-links a:hover { color: #6a9070; }
+        .db-footer-links a:hover { color: #cbd5e1; }
 
         .db-footer-links a::before {
           content: '›';
-          color: #1a2818;
+          color: #1e293b;
           font-size: 13px;
         }
 
@@ -556,7 +556,7 @@ export default function DashboardPage() {
           font-size: 10px;
         }
 
-        .db-footer-sys-key { color: #2e4035; letter-spacing: 0.04em; }
+        .db-footer-sys-key { color: #475569; letter-spacing: 0.04em; }
 
         .db-footer-sys-val {
           font-size: 10px;
@@ -578,11 +578,11 @@ export default function DashboardPage() {
 
         .db-footer-copy {
           font-size: 10px;
-          color: #1e2e20;
+          color: #1e293b;
           letter-spacing: 0.04em;
         }
 
-        .db-footer-copy span { color: #2e4035; }
+        .db-footer-copy span { color: #475569; }
 
         .db-footer-meta {
           display: flex;
@@ -592,14 +592,14 @@ export default function DashboardPage() {
 
         .db-footer-meta-item {
           font-size: 10px;
-          color: #1e2e20;
+          color: #1e293b;
           display: flex;
           align-items: center;
           gap: 5px;
           letter-spacing: 0.04em;
         }
 
-        .db-footer-meta-item.ok { color: #2a4030; }
+        .db-footer-meta-item.ok { color: #334155; }
         .db-footer-meta-item.ok::before {
           content: '●';
           color: #10b981;
@@ -890,7 +890,7 @@ export default function DashboardPage() {
               <span className="db-footer-divider">·</span>
               <span className="db-footer-meta-item ok">scheduler</span>
               <span className="db-footer-divider">·</span>
-              <span className="db-footer-meta-item" style={{ color: "#2e4035" }}>
+              <span className="db-footer-meta-item" style={{ color: "#475569" }}>
                 <Terminal size={10} style={{ marginRight: 4 }} />
                 backup-room
               </span>

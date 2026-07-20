@@ -92,14 +92,14 @@ function StageIcon({
   if (status === "failed")
     return <XCircle size={14} style={{ color: "#ff4444" }} />;
   if (status === "skipped")
-    return <Circle size={14} style={{ color: "#3d4040" }} />;
+    return <Circle size={14} style={{ color: "#64748b" }} />;
   if (status === "current")
     return (
       <span style={{ color: "#6366f1" }}>
         <Loader2 size={14} className="animate-spin" />
       </span>
     );
-  return <Circle size={14} style={{ color: "#3d4040" }} />;
+  return <Circle size={14} style={{ color: "#64748b" }} />;
 }
 
 // ─── Dot pulse ──────────────────────────────────────────────────────────────
@@ -156,7 +156,7 @@ export function BackupProgressBar({
       {/* ── Top info bar ─────────────────────────────────────────────────── */}
       <div
         className="flex items-center justify-between px-3 py-2.5 rounded text-xs"
-        style={{ background: "#1a1d1a", border: "1px solid #252825" }}
+        style={{ background: "#1a1d1a", border: "1px solid #334155" }}
       >
         <div className="flex items-center gap-2">
           {isFailed ? (
@@ -172,7 +172,7 @@ export function BackupProgressBar({
                 ? "#ff4444"
                 : isComplete
                 ? "#10b981"
-                : "#e8edea",
+                : "#ffffff",
             }}
           >
             {isFailed
@@ -182,7 +182,7 @@ export function BackupProgressBar({
               : "backup in progress..."}
           </span>
           {dbName && (
-            <span style={{ color: "#4a5450" }}>· {dbName}</span>
+            <span style={{ color: "#64748b" }}>· {dbName}</span>
           )}
         </div>
 
@@ -191,14 +191,14 @@ export function BackupProgressBar({
           {elapsed !== undefined && (
             <span
               className="flex items-center gap-1"
-              style={{ color: "#4a5450" }}
+              style={{ color: "#64748b" }}
             >
               <Clock size={11} />
               {elapsed}s elapsed
             </span>
           )}
           {remaining !== null && !isComplete && !isFailed && (
-            <span style={{ color: "#4a5450" }}>
+            <span style={{ color: "#64748b" }}>
               ~{remaining}s left
             </span>
           )}
@@ -208,7 +208,7 @@ export function BackupProgressBar({
       {/* ── Progress bar ─────────────────────────────────────────────────── */}
       <div className="space-y-1.5">
         <div className="flex justify-between text-xs">
-          <span style={{ color: "#8a9690" }}>
+          <span style={{ color: "#cbd5e1" }}>
             {STAGES.find((s) => s.key === progress.stage)?.label
               ?? progress.stage}
           </span>
@@ -229,7 +229,7 @@ export function BackupProgressBar({
         {/* Track */}
         <div
           className="h-2 w-full rounded-full overflow-hidden"
-          style={{ background: "#252825" }}
+          style={{ background: "#334155" }}
         >
           <div
             className="h-full rounded-full transition-all duration-300"
@@ -291,22 +291,22 @@ export function BackupProgressBar({
                       status === "done"
                         ? "#10b981"
                         : status === "current"
-                        ? "#e8edea"
+                        ? "#ffffff"
                         : status === "failed"
                         ? "#ff4444"
                         : status === "skipped"
-                        ? "#3d4040"
-                        : "#4a5450",
+                        ? "#64748b"
+                        : "#64748b",
                   }}
                 >
                   {stage.label}
                   {status === "skipped" && (
-                    <span style={{ color: "#3d4040" }}> — skipped</span>
+                    <span style={{ color: "#64748b" }}> — skipped</span>
                   )}
                 </p>
                 {/* Sub label — only show for current/done/failed */}
                 {(status === "current" || status === "done") && (
-                  <p style={{ color: "#4a5450", fontSize: 10 }}>
+                  <p style={{ color: "#64748b", fontSize: 10 }}>
                     {stage.sub}
                   </p>
                 )}
@@ -351,7 +351,7 @@ export function BackupProgressBar({
           <div>
             <p className="font-medium">backup completed successfully</p>
             {elapsed && (
-              <p style={{ color: "#4a5450", fontSize: 10 }}>
+              <p style={{ color: "#64748b", fontSize: 10 }}>
                 finished in {elapsed}s
               </p>
             )}
@@ -375,8 +375,8 @@ export function BackupProgressBar({
             <XCircle size={13} />
             backup failed
           </div>
-          <p style={{ color: "#8a9690" }}>{progress.message}</p>
-          <p style={{ color: "#4a5450", fontSize: 10 }}>
+          <p style={{ color: "#cbd5e1" }}>{progress.message}</p>
+          <p style={{ color: "#64748b", fontSize: 10 }}>
             check live logs for full error details
           </p>
         </div>
@@ -387,7 +387,7 @@ export function BackupProgressBar({
         <div
           className="flex items-center justify-between text-xs pt-1
                      border-t"
-          style={{ borderColor: "#1a1d1a", color: "#3d4040" }}
+          style={{ borderColor: "#1a1d1a", color: "#64748b" }}
         >
           <span>do not close this window</span>
           <span>

@@ -138,12 +138,12 @@ export default function Sidebar() {
               <span className="sb-nav-accent" style={{ opacity: active ? 1 : 0 }} />
               <span className="sb-nav-icon" style={{
                 background: active ? "rgba(99,102,241,0.12)" : hovered ? "rgba(255,255,255,0.04)" : "transparent",
-                color: active ? "#6366f1" : "#4a5450",
+                color: active ? "#6366f1" : "#64748b",
               }}>
                 <Icon size={13} />
               </span>
               <span className="sb-nav-label-text" style={{
-                color: active ? "#e8edea" : hovered ? "#8a9690" : "#4a5450",
+                color: active ? "#ffffff" : hovered ? "#cbd5e1" : "#64748b",
               }}>
                 {label}
               </span>
@@ -165,7 +165,7 @@ export default function Sidebar() {
         <div className="sb-stat-row">
           <div className="sb-stat-head">
             <div className="flex items-center gap-1.5">
-              <HardDrive size={10} style={{ color: "#4a5450" }} />
+              <HardDrive size={10} style={{ color: "#64748b" }} />
               <span>storage</span>
             </div>
             <span style={{ color: "#6366f1" }}>{sysStats.storage}%</span>
@@ -175,7 +175,7 @@ export default function Sidebar() {
         <div className="sb-stat-row">
           <div className="sb-stat-head">
             <div className="flex items-center gap-1.5">
-              <Zap size={10} style={{ color: "#4a5450" }} />
+              <Zap size={10} style={{ color: "#64748b" }} />
               <span>uptime</span>
             </div>
             <span style={{ color: "#10b981" }}>{sysStats.uptime}%</span>
@@ -188,7 +188,7 @@ export default function Sidebar() {
             <span style={{ color: "#6366f1" }}>{sysStats.backups}</span>
             <span>backups</span>
           </div>
-          <div className="sb-count-divider" style={{ background: "#252825" }} />
+          <div className="sb-count-divider" style={{ background: "#334155" }} />
           <div className="sb-count-item">
             <Wifi size={10} style={{ color: "#3b82f6" }} />
             <span style={{ color: "#3b82f6" }}>{sysStats.connections}</span>
@@ -209,7 +209,7 @@ export default function Sidebar() {
         </div>
         <div className="sb-uptime-row">
           <span>session</span>
-          <span style={{ color: "#4a5450", fontVariantNumeric: "tabular-nums" }}>
+          <span style={{ color: "#64748b", fontVariantNumeric: "tabular-nums" }}>
             {uptime}
           </span>
         </div>

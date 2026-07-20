@@ -17,17 +17,17 @@ const FONT = "'JetBrains Mono','Fira Code',monospace";
 
 const TOOLTIP_STYLE: React.CSSProperties = {
   background: "#0f172a",
-  border: "1px solid #252825",
+  border: "1px solid #334155",
   borderRadius: 8,
   fontFamily: FONT,
   fontSize: 12,
-  color: "#e8edea",
+  color: "#ffffff",
   padding: "10px 14px",
   boxShadow: "0 4px 24px rgba(0,0,0,0.5)",
 };
 
 const AXIS_TICK = {
-  fill: "#4a5450",
+  fill: "#64748b",
   fontSize: 10,
   fontFamily: FONT,
 };
@@ -39,9 +39,9 @@ function StorageTooltip({ active, payload, label }: TooltipProps<number, string>
   const val = payload[0].value as number;
   return (
     <div style={TOOLTIP_STYLE}>
-      <p style={{ color: "#4a5450", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
+      <p style={{ color: "#64748b", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
       <p style={{ color: "#6366f1", display: "flex", alignItems: "center", gap: 6 }}>
-        <span style={{ color: "#4a5450" }}>size</span>
+        <span style={{ color: "#64748b" }}>size</span>
         <span style={{ fontWeight: 700 }}>{formatBytes(val)}</span>
       </p>
     </div>
@@ -54,9 +54,9 @@ function RateTooltip({ active, payload, label }: TooltipProps<number, string>) {
   const color = val >= 90 ? "#10b981" : val >= 70 ? "#fbbf24" : "#ff4444";
   return (
     <div style={TOOLTIP_STYLE}>
-      <p style={{ color: "#4a5450", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
+      <p style={{ color: "#64748b", fontSize: 10, marginBottom: 6, letterSpacing: "0.5px" }}>{label}</p>
       <p style={{ color, display: "flex", alignItems: "center", gap: 6 }}>
-        <span style={{ color: "#4a5450" }}>rate</span>
+        <span style={{ color: "#64748b" }}>rate</span>
         <span style={{ fontWeight: 700 }}>{val}%</span>
       </p>
     </div>
@@ -76,7 +76,7 @@ function ChartCard({ title, meta, children }: CardProps) {
     <div
       style={{
         background: "#141714",
-        border: "1px solid #252825",
+        border: "1px solid #334155",
         borderRadius: 12,
         padding: "18px 16px 14px",
         display: "flex",
@@ -92,7 +92,7 @@ function ChartCard({ title, meta, children }: CardProps) {
             fontWeight: 700,
             letterSpacing: "1.2px",
             textTransform: "uppercase",
-            color: "#4a5450",
+            color: "#64748b",
           }}
         >
           {title}
@@ -195,7 +195,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
 
             <Tooltip
               content={<StorageTooltip />}
-              cursor={{ stroke: "#252825", strokeWidth: 1 }}
+              cursor={{ stroke: "#334155", strokeWidth: 1 }}
             />
 
             <Area
@@ -214,7 +214,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
         </ResponsiveContainer>
 
         {/* mini legend */}
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 10, color: "#4a5450" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 10, color: "#64748b" }}>
           <span style={{ width: 16, height: 2, background: "#6366f1", borderRadius: 1, display: "inline-block" }} />
           cumulative backup size over time
         </div>
@@ -242,7 +242,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
               label={{
                 value: "90%",
                 position: "right",
-                fill: "#4a5450",
+                fill: "#64748b",
                 fontSize: 9,
                 fontFamily: FONT,
               }}
@@ -278,7 +278,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
 
             <Tooltip
               content={<RateTooltip />}
-              cursor={{ stroke: "#252825", strokeWidth: 1 }}
+              cursor={{ stroke: "#334155", strokeWidth: 1 }}
             />
 
             <Line
@@ -309,7 +309,7 @@ export default function BackupChart({ stats }: { stats: DashboardStats }) {
         </ResponsiveContainer>
 
         {/* mini legend */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 10, color: "#4a5450" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 10, color: "#64748b" }}>
           <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
             <span style={{ width: 16, height: 2, background: "#10b981", borderRadius: 1, display: "inline-block" }} />
             success
