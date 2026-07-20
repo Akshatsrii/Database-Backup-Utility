@@ -44,7 +44,7 @@ export const scheduleController = {
     const { enabled } = req.body as { enabled: boolean };
 
     try {
-      const schedule = schedulerService.toggleSchedule(id, enabled);
+      const schedule = schedulerService.toggleSchedule(id as string, enabled);
       res.json({
         success: true,
         data:    schedule,
@@ -61,7 +61,7 @@ export const scheduleController = {
   // DELETE /api/schedules/:id
   remove(req: Request, res: Response) {
     try {
-      schedulerService.deleteSchedule(req.params.id);
+      schedulerService.deleteSchedule(req.params.id as string);
       res.json({ success: true, message: "Schedule deleted" });
     } catch (err) {
       res.status(404).json({

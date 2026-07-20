@@ -22,7 +22,7 @@ export const connectionController = {
       host:      dto.host,
       port:      dto.port,
       username:  dto.username,
-      password:  dto.password,
+      password:  dto.password || "",
       database:  dto.database,
       createdAt: new Date().toISOString(),
     };
