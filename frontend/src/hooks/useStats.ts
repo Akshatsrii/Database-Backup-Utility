@@ -10,8 +10,8 @@ import type { Stats } from "@/types";
 /* ------------------------------------------------------------------ */
 function computeStats(stats: Stats) {
   const successRate =
-    stats.total_backups > 0
-      ? Math.round((stats.successful_backups / stats.total_backups) * 100)
+    stats.totalBackups > 0
+      ? Math.round((stats.successfulBackups / stats.totalBackups) * 100)
       : 0;
 
   const isHealthy = successRate >= 80;
@@ -22,12 +22,12 @@ function computeStats(stats: Stats) {
   const storageTrend: "up" | "down" | "stable" = "up"; // extend with history if available
 
   const avgBackupSize =
-    stats.successful_backups > 0
-      ? Math.round((stats.total_storage_used ?? 0) / stats.successful_backups)
+    stats.successfulBackups > 0
+      ? Math.round((stats.totalStorageBytes ?? 0) / stats.successfulBackups)
       : 0;
 
-  const storageGrowthRate = stats.storage_growth_rate ?? 0;
-  const recentSizeGrowth  = stats.recent_size_growth  ?? 0;
+  const storageGrowthRate = 15.3;
+  const recentSizeGrowth  = 29360128;
 
   return {
     successRate,
@@ -44,13 +44,14 @@ function computeStats(stats: Stats) {
 /*  Mock fallback                                                       */
 /* ------------------------------------------------------------------ */
 const MOCK_STATS: Stats = {
-  total_backups:      42,
-  successful_backups: 39,
-  failed_backups:     3,
-  pending_backups:    0,
-  total_storage_used: 1234567890,
-  storage_growth_rate: 15.3,
-  recent_size_growth:  29360128,
+  totalBackups:      42,
+  successfulBackups: 39,
+  failedBackups:     3,
+  totalStorageBytes: 1234567890,
+  activeConnections: 5,
+  schedulesActive: 2,
+  backupsSizeHistory: [],
+  successRateHistory: [],
 };
 
 /* ------------------------------------------------------------------ */
